@@ -1,0 +1,123 @@
+.messages {
+    font-family: 'Times New Roman', Times, serif;
+    position: fixed;
+    right: 0;
+    width: 250px;
+    height: 100%;
+    padding: 15px;
+    margin-top: .2%;
+    background-color: #2bb1ab;
+    box-shadow: -2px 2px 2px black;
+}
+
+.messages .close-messages {
+    user-select: none;
+    color: red;
+    padding: 2%;
+    border: 1px solid red;
+    border-radius: 8px;
+    margin-left: 80%;
+    text-align: center;
+    transition: all .3s;
+}
+
+.messages .close-messages:hover {
+    background-color: red;
+    color: white;
+    box-shadow: 2px 2px 2px black;
+}
+
+.messages .messages-received #en-tete {
+    display: flex;
+    color: rgb(0, 0, 109);
+}
+
+.messages .messages-received #en-tete h3 {
+    margin-left: 5%;
+}
+
+.messages .messages-received p {
+    width: 150px;
+    margin: 1% 0 2% 10%;
+    color: white;
+}
+
+.messages .answer {
+    position: inherit;
+    bottom: 2%;
+    display: flex;
+}
+
+.messages .answer #emoticone {
+    background-color: white;
+    border-radius: 8px;
+    padding: 2%;
+    margin-right: 1%;
+    width: 10%;
+    height: 10%;
+    transition: all .5s;
+}
+
+.messages .answer #emoticone:hover,
+.messages .answer #send:hover {
+    background-color: aqua;
+    box-shadow: 2px 2px 2px black;
+}
+
+.messages .answer textarea {
+    border-radius: 10px;
+    resize: none;
+    min-height: 7%;
+    padding: 1%;
+}
+
+.messages .answer #send {
+    border: 1px solid white;
+    background-color: white;
+    border-radius: 8px;
+    margin-left: 1%;
+    padding: 4%;
+    transition: all .5s;
+}
+
+.messages .answer #send:hover {
+    border: 1px solid aqua;
+}
+
+/* Mobile messages box style */
+@media screen and (max-width: 555px) {
+    .messages {
+        width: 100%;
+    }
+
+    .messages .messages-received #en-tete img {
+        margin-left: 10%;
+    }
+    
+    .messages .messages-received p {
+        margin: 2% 0 2% 20%;
+    }
+
+    .messages .answer {
+        width: 100%;
+        margin-left: 10%;
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    transition: all .3s;
+}
+
+.fade-in.show {
+    opacity: 1;
+}
+
+.fade-out {
+    opacity: 1;
+    transition: all .3s;
+}
+
+.fade-out.hide {
+    opacity: 0;
+}

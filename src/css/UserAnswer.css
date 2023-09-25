@@ -1,0 +1,26 @@
+.user-answer {
+    position: absolute;
+    bottom: 27%;
+    right: 4%;
+    padding: 2px;
+}
+
+.user-answer p {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 8px;
+    height: fit-content;
+    max-width: 200px;
+    overflow: hidden;
+    border: 1px solid aqua;
+    border-radius: 8px;
+    background-color: rgb(0, 220, 220);
+    box-shadow: 2px 2px 2px black;
+}
+
+/* Mobile user answer box style */
+@media screen and (max-width: 555px) {
+    .user-answer {
+        margin-top: 20%;
+        margin-left: 30%;
+    }
+}

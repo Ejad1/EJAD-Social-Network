@@ -1,0 +1,214 @@
+main {
+    width: 60%;
+    margin: auto;
+}
+
+@media screen and (max-width: 555px) {
+    main {
+        width: 80%;
+    }
+}
+
+.publication, .new-publication {
+    margin-top: 5%;    
+    border: 1px solid #1b6c68;
+    background: fixed #31cdc5;
+    padding: 10px;
+}
+
+@media screen and (max-width: 555px) {
+    .publication, .new-publication {
+        width: 70%;
+        margin-left: 10%;
+    }
+}
+
+.publication #en-tete {
+    display: flex;
+}
+
+.publication #en-tete img {
+    width: 50px;
+    height: 50px;
+}
+
+.publication #en-tete h3 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    color: darkblue;
+    margin-left: 5px;
+    margin-top: 2.5%;
+}
+
+.publication p {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 10px;
+}
+
+.publication img {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    max-width: 100%;
+    height: auto;
+}
+
+.publication #bas {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
+}
+
+
+/* New publication box style */
+.new-publication {
+    position: fixed;
+    top: 10%;
+    left: 30%;
+    width: 45%;
+    height: 450px;
+    margin-top: 5%;
+    border: 1px solid #1b6c68;
+    background: fixed #2bb1ab;
+    padding: 10px;
+}
+
+.new-publication #close {
+    user-select: none;
+    color: red;
+    margin-left: 93%;
+    margin-top: -1%;
+    border: 1px solid red;
+    padding-left: 2.7%;
+    padding-top: 2px;
+    width: 30px;
+    height: 25px;
+}
+
+.new-publication #close:hover {
+    background-color: red;
+    color: white;
+    box-shadow: 2px 2px 2px black;
+    transition: all .3s;
+}
+
+
+/* New publication title style */
+.new-publication #title {
+    position: relative;
+    user-select: none;
+    font-size: 30px;
+    text-shadow: 2px 2px 1px black;
+    text-align: center;
+    color: white;
+    padding: 1% 0 2% 0;
+    margin: 2% 0 3% 0;
+}
+  
+.new-publication #title::before,
+.new-publication #title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s ease-in-out;
+}
+
+.new-publication #title::before {
+    transform-origin: left;
+}
+
+.new-publication #title::after {
+    transform-origin: right;
+}
+
+.new-publication #title:hover::before,
+.new-publication #title:hover::after {
+    width: 50%;
+}
+/* End of the style of the title */
+
+.new-publication textarea {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.new-publication #my_buttons {
+    display: flex;
+}
+
+.new-publication textarea {
+    border: 2px solid blue;
+    border-radius: 10px;
+    padding: 1%;
+    height: 135px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: large;
+}
+
+.new-publication .my_buttons .input-image {
+    margin-top: 3%;
+}
+
+.new-publication .my_buttons .input-image input[type="file"] {
+    display: none;
+}
+
+.new-publication .my_buttons .input-image label {
+    font-size: larger;
+    width: 300px;
+    margin: 35%;
+    padding: 10px;
+    border: 1px solid white;
+    transition: all .3s;
+}
+
+.new-publication .my_buttons .input-image label:hover {
+    background-color: white;
+    color: #1b6c68;
+    box-shadow: 2px 2px 2px black;
+}
+
+.new-publication .my_buttons .input-image p {
+    border: 1px solid black;
+    width: 300px;
+    padding: 10px;
+    margin-top: 3%;
+    margin-left: 22%;
+    background-color: #1b6c68;
+    user-select: none;
+    transition: all .5s;
+}
+
+.new-publication .my_buttons .input-image p.imageSelected {
+    text-align: center;
+    background-color: rgb(0, 214, 214);
+    border: 2px solid #2bb1ab;
+    box-shadow: 2px 2px 2px black;
+}
+
+.new-publication .my_buttons button {
+    border: 2px solid #1b6c68;
+    border-radius: 6%;
+    background-color: rgb(0, 165, 165);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: larger;
+    color: white;
+    box-shadow: 2px 2px 2px black;
+    padding: 10px;
+    width: 150px;
+    margin: 3% 0 0 35%;
+    transition: all .3s;
+}
+
+.new-publication .my_buttons button:hover {
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+    font-size: 16px;
+}
+
+/* End of the style of the new publication box */
