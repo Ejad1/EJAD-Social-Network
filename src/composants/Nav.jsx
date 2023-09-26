@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { NewPublication } from './NewPublication'
+import { Messages } from './Messages'
 import { Link } from 'react-router-dom'
 import '../css/Nav.css'
 import friends from '../assets/person-circle.svg'
 import messages from '../assets/envelope.svg'
 import publication from '../assets/card-text.svg'
 import search from '../assets/search.svg'
-import { Messages } from './Messages'
 
 
 export function Navbar() {
