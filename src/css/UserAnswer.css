@@ -1,5 +1,6 @@
 .user-answer {
-    position: absolute;
+    /* position: absolute; */
+    margin-bottom: 20px;
     bottom: 27%;
     right: 4%;
     padding: 2px;

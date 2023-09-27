@@ -4,12 +4,22 @@
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 2px 2px 2px black;
-    height: 600px;
-    width: 1000px;
+    height: 85%;
+    width: 70%;
     padding: 1%;
     text-align: center;
     backdrop-filter: blur(50px);
     -webkit-backdrop-filter: blur(5px); /* Pour la compatibilité avec Safari */         
+}
+
+@media screen and (max-width: 555px) {
+    .advertising {
+        width: 96%;
+        padding: 2%;
+        top: 50%;
+        left: 0;
+        transform: translateY(-49%);
+    }
 }
 
 .advertising .head {
@@ -23,6 +33,7 @@
 }
 
 .advertising .head h1 {
+    user-select: none;
     border: 2px solid black;
     border-radius: 50%;
     width: 40px;
@@ -77,6 +88,7 @@
 }
 
 .advertising .main .adver-body .product h2 {
+    text-align: center;
     position: relative;
     top: 80%;
     margin-left: 4%;
@@ -100,6 +112,27 @@
     color: blue;
 }
 
+@media screen and (max-width: 555px) {
+    .advertising .main .adver-body .product {
+        flex-wrap: wrap;
+    }
+
+    .advertising .main .adver-body .product h2 {
+        top: 4%;
+        width: fit-content;
+        margin: auto;
+    }
+
+    .advertising .main .adver-body .product .demarcation-line {
+        width: 80%;
+        height: 2px;
+    }
+
+    .advertising .main .adver-body .product .product-description h3 {
+        margin: 10px;
+    }
+}
+
 .advertising .main .adver-body #super-advertise {
     text-align: center;
     padding: 10px;
@@ -115,6 +148,13 @@
 .advertising .main .adver-body #super-advertise:hover {
     background-color: white;
     box-shadow: 2px 2px 2px black;
+}
+
+@media screen and (max-width: 555px) {
+    .advertising .main .adver-body #super-advertise {
+        padding: 5px;
+        margin-top: 5%;
+    }
 }
 
 .advertising .main .adver-body #testimonials-title {

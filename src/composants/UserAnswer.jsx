@@ -1,5 +1,7 @@
 import { PropTypes } from "prop-types";
 import '../css/UserAnswer.css'
+import { useState } from "react";
+import { useEffect } from "react";
 
 // Array for the user answers
 const useranswers = [
@@ -28,12 +30,24 @@ function AnotherAnswer({ myAnswer }) {
 }
 
 export function UserAnswer({ answer }) {
+    const [messages, setMessages] = useState(["Salut"]);
+    let newEjad;
+
+    if (messages[-1] != answer) {
+        newEjad = answer;
+    }
+
+    useEffect(() => {
+        if (answer != "") {
+            setMessages([...messages, newEjad]);
+        }
+    }, [messages, answer, newEjad]);
+
+
     const newAnswer = { id: useranswers.length, text: answer};
     if (!useranswers.includes(newAnswer)) {
         useranswers.push(newAnswer);
     }
-
-    console.log(useranswers);
 
     if ( answer !== "" ) {
         return (
@@ -47,9 +61,15 @@ export function UserAnswer({ answer }) {
                     })
                 }
 
+                <ul>
+                    { messages.map((unMessage, index) => (
+                        <li key={ index }> { unMessage }</li>
+                    ))}
+                </ul>
+
                 <div className="user-answer">
                     <p>
-                        { answer }
+                        { newEjad }
                     </p>
                 </div>
             </>
