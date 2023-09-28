@@ -1,9 +1,10 @@
+import { PropTypes } from "prop-types";
 import { useState } from 'react'
 import { Publication } from './Publication'
 import '../css/Main.css'
 import imagePublication from '../assets/cat.jpg'
 
-export function Main() {
+export function Main({ array }) {
     const [publicationText, setPublicationText] = useState(
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates a dolore veritatis, "
     )
@@ -54,9 +55,14 @@ export function Main() {
                         key = { aPublication.id }
                         content = { aPublication.text }
                         imageSource = { imagePublication }
+                        tableau = { array }
                     />
                 )
             }    
         </main>
     )
+}
+
+Main.propTypes = {
+    array: PropTypes.func.isRequired
 }

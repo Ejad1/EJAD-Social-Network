@@ -2,12 +2,21 @@ import { useState } from "react";
 import { PropTypes } from "prop-types";
 import profile from '../assets/person-circle.svg'
 
-export function Publication({ content, imageSource }) {
+export function Publication({ content, imageSource, tableau }) {
     const [like, setLike] = useState(0);
     const [share, setShare] = useState(0);
 
+    const likeNotification = {
+        title: "Like",
+        content: "Vous avez liker une publication"
+    }
+
     const handleLike = () => {
         setLike(like + 1)
+        tableau((previous) => {
+            return previous + likeNotification;
+        }
+        )
     }
 
     const handleShare = () => {
@@ -34,5 +43,6 @@ export function Publication({ content, imageSource }) {
 
 Publication.propTypes = {
     content: PropTypes.string.isRequired,
-    imageSource: PropTypes.string.isRequired
+    imageSource: PropTypes.string.isRequired,
+    tableau: PropTypes.func.isRequired
 }

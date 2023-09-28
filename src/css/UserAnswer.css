@@ -1,21 +1,26 @@
 .user-answer {
-    /* position: absolute; */
-    margin-bottom: 20px;
-    bottom: 27%;
-    right: 4%;
+    position: relative;
+    bottom: 0;
+    margin-bottom: 10px;
     padding: 2px;
+    text-align: bottom;
 }
 
 .user-answer p {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     padding: 8px;
     height: fit-content;
+    width: fit-content;
     max-width: 200px;
     overflow: hidden;
     border: 1px solid aqua;
     border-radius: 8px;
     background-color: rgb(0, 220, 220);
     box-shadow: 2px 2px 2px black;
+    position: inherit;
+    right: 0;
+    left: 100%;
+    transform: translateX(-100%);
 }
 
 /* Mobile user answer box style */

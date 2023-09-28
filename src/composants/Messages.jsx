@@ -9,8 +9,10 @@ import emojis from '../assets/face-smile-beam-regular.svg'
 export function Messages() {
     const [isClicked, setIsClicked] = useState(false);
     const [message, setMessage] = useState("");
-    const [messageDisplayed, setMessageDisplayed] = useState("");
     const [closeMessage, setCloseMessage] = useState(false);
+
+    // Array for user answers
+    const [userAnswers, setUserAnswers] = useState([]);
 
     const handleEmojisClick = () => {
         setIsClicked(!isClicked);
@@ -22,7 +24,7 @@ export function Messages() {
 
     const handleSendClick = () => {
         if (message != "") {
-            setMessageDisplayed(message);
+            setUserAnswers([...userAnswers, message]);
             setMessage("");
         }
     }
@@ -45,8 +47,12 @@ export function Messages() {
                         dolores qui libero et quod dignissimos doloremque fuga. Placeat dolore numquam repellat recusandae?
                     </p>
                 </div>
-    
-                <UserAnswer answer = { messageDisplayed } ></UserAnswer>
+
+                {
+                    userAnswers.map((anAnswer, index) => (
+                        <UserAnswer key={ index } answer={ anAnswer }></UserAnswer>
+                    ))
+                }
     
                 <div className="answer">     
                     <img src= { emojis } alt="" id='emoticone' onClick={ handleEmojisClick } />

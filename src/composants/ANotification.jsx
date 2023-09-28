@@ -1,16 +1,21 @@
+import { PropTypes } from "prop-types";
 import fleche from '../assets/caret-right-fill.svg'
 
-export function ANotification() {
+export function ANotification({ notifTitle, notifContent }) {
     return (
         <div>
             <div className="notif-title">
                 <img src={ fleche } alt="" />
-                <h3>Titre de la notification</h3>
+                <h3>{ notifTitle }</h3>
             </div>
-            <p>Contenu : Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem fugit aut consectetur quia illum quod 
-                vitae corporis, sapiente animi asperiores possimus? Ad soluta porro nesciunt obcaecati, at similique officia 
-                exercitationem.
+            <p>
+                { notifContent }
             </p>
         </div>
     )
+}
+
+ANotification.propTypes = {
+    notifTitle: PropTypes.string.isRequired,
+    notifContent: PropTypes.string.isRequired
 }
