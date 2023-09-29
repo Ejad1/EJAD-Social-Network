@@ -12,12 +12,10 @@ export function Notifications({ monTableau }) {
                     <ANotification notifTitle={ element.title } notifContent={ element.content } key={ index }></ANotification>
                 ))
             }
-            {/* <ANotification notifTitle = { titreNotification } notifContent = { contenuNotification } /> */}
         </aside>
     )
 }
 
 Notifications.propTypes = {
-    afficher: PropTypes.bool.isRequired,
-    monTableau: PropTypes.string.isRequired
+    monTableau: PropTypes.array.isRequired
 }

@@ -13,12 +13,8 @@ export function Navbar() {
     const [clickPub, setClickPub] = useState(false);
     const [messageClick, setMessageClick] = useState(false);
 
-    const MakeAPublication = () => {
-        setClickPub(!clickPub)
-    }
-
-    const handleMessageClick = () => {
-        setMessageClick(true);
+    const MakeAPublication = (state) => {
+        setClickPub(state);
     }
 
     // let [affichageNavMobile, setAffichageNavMobile] = useState(0);
@@ -50,7 +46,9 @@ export function Navbar() {
         )
     }
 
-    const variable = true;
+    const handleDisplayMessage = (state) => {
+        setMessageClick(state);
+    }
 
     return (
         <>
@@ -64,15 +62,13 @@ export function Navbar() {
                 <div className='links'>
                     <div className="pub-div">
                         <img src={ publication } alt="" />
-                        <Link to={ "/publi" }>
-                            <h3 onClick={() => MakeAPublication()} id='make-pub'>Faire une publication</h3>
-                        </Link>
+                        <h3 onClick={() => MakeAPublication(true)} id='make-pub'>Faire une publication</h3>
                     </div>
                     <div className="friends-div">
                         <img src={ friends } alt=""/> 
                         <h3 id='friends'>Amis</h3>
                     </div>
-                    <div className="messages-div" onClick={ handleMessageClick }>
+                    <div className="messages-div" onClick={ () => handleDisplayMessage(true) }>
                         <img src={ messages } alt="" /> 
                         <h3 id='messages'>Messages</h3>
                     </div>
@@ -86,12 +82,10 @@ export function Navbar() {
                     <div id='two'></div>
                     <div id='three'></div>
                 </div>
-                <NewPublication afficher = { variable }/>
+                { clickPub && <NewPublication afficher = { MakeAPublication }/> }
             </nav>
 
-            {/* { clickPub && <NewPublication afficher = { variable } />} */}
-
-            { messageClick && <Messages></Messages> }
+           { messageClick && <Messages display = { handleDisplayMessage }></Messages> }
         </>
     )
 }

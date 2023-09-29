@@ -1,25 +1,31 @@
 import './css/App.css'
 import { Navbar } from './composants/Nav'
 import { Main } from './composants/Main'
-import { Messages } from './composants/Messages'
-import { Advertising } from './composants/Advertising'
+// import { Advertising } from './composants/Advertising'
 import { Notifications } from './composants/Notifications'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function App() {
   const [notificationsArray, setNotificationsArray] = useState([]);
+  const [displayNotifications, setDisplayNotifications] = useState(false);
 
   const handleAddNotifications = (notification) => {
     setNotificationsArray([...notificationsArray, notification])
   }
 
+  useEffect(() => {
+    if (notificationsArray.length !== 0) {
+      setDisplayNotifications(true);
+    }
+  }, [notificationsArray]);
+  
+
   return (
     <>
       <Navbar></Navbar>
-      <Notifications monTableau = { notificationsArray }></Notifications>
-      <Messages></Messages>
+      { displayNotifications && <Notifications monTableau = { notificationsArray }></Notifications> }
       <Main array={ handleAddNotifications }></Main>
-      <Advertising></Advertising>
+      {/* <Advertising></Advertising> */}
     </>
   )
 }

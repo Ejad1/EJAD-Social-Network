@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { PropTypes } from "prop-types";
 import { UserAnswer } from './UserAnswer'
 import { Emoticones } from './Emoticones'
 import '../css/Messages.css'
@@ -6,10 +7,9 @@ import profile from '../assets/person-circle.svg'
 import envoyer from '../assets/send.svg'
 import emojis from '../assets/face-smile-beam-regular.svg'
 
-export function Messages() {
+export function Messages({ display }) {
     const [isClicked, setIsClicked] = useState(false);
     const [message, setMessage] = useState("");
-    const [closeMessage, setCloseMessage] = useState(false);
 
     // Array for user answers
     const [userAnswers, setUserAnswers] = useState([]);
@@ -30,10 +30,9 @@ export function Messages() {
     }
 
     const handleCloseClick = () => {
-        setCloseMessage(true);
+        display(false);
     }
 
-    if (!closeMessage) {
         return (
             <div className="messages">
                 <h2 className="close-messages" onClick={ handleCloseClick }>X</h2>
@@ -72,4 +71,8 @@ export function Messages() {
             </div>
         )
     }
+
+
+Messages.propTypes = {
+    display: PropTypes.func.isRequired
 }

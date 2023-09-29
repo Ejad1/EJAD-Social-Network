@@ -133,7 +133,7 @@ nav h1 #initials {
     color: #ecc19c;
 }
 
-nav .links, nav .links .pub-div a {
+nav .links, nav .links .pub-div h3 {
     display: flex;
     justify-content: space-between;
     color: rgba(255, 255, 255, 0.91);
@@ -166,7 +166,7 @@ nav .links .pub-div:hover, .friends-div:hover, .messages-div:hover {
     margin-top: 2.5%;
 }
 
-nav .links .pub-div:hover a h3, .friends-div:hover h3, .messages-div:hover h3 {
+nav .links .pub-div:hover h3, .friends-div:hover h3, .messages-div:hover h3 {
     border-bottom: 2px solid white;
 }
 
