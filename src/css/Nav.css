@@ -100,7 +100,7 @@ nav .lines {
     }
 
     .mobile-nav .links-mobile .pub-div, 
-    .mobile-nav .links-mobile .friends-div, 
+    .mobile-nav .links-mobile .notifs-div, 
     .mobile-nav .links-mobile .messages-div {
         display: flex;
         margin: 100px;
@@ -112,13 +112,13 @@ nav .lines {
     }
 
     .mobile-nav .links-mobile .pub-div h3, 
-    .mobile-nav .links-mobile .friends-div h3, 
+    .mobile-nav .links-mobile .notifs-div h3, 
     .mobile-nav .links-mobile .messages-div h3 {
         transition: all .3s;
     }
 
     .mobile-nav .links-mobile .pub-div h3:hover, 
-    .mobile-nav .links-mobile .friends-div h3:hover, 
+    .mobile-nav .links-mobile .notifs-div h3:hover, 
     .mobile-nav .links-mobile .messages-div h3:hover {
         padding: 10px 50px 10px 0;
         border-right: 2px solid green;
@@ -152,7 +152,7 @@ nav .links img {
     margin-top: 3px;
 }
 
-nav .links .pub-div, .friends-div, .messages-div {
+nav .links .pub-div, .notifs-div, .messages-div {
     display: flex;
     justify-content: space-between;
     user-select: none;
@@ -162,11 +162,11 @@ nav .links .pub-div, .friends-div, .messages-div {
     transition: all .3s;
 }
 
-nav .links .pub-div:hover, .friends-div:hover, .messages-div:hover {
+nav .links .pub-div:hover, .notifs-div:hover, .messages-div:hover {
     margin-top: 2.5%;
 }
 
-nav .links .pub-div:hover h3, .friends-div:hover h3, .messages-div:hover h3 {
+nav .links .pub-div:hover h3, .notifs-div:hover h3, .messages-div:hover h3 {
     border-bottom: 2px solid white;
 }
 

@@ -3,7 +3,7 @@ import { PropTypes } from "prop-types";
 import profile from '../assets/person-circle.svg'
 import { UpdatePublication } from "./UpdatePublication";
 
-export function Publication({ id, content, imageSource, modifications, addNotifs }) {
+export function Publication({ id, content, imageSource, modifications, deletePub, addNotifs, handleDisplayNotification }) {
     const [pubContent, setPubContent] = useState(content);
     const [pubImageSource, setPubImageSource] = useState(imageSource);
     const [like, setLike] = useState(0);
@@ -12,16 +12,35 @@ export function Publication({ id, content, imageSource, modifications, addNotifs
 
     const likeNotification = {
         title: "Like",
-        content: "Vous avez liker une publication"
+        content: "Vous avez liker la publication : " + id
+    }
+
+    const deleteNotification = {
+        title: "Suppression",
+        content: "Vous avez supprimer la publication : " + id 
+    }
+
+    const shareNotification = {
+        title: "Partage",
+        content: "Vous avez partager une publication"
+    }
+
+    const handleDeletePublication = () => {
+        deletePub(id);
+        addNotifs(deleteNotification);
+        handleDisplayNotification(true);
     }
 
     const handleLike = () => {
         setLike(like + 1)
         addNotifs(likeNotification);
+        handleDisplayNotification(true);
     }
 
     const handleShare = () => {
-        setShare(share + 1)
+        setShare(share + 1);
+        addNotifs(shareNotification);
+        handleDisplayNotification(true);
     }
 
     const handleUpdateClick = (display) => {
@@ -41,7 +60,7 @@ export function Publication({ id, content, imageSource, modifications, addNotifs
             <div className="publication">
                 <div id="en-tete">
                     <img src={ profile } alt="Photo de profil" /> <h3>EJAD</h3>
-                    <h2 id="close-publication">X</h2>
+                    <h2 id="close-publication" onClick={ handleDeletePublication }>X</h2>
                 </div>
                 <p>
                     { pubContent }
@@ -65,6 +84,7 @@ export function Publication({ id, content, imageSource, modifications, addNotifs
                     afficher = { handleUpdateClick }
                     notif = { addNotifs }
                     publicationArrayUpdate = { modifications }
+                    handleDisplayNotification = { handleDisplayNotification }
                 ></UpdatePublication>
             }
         </>
@@ -76,5 +96,7 @@ Publication.propTypes = {
     content: PropTypes.string.isRequired,
     imageSource: PropTypes.string.isRequired,
     addNotifs: PropTypes.func.isRequired,
-    modifications: PropTypes.func.isRequired
+    modifications: PropTypes.func.isRequired,
+    deletePub: PropTypes.func.isRequired,
+    handleDisplayNotification: PropTypes.func.isRequired
 }

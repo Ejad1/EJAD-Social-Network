@@ -10,7 +10,7 @@ export function Advertising() {
     const [volumeUp, setVolumeUp] = useState(true);
     let soundState;
     const [waitTheEnd, setWaitTheEnd] = useState(true);
-    const [count, setCount] = useState(30);
+    const [count, setCount] = useState(15);
     const audioRef = useRef(null);
     const [isMuted, setIsMuted] = useState(false);
 
@@ -42,7 +42,7 @@ export function Advertising() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            if (timeToDisplayAdvertise < 300) {
+            if (timeToDisplayAdvertise < 120) {
                 setTimeToDisplayAdvertise((prevCount) => prevCount + 1);
             }
             else {
@@ -59,7 +59,7 @@ export function Advertising() {
     const handleCloseAdvertise = () => {
         setTimeToDisplayAdvertise(0);
         setDisplayAdvertise(false);
-        setCount(30);
+        setCount(15);
         setWaitTheEnd(true);
     }
 

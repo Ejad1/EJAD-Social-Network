@@ -40,6 +40,24 @@ main {
     margin-top: 2.5%;
 }
 
+.publication #en-tete h2 {
+    color: red;
+    border: 1px solid red;
+    padding: 2px 6px;
+    user-select: none;
+    margin-left: 83%;
+    height: 2%;
+    width: 4%;
+    text-align: center;
+    transition: all .3s;
+}
+
+.publication #en-tete h2:hover {
+    color: white;
+    background-color: red;
+    box-shadow: 2px 2px 2px black;
+}
+
 .publication p {
     font-family: Arial, Helvetica, sans-serif;
     margin-top: 10px;
@@ -50,6 +68,16 @@ main {
     margin-bottom: 1%;
     max-width: 100%;
     height: auto;
+    z-index: 2;
+}
+
+.publication #image-publication {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-left: 50%;
+    max-width: 100%;
+    height: auto;
+    transform: translateX(-50%);
 }
 
 .publication #bas {
@@ -72,6 +100,7 @@ main {
     border: 1px solid #1b6c68;
     background: fixed #2bb1ab;
     padding: 10px;
+    z-index: 800;
 }
 
 .new-publication #close {

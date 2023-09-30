@@ -1,16 +1,12 @@
 import { useRef, useState } from "react"
 import { PropTypes } from "prop-types";
-import { Publication } from "./Publication";
 
-export function NewPublication({ afficher }) {
+export function NewPublication({ afficher, addPub, longueur }) {
     const [imageName, setImageName] = useState("No image has been selected");
     const [imageSelected, setImageSelected] = useState(false);
     const addImage = useRef(null);
     const [newPublicationText, setNewPublicationText] = useState("");
-    const [newPublicationTextDisplayed, setNewPublicationTextDisplayed] = useState("");
     const [newPublicationImage, setNewPublicationImage] = useState(null);
-    const [newPublicationImagePost, setNewPublicationImagePost] = useState(null);
-    const [addNewPublication, setAddNewPublication] = useState(false);
 
     const handleClose = () => {
         afficher(false);
@@ -35,13 +31,19 @@ export function NewPublication({ afficher }) {
 
     const handleSubmit = () => {
         if (newPublicationText != "") {
-            setAddNewPublication(true);
-            setNewPublicationTextDisplayed(newPublicationText);
+
+            const newPublication = {
+                id: longueur + 1,
+                text: newPublicationText,
+                photo: newPublicationImage
+            }
+            addPub(newPublication);
+
             setNewPublicationText("");
             setImageName("No image has been selected");
             setImageSelected(false);
-            setNewPublicationImagePost(newPublicationImage);
             setNewPublicationImage(null);
+            afficher(false);
         }
     }
 
@@ -72,19 +74,12 @@ export function NewPublication({ afficher }) {
                 </div>
                 <button type="submit" id="submit" onClick={ handleSubmit }>Publier</button>
             </div>
-
-            { 
-                addNewPublication 
-                    && 
-                <Publication 
-                    content = { newPublicationTextDisplayed } 
-                    imageSource = { newPublicationImagePost } 
-                ></Publication> 
-            }
         </div>
     )
 }
 
 NewPublication.propTypes = {
-    afficher: PropTypes.func.isRequired
+    afficher: PropTypes.func.isRequired,
+    addPub: PropTypes.func.isRequired,
+    longueur: PropTypes.number.isRequired
 }

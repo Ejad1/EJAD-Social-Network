@@ -1,15 +1,16 @@
+import { PropTypes } from "prop-types";
 import { useState } from 'react'
 import { NewPublication } from './NewPublication'
 import { Messages } from './Messages'
 import { Link } from 'react-router-dom'
 import '../css/Nav.css'
-import friends from '../assets/person-circle.svg'
 import messages from '../assets/envelope.svg'
 import publication from '../assets/card-text.svg'
+import notification from '../assets/bell.svg'
 import search from '../assets/search.svg'
 
 
-export function Navbar() {
+export function Navbar({ handleAddNotifications, handleDisplayNotification, state, addPub, longueur }) {
     const [clickPub, setClickPub] = useState(false);
     const [messageClick, setMessageClick] = useState(false);
 
@@ -50,6 +51,10 @@ export function Navbar() {
         setMessageClick(state);
     }
 
+    const handleNotificationsClick = () => {
+        handleDisplayNotification(!state);
+    }
+
     return (
         <>
             <nav>
@@ -60,17 +65,17 @@ export function Navbar() {
                     </a>
                 </h1>
                 <div className='links'>
-                    <div className="pub-div">
+                    <div className="pub-div" onClick={() => MakeAPublication(true)}>
                         <img src={ publication } alt="" />
-                        <h3 onClick={() => MakeAPublication(true)} id='make-pub'>Faire une publication</h3>
-                    </div>
-                    <div className="friends-div">
-                        <img src={ friends } alt=""/> 
-                        <h3 id='friends'>Amis</h3>
+                        <h3 id='make-pub'>Faire une publication</h3>
                     </div>
                     <div className="messages-div" onClick={ () => handleDisplayMessage(true) }>
                         <img src={ messages } alt="" /> 
                         <h3 id='messages'>Messages</h3>
+                    </div>
+                    <div className="notifs-div" onClick={ handleNotificationsClick }>
+                        <img src={ notification } alt=""/> 
+                        <h3 id='notifs'>Notifications</h3>
                     </div>
                     <div className='search-div'>
                         <input type="search" name="search" id="search" placeholder='@Votre recherche' />
@@ -82,10 +87,25 @@ export function Navbar() {
                     <div id='two'></div>
                     <div id='three'></div>
                 </div>
-                { clickPub && <NewPublication afficher = { MakeAPublication }/> }
+                { clickPub && <NewPublication afficher = { MakeAPublication } addPub = { addPub } longueur = { longueur }/> }
             </nav>
 
-           { messageClick && <Messages display = { handleDisplayMessage }></Messages> }
+           { messageClick 
+                && 
+             <Messages 
+                display = { handleDisplayMessage } 
+                handleAddNotifications = { handleAddNotifications }
+                handleDisplayNotification = { handleDisplayNotification }
+             ></Messages> 
+            }
         </>
     )
+}
+
+Navbar.propTypes = {
+    handleAddNotifications: PropTypes.func.isRequired,
+    handleDisplayNotification: PropTypes.func.isRequired,
+    state: PropTypes.bool.isRequired,
+    addPub: PropTypes.array.isRequired,
+    longueur: PropTypes.number.isRequired
 }
