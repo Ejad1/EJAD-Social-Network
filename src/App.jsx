@@ -56,6 +56,12 @@ function App() {
   // Add new publication
   const handleAddNewPublication = (newPub) => {
     setUserPublications((prevPubs) => [newPub, ...prevPubs]);
+
+    const copy = [...userPublications];
+    for (let i = 0; i < userPublications.length; i++) {
+      copy[i].id = i + 1;
+    }
+    setUserPublications(copy);
   }
 
   // Publication text and/or image modification function
@@ -77,7 +83,13 @@ function App() {
 
   const handleDeletePublication = (id) => {
     setUserPublications((prevPublications) => prevPublications.filter((pub) => pub.id !== id));
-    setPublicationsArraLength(userPublications.length)
+
+    const copy = [...userPublications];
+    for (let i = 0; i < userPublications.length; i++) {
+      copy[i].id = i + 1;
+    }
+    setUserPublications(copy);
+    setPublicationsArraLength(userPublications.length);
   }
 
   const handleAddNotifications = (notification) => {

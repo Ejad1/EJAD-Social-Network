@@ -3,11 +3,12 @@ import { Publication } from './Publication'
 import '../css/Main.css'
 
 export function Main({ notifsArray, handleDisplayNotification, state, pubsArray, pubModification, pubDelete }) {
+    const publicationsArray = pubsArray.slice().reverse();
    
     return (
         <main>
             {
-                pubsArray.map(aPublication =>
+                publicationsArray.map(aPublication =>
                     <Publication
                         key = { aPublication.id }
                         id = { aPublication.id }
