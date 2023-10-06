@@ -106,6 +106,6 @@ Navbar.propTypes = {
     handleAddNotifications: PropTypes.func.isRequired,
     handleDisplayNotification: PropTypes.func.isRequired,
     state: PropTypes.bool.isRequired,
-    addPub: PropTypes.array.isRequired,
+    addPub: PropTypes.func.isRequired,
     longueur: PropTypes.number.isRequired
 }

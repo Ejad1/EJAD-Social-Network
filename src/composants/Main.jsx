@@ -30,7 +30,7 @@ Main.propTypes = {
     notifsArray: PropTypes.func.isRequired,
     handleDisplayNotification: PropTypes.func.isRequired,
     state: PropTypes.bool.isRequired,
-    pubsArray: PropTypes.string.isRequired, 
+    pubsArray: PropTypes.array.isRequired, 
     pubModification: PropTypes.func.isRequired,
     pubDelete: PropTypes.func.isRequired
 }

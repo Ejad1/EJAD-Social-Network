@@ -1,5 +1,7 @@
-EJAD Social Network (ESN) comme son nom l'indique est un réseau social comme facebook ou autre qui me sert d'application à ma formation React
+# EJAD Social Network ( ESN )
 
-L'utilisateur peut faire une publication, la liker et la modifier. A chaque fois qu'il effectue une action, il reçoit une notification
-
-Une publicité apparait également chaque 3 minutes sur le site
+## Fonctionnalités
+1. Creation d'un compte
+1. Création, lecture, modification et suppression d'un tweet de l'utilisateur
+1. Possibilité de liker, commenter et partager la publication d'un autre utilisateur
+1. Envoi et réception de messages
