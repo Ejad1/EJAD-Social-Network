@@ -12,6 +12,7 @@ nav {
     justify-content: space-between;
     background-color: #1e847f;
     box-shadow: 3px 3px 2px black;
+    max-height: 90px;
 }
 
 nav h1 {
@@ -130,13 +131,19 @@ nav .lines {
 }
 
 nav h1 #initials {
-    color: #ecc19c;
+    color: #f6416c;
+    color: yellow;
 }
 
-nav .links, nav .links .pub-div h3 {
+nav h1 a {
+    color: #a6e3e9;
+}
+
+nav .links {
     display: flex;
     justify-content: space-between;
-    color: rgba(255, 255, 255, 0.91);
+    color: white;
+    margin-top: -.5%;
 }
 
 @media all and (max-width: 675px) {

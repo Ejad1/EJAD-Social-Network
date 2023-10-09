@@ -1,0 +1,20 @@
+
+form {
+    width: 50%;
+    margin: auto;
+    display: flex;
+}
+
+form img {
+    max-height: 450px;
+    width: 300px;
+}
+
+form .formulaire {
+    width: 50%;
+    margin: auto;
+    background-color: azure;
+    border: 2px solid azure;
+    box-shadow: 2px 2px 2px black;
+    display: flex;
+}

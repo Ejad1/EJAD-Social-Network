@@ -77,6 +77,12 @@ export function Navbar({ handleAddNotifications, handleDisplayNotification, stat
                         <img src={ notification } alt=""/> 
                         <h3 id='notifs'>Notifications</h3>
                     </div>
+                    <div className="notifs-div" onClick={ handleNotificationsClick }>
+                        <img src={ notification } alt=""/> 
+                        <Link to={ "/form" }>
+                            <h3 id='notifs'>Formulaire</h3>
+                        </Link>
+                    </div>
                     <div className='search-div'>
                         <input type="search" name="search" id="search" placeholder='@Votre recherche' />
                         <img src={ search } alt="" />

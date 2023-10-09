@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './css/App.css'
 import { Navbar } from './composants/Nav'
 import { Main } from './composants/Main'
-import { Advertising } from './composants/Advertising'
+// import { Advertising } from './composants/Advertising'
 import { Notifications } from './composants/Notifications'
 import imagePublication from './assets/cat.jpg'
 
@@ -121,7 +121,7 @@ function App() {
           pubModification = { handleSetPublication }
           pubDelete = { handleDeletePublication }
       ></Main>
-      <Advertising></Advertising>
+      {/* <Advertising></Advertising> */}
     </>
   )
 }

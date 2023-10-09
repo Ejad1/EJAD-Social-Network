@@ -10,6 +10,7 @@ import App from './App.jsx'
 import './index.css'
 import { NewPublication } from './composants/NewPublication.jsx'
 import { Notifications } from './composants/Notifications.jsx'
+import { Form } from './composants/Form.jsx'
 
 const router = createBrowserRouter([
   {
@@ -25,8 +26,8 @@ const router = createBrowserRouter([
     element: <Notifications></Notifications>
   },
   {
-    path:'/',
-    element: <App></App>
+    path:'/form',
+    element: <Form></Form>
   }
 ])
 
