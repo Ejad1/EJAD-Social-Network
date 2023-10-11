@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { PropTypes } from "prop-types";
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import profile from '../assets/person-circle.svg'
 import { UpdatePublication } from "./UpdatePublication";
 
@@ -57,6 +59,11 @@ export function Publication({ id, content, imageSource, modifications, deletePub
 
     return (
         <>
+            <Stack spacing={2} direction="row">
+                <Button variant="text">Text</Button>
+                <Button variant="contained">Contained</Button>
+                <Button variant="outlined">Outlined</Button>
+            </Stack>
             <div className="publication">
                 <div id="en-tete">
                     <img src={ profile } alt="Photo de profil" /> <h3>EJAD</h3>
