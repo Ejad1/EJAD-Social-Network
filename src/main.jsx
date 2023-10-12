@@ -18,16 +18,16 @@ const router = createBrowserRouter([
     element: <App></App>
   },
   {
+    path:'/form',
+    element: <Form></Form>
+  },
+  {
     path:'/publi',
     element: <NewPublication afficher={ true }></NewPublication>
   },
   {
     path:'/notifications',
     element: <Notifications></Notifications>
-  },
-  {
-    path:'/form',
-    element: <Form></Form>
   }
 ])
 
