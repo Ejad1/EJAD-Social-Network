@@ -1,5 +1,5 @@
 import { PropTypes } from "prop-types";
-import '../css/Notifications.css'
+import '../../css/Notifications.css'
 import { ANotification } from './ANotification'
 import { useEffect, useState } from "react";
 
@@ -63,5 +63,5 @@ export function Notifications({ monTableau }) {
 }
 
 Notifications.propTypes = {
-    monTableau: PropTypes.array.isRequired
+    monTableau: PropTypes.array
 }

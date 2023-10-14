@@ -8,18 +8,15 @@ import {
 
 import App from './App.jsx'
 import './index.css'
-import { NewPublication } from './composants/NewPublication.jsx'
-import { Notifications } from './composants/Notifications.jsx'
-import { Form } from './composants/Form.jsx'
+import { NewPublication } from './composants/Publications/NewPublication.jsx'
+import { Notifications } from './composants/Notifications/Notifications.jsx'
+import { SignUpForm } from './composants/Forms/SignUpForm.jsx'
+import { SignInForm } from './composants/Forms/SignInForm.jsx'
 
 const router = createBrowserRouter([
   {
     path:'/',
     element: <App></App>
-  },
-  {
-    path:'/form',
-    element: <Form></Form>
   },
   {
     path:'/publi',
@@ -28,6 +25,14 @@ const router = createBrowserRouter([
   {
     path:'/notifications',
     element: <Notifications></Notifications>
+  },
+  {
+    path:'/signup',
+    element: <SignUpForm></SignUpForm>
+  },
+  {
+    path:'/signin',
+    element: <SignInForm></SignInForm>
   }
 ])
 

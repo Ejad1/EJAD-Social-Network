@@ -1,7 +1,7 @@
 import { PropTypes } from "prop-types";
 import { useState } from 'react'
-import { NewPublication } from './NewPublication'
-import { Messages } from './Messages'
+import { NewPublication } from './Publications/NewPublication'
+import { Messages } from './Messages/Messages'
 import { Link } from 'react-router-dom'
 import '../css/Nav.css'
 import messages from '../assets/envelope.svg'

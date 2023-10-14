@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import { PropTypes } from "prop-types";
 import { UserAnswer } from './UserAnswer'
 import { Emoticones } from './Emoticones'
-import '../css/Messages.css'
-import profile from '../assets/person-circle.svg'
-import envoyer from '../assets/send.svg'
-import emojis from '../assets/face-smile-beam-regular.svg'
+import '../../css/Messages.css'
+import profile from '../../assets/person-circle.svg'
+import envoyer from '../../assets/send.svg'
+import emojis from '../../assets/face-smile-beam-regular.svg'
 
 export function Messages({ display, handleAddNotifications, handleDisplayNotification }) {
     const [messagesTop, setMessagesTop] = useState(13.5);

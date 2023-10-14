@@ -1,5 +1,5 @@
 import { PropTypes } from "prop-types";
-import fleche from '../assets/caret-right-fill.svg'
+import fleche from '../../assets/caret-right-fill.svg'
 
 export function ANotification({ notifTitle, notifContent }) {
     return (

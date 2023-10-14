@@ -80,6 +80,6 @@ export function NewPublication({ afficher, addPub, longueur }) {
 
 NewPublication.propTypes = {
     afficher: PropTypes.func.isRequired,
-    addPub: PropTypes.func.isRequired,
-    longueur: PropTypes.number.isRequired
+    addPub: PropTypes.func,
+    longueur: PropTypes.number
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { PropTypes } from "prop-types";
 // import Stack from '@mui/material/Stack';
 // import Button from '@mui/material/Button';
-import profile from '../assets/person-circle.svg'
+import profile from '../../assets/person-circle.svg'
 import { UpdatePublication } from "./UpdatePublication";
 
 export function Publication({ id, content, imageSource, modifications, deletePub, addNotifs, handleDisplayNotification }) {

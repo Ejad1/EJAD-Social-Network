@@ -1,5 +1,5 @@
 import { PropTypes } from "prop-types";
-import { Publication } from './Publication'
+import { Publication } from './Publications/Publication'
 import '../css/Main.css'
 
 export function Main({ notifsArray, handleDisplayNotification, state, pubsArray, pubModification, pubDelete }) {
