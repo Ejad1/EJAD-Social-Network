@@ -48,6 +48,9 @@ export function SignUpForm() {
   const [emailConfError, setEmailConfError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [passwordConfError, setPasswordConfError] = useState("");
+  
+  const [gender, setGender] = useState("");
+  const [genderError, setGenderError] = useState("");
 
   // Inputs ref
   const firstname = useRef(null);
@@ -58,16 +61,20 @@ export function SignUpForm() {
   const password = useRef(null);
   const passwordConf = useRef(null);
 
+  const handleGenderChange = (event) => {
+    setGender(event.target.value);
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     // @ Empty form area verifications @ //
     firstname.current.value === "" 
-    ? (setNameError("Please enter your first name"), setNameErrorPresent(true) ) 
+    ? (setNameError("Please enter your last name"), setNameErrorPresent(true) ) 
     : (setNameError(""), setNameErrorPresent(false) );
 
     lastname.current.value === "" 
-    ? (setLastNameError("Please enter your last name"), setLastNameErrorPresent(true) ) 
+    ? (setLastNameError("Please enter your first name"), setLastNameErrorPresent(true) ) 
     : (setLastNameError(""), setLastNameErrorPresent(false) );
 
     number.current.value === "" 
@@ -89,6 +96,8 @@ export function SignUpForm() {
     passwordConf.current.value === "" 
     ? (setPasswordConfError("Please confirm your password"), setPasswordConfErrorPresent(true) ) 
     : (setPasswordConfError(""), setPasswordConfErrorPresent(false) );
+
+    gender === "" ? setGenderError("Enter your gender") : setGenderError("")
     // @ Empty form area verifications @ //
 
     if (nameErrorPresent || lastNameErrorPresent || numberErrorPresent || emailErrorPresent || emailConfErrorPresent || 
@@ -173,11 +182,13 @@ export function SignUpForm() {
                   row
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group"
+                  onChange={ handleGenderChange }
                 >
                   <FormControlLabel value="male" control={<Radio />} label="Male" />
                   <FormControlLabel value="female" control={<Radio />} label="Female" />
                 </RadioGroup>
               </FormControl> 
+              <p style={{ color: 'red' }}>{ genderError }</p>
               </Grid>
 
               <Grid item xs={12} sm={6}>
@@ -230,6 +241,7 @@ export function SignUpForm() {
                 />
                 <p style={{ color: 'red' }}>{ passwordConfError }</p>
               </Grid>
+
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
