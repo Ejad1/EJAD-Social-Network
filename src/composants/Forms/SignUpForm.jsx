@@ -31,7 +31,14 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export function SignUpForm() {
-  const [errorPresent, setErrorPresent] = useState(false);
+  // const [userInfos, setUserInfos] = useState({});
+  // const handleAddUser = (infos) => {
+  //   setUserInfos(infos);
+  // }
+
+  // Variable for navigation after submitting the sign up form
+
+  const [errorPresent, setErrorPresent] = useState(true);
   const [nameErrorPresent, setNameErrorPresent] = useState(false);
   const [lastNameErrorPresent, setLastNameErrorPresent] = useState(false);
   const [numberErrorPresent, setNumberErrorPresent] = useState(false);
@@ -41,6 +48,7 @@ export function SignUpForm() {
   const [passwordConfErrorPresent, setPasswordConfErrorPresent] = useState(false);
 
   // Errors messages
+  const [generalError, setGeneralError] = useState("");
   const [nameError, setNameError] = useState("");
   const [lastNameError, setLastNameError] = useState("");
   const [numberError, setNumberError] = useState("");
@@ -104,14 +112,36 @@ export function SignUpForm() {
       passwordErrorPresent || passwordConfErrorPresent) {
         setErrorPresent(true)
     }
-    else setErrorPresent(false);
+    else {
+      setErrorPresent(false);
+    }
 
-    if (!errorPresent) {
-      const data = new FormData(event.currentTarget);
-      console.log({
-        email: data.get('email'),
-        password: data.get('password'),
-      });
+    console.log(errorPresent);
+
+    if (errorPresent) {
+      setGeneralError("Veuillez remplir tous les champs du formulaire");
+    }
+    else {
+      if (email === emailConf) {
+        if (password === passwordConf) {
+          // const data = new FormData(event.currentTarget);
+
+          // const myUser = {
+          //   nom: data.get('firstName'),
+          //   lastName: data.get('lastName'),
+          //   number: data.get('number'),
+          //   gender: gender,
+          //   email: data.get('email'),
+          //   password: data.get('password'),
+          // }
+        }
+        else {
+          setGeneralError("Les deux mots de passe que vous avez entrez ne sont pas conformes");
+        }
+      }
+      else {
+        setGeneralError("Les deux emails que vous avez entrez ne sont pas conformes");
+      }
     }
   };
 
@@ -240,6 +270,12 @@ export function SignUpForm() {
                   autoComplete="password"
                 />
                 <p style={{ color: 'red' }}>{ passwordConfError }</p>
+              </Grid>
+
+              <Grid item xs={1} sm={1}></Grid>
+
+              <Grid item xs={6} sm={10}>
+                <p style={{ color: 'red', textAlign: 'center' }}>{ generalError }</p>
               </Grid>
 
               <Grid item xs={12}>
