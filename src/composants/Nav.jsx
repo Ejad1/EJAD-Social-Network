@@ -10,7 +10,7 @@ import notification from '../assets/bell.svg'
 import search from '../assets/search.svg'
 
 
-export function Navbar({ handleAddNotifications, handleDisplayNotification, state, addPub, longueur }) {
+export function Navbar({ handleAddNotifications, handleDisplayNotification, state, addPub, longueur, userName }) {
     const [clickPub, setClickPub] = useState(false);
     const [messageClick, setMessageClick] = useState(false);
 
@@ -61,7 +61,7 @@ export function Navbar({ handleAddNotifications, handleDisplayNotification, stat
                 <h1 id="initials-mobile">ESN</h1>
                 <h1>
                     <a href="../../index.html">
-                        <span id='initials'>EJAD S</span>ocial <span id='initials'>N</span>etwork
+                        <span id='initials'>{ userName.nom + " " + userName.lastName }</span>
                     </a>
                 </h1>
                 <div className='links'>
@@ -107,5 +107,6 @@ Navbar.propTypes = {
     handleDisplayNotification: PropTypes.func.isRequired,
     state: PropTypes.bool.isRequired,
     addPub: PropTypes.func.isRequired,
-    longueur: PropTypes.number.isRequired
+    longueur: PropTypes.number.isRequired,
+    userName: PropTypes.object
 }

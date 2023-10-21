@@ -16,6 +16,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 
 
 function Copyright(props) {
@@ -37,6 +38,7 @@ export function SignUpForm() {
   // }
 
   // Variable for navigation after submitting the sign up form
+  const navigate = useNavigate();
 
   const [errorPresent, setErrorPresent] = useState(true);
   const [nameErrorPresent, setNameErrorPresent] = useState(false);
@@ -76,37 +78,37 @@ export function SignUpForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // @ Empty form area verifications @ //
-    firstname.current.value === "" 
+    // @ --- Empty form area verifications --- @ //
+    firstname.current.value === null
     ? (setNameError("Please enter your last name"), setNameErrorPresent(true) ) 
     : (setNameError(""), setNameErrorPresent(false) );
 
-    lastname.current.value === "" 
+    lastname.current.value === null
     ? (setLastNameError("Please enter your first name"), setLastNameErrorPresent(true) ) 
     : (setLastNameError(""), setLastNameErrorPresent(false) );
 
-    number.current.value === "" 
+    number.current.value === null
     ? (setNumberError("Please enter your contact"), setNumberErrorPresent(true) ) 
     : (setNumberError(""), setNumberErrorPresent(false) );
 
-    email.current.value === "" 
+    email.current.value === null
     ? (setEmailError("Please enter your mail"), setEmailErrorPresent(true) ) 
     : (setEmailError(""), setEmailErrorPresent(false) );
 
-    emailConf.current.value === "" 
+    emailConf.current.value === null 
     ? (setEmailConfError("Please confirm your mail address"), setEmailConfErrorPresent(true) ) 
     : (setEmailConfError(""), setEmailConfErrorPresent(false) );
 
-    password.current.value === "" 
+    password.current.value === null
     ? (setPasswordError("Please enter your password"), setPasswordErrorPresent(true) ) 
     : (setPasswordError(""), setPasswordErrorPresent(false) );
 
-    passwordConf.current.value === "" 
+    passwordConf.current.value === null 
     ? (setPasswordConfError("Please confirm your password"), setPasswordConfErrorPresent(true) ) 
     : (setPasswordConfError(""), setPasswordConfErrorPresent(false) );
 
-    gender === "" ? setGenderError("Enter your gender") : setGenderError("")
-    // @ Empty form area verifications @ //
+    gender === null ? setGenderError("Enter your gender") : setGenderError("")
+    // @ --- End of empty form area verifications --- @ //
 
     if (nameErrorPresent || lastNameErrorPresent || numberErrorPresent || emailErrorPresent || emailConfErrorPresent || 
       passwordErrorPresent || passwordConfErrorPresent) {
@@ -122,18 +124,24 @@ export function SignUpForm() {
       setGeneralError("Veuillez remplir tous les champs du formulaire");
     }
     else {
-      if (email === emailConf) {
-        if (password === passwordConf) {
-          // const data = new FormData(event.currentTarget);
+      if (email.current.value === emailConf.current.value) {
+        if (password.current.value === passwordConf.current.value) {
+          const data = new FormData(event.currentTarget);
 
-          // const myUser = {
-          //   nom: data.get('firstName'),
-          //   lastName: data.get('lastName'),
-          //   number: data.get('number'),
-          //   gender: gender,
-          //   email: data.get('email'),
-          //   password: data.get('password'),
-          // }
+          const myUser = {
+            nom: data.get('firstName'),
+            lastName: data.get('lastName'),
+            number: data.get('number'),
+            gender: gender,
+            email: data.get('email'),
+            password: data.get('password'),
+          }
+
+          console.log(myUser);
+
+          navigate("/esn", { state: {myUser} });
+
+          setGeneralError("");
         }
         else {
           setGeneralError("Les deux mots de passe que vous avez entrez ne sont pas conformes");
