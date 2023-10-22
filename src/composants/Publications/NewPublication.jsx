@@ -37,7 +37,7 @@ export function NewPublication({ afficher, addPub, longueur }) {
                 text: newPublicationText,
                 photo: newPublicationImage
             }
-            addPub(newPublication);
+            addPub(newPublication, longueur);
 
             setNewPublicationText("");
             setImageName("No image has been selected");

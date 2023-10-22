@@ -3,7 +3,7 @@ import { Publication } from './Publications/Publication'
 import '../css/Main.css'
 
 export function Main({ notifsArray, handleDisplayNotification, state, pubsArray, pubModification, pubDelete }) {
-    const publicationsArray = pubsArray.slice().reverse();
+    const publicationsArray = pubsArray;
    
     return (
         <main>

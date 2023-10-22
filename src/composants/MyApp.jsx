@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Navbar } from './Nav'
 import { Main } from './Main'
 // import { Advertising } from './composants/Advertising'
@@ -7,9 +7,9 @@ import imagePublication from '../assets/cat.jpg'
 import { useLocation } from 'react-router-dom'
 
 function MyApp() {
-    // Recuparation of the user infos
-    const location = useLocation();
-    const myUser = location.state.myUser;
+  // Recuparation of the user infos
+  const location = useLocation();
+  const myUser = location.state.myUser;
 
   const [notificationsArray, setNotificationsArray] = useState([]);
   const [displayNotifications, setDisplayNotifications] = useState(false);
@@ -58,14 +58,18 @@ function MyApp() {
   const [publicationArrayLength, setPublicationsArraLength] = useState(userPublications.length);
 
   // Add new publication
-  const handleAddNewPublication = (newPub) => {
+  const handleAddNewPublication = (newPub, len) => {
     setUserPublications((prevPubs) => [newPub, ...prevPubs]);
 
-    const copy = [...userPublications];
-    for (let i = 0; i < userPublications.length; i++) {
-      copy[i].id = i + 1;
-    }
-    setUserPublications(copy);
+    useEffect[() => {
+      const copy = [...userPublications];
+      for (let i = 0; i < userPublications.length; i++) {
+        copy[i].id = i + 1;
+      }
+      setUserPublications(copy);
+    }, userPublications]
+
+    setPublicationsArraLength(len + 1);
   }
 
   // Publication text and/or image modification function
@@ -88,12 +92,17 @@ function MyApp() {
   const handleDeletePublication = (id) => {
     setUserPublications((prevPublications) => prevPublications.filter((pub) => pub.id !== id));
 
-    const copy = [...userPublications];
-    for (let i = 0; i < userPublications.length; i++) {
-      copy[i].id = i + 1;
-    }
-    setUserPublications(copy);
+    useEffect[() => {
+      const copy = [...userPublications];
+      for (let i = 0; i < userPublications.length; i++) {
+        copy[i].id = i + 1;
+      }
+      setUserPublications(copy);
+    }, userPublications]
+
     setPublicationsArraLength(userPublications.length);
+
+    console.log(userPublications);
   }
 
   const handleAddNotifications = (notification) => {

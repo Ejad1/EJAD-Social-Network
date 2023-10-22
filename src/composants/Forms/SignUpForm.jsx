@@ -128,8 +128,11 @@ export function SignUpForm() {
         if (password.current.value === passwordConf.current.value) {
           const data = new FormData(event.currentTarget);
 
+          let userName = data.get('firstName');
+          userName = userName.toUpperCase();
+
           const myUser = {
-            nom: data.get('firstName'),
+            nom: userName,
             lastName: data.get('lastName'),
             number: data.get('number'),
             gender: gender,
