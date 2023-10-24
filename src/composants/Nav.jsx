@@ -70,7 +70,8 @@ export function Navbar({ handleAddNotifications, handleDisplayNotification, stat
                         <h3 id='make-pub'>Faire une publication</h3>
                     </div>
                     <div className="messages-div" onClick={ () => handleDisplayMessage(true) }>
-                        <img src={ messages } alt="" /> 
+                        <img src={ messages } alt="" />
+                        <Link to="/messages">Messages</Link>
                         <h3 id='messages'>Messages</h3>
                     </div>
                     <div className="notifs-div" onClick={ handleNotificationsClick }>

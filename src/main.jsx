@@ -8,11 +8,11 @@ import {
 
 import App from './App.jsx'
 import './index.css'
-import { NewPublication } from './composants/Publications/NewPublication.jsx'
 import { Notifications } from './composants/Notifications/Notifications.jsx'
 import { SignUpForm } from './composants/Forms/SignUpForm.jsx'
 import { SignInForm } from './composants/Forms/SignInForm.jsx'
 import MyApp from './composants/MyApp.jsx'
+import { Messages } from './composants/Messages/Messages.jsx'
 
 const router = createBrowserRouter([
   {
@@ -24,8 +24,8 @@ const router = createBrowserRouter([
     element: <MyApp></MyApp>
   },
   {
-    path:'/publi',
-    element: <NewPublication afficher={ true }></NewPublication>
+    path:'/messages',
+    element: <Messages></Messages>
   },
   {
     path:'/notifications',

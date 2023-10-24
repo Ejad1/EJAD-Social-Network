@@ -2,13 +2,38 @@ import { useEffect, useState } from 'react'
 import { PropTypes } from "prop-types";
 import { UserAnswer } from './UserAnswer'
 import { Emoticones } from './Emoticones'
-import '../../css/Messages.css'
+import '../../css/Messages/Messages.css'
 import profile from '../../assets/person-circle.svg'
 import envoyer from '../../assets/send.svg'
 import emojis from '../../assets/face-smile-beam-regular.svg'
+import { DiscussionsList } from './DiscussionsList';
+import { Conversation } from './Conversation';
 
 export function Messages({ display, handleAddNotifications, handleDisplayNotification }) {
     const [messagesTop, setMessagesTop] = useState(13.5);
+
+    const [discussionsList, setDiscussionsList] = useState([
+        {
+            id: 1,
+            discussionName: "EJAD",
+            message: "How are you"
+        },
+        {
+            id: 2,
+            discussionName: "Elle",
+            message: "How are you ?"
+        },
+        {
+            id: 3,
+            discussionName: "Moi",
+            message: "Nice to meet you"
+        },
+        {
+            id: 4,
+            discussionName: "You",
+            message: "Okay very good"
+        },
+    ])
 
     useEffect(() => {
         let lastScrollTop = document.documentElement.scrollTop;
@@ -76,6 +101,8 @@ export function Messages({ display, handleAddNotifications, handleDisplayNotific
         <div className="messages" 
             style={{ top: `${ messagesTop }%`, overflowY: 'auto' }}
         >
+            <DiscussionsList discussionsList = { discussionsList }></DiscussionsList>
+            <Conversation></Conversation>
             <h2 className="close-messages" onClick={ handleCloseClick }>X</h2>
             <div className="messages-received">
                 <div id="en-tete">
