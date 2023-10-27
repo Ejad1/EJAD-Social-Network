@@ -32,10 +32,6 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export function SignUpForm() {
-  // const [userInfos, setUserInfos] = useState({});
-  // const handleAddUser = (infos) => {
-  //   setUserInfos(infos);
-  // }
 
   // Variable for navigation after submitting the sign up form
   const navigate = useNavigate();

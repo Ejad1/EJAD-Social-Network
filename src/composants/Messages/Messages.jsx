@@ -12,28 +12,35 @@ import { Conversation } from './Conversation';
 export function Messages({ display, handleAddNotifications, handleDisplayNotification }) {
     const [messagesTop, setMessagesTop] = useState(13.5);
 
-    const [discussionsList, setDiscussionsList] = useState([
+    const [conversationCibleInfos, setConversationCibleInfos] = useState({});
+
+    // Callback funcion to display a conversation
+    const handleCallback = (informations) => {
+        setConversationCibleInfos(informations)
+    }
+
+    const discussionsList = [
         {
             id: 1,
             discussionName: "EJAD",
-            message: "How are you"
+            message: ["How are you"]
         },
         {
             id: 2,
             discussionName: "Elle",
-            message: "How are you ?"
+            message: ["How are you ?"]
         },
         {
             id: 3,
             discussionName: "Moi",
-            message: "Nice to meet you"
+            message: ["Nice to meet you"]
         },
         {
             id: 4,
             discussionName: "You",
-            message: "Okay very good"
+            message: ["Okay very good"]
         },
-    ])
+    ]
 
     useEffect(() => {
         let lastScrollTop = document.documentElement.scrollTop;
@@ -101,8 +108,10 @@ export function Messages({ display, handleAddNotifications, handleDisplayNotific
         <div className="messages" 
             style={{ top: `${ messagesTop }%`, overflowY: 'auto' }}
         >
-            <DiscussionsList discussionsList = { discussionsList }></DiscussionsList>
-            <Conversation></Conversation>
+            <div className="discussions-conversations">
+                <DiscussionsList discussionsList = { discussionsList } callback={ handleCallback }></DiscussionsList>
+                <Conversation conversationCible={ conversationCibleInfos }></Conversation>
+            </div>
             <h2 className="close-messages" onClick={ handleCloseClick }>X</h2>
             <div className="messages-received">
                 <div id="en-tete">
@@ -121,7 +130,7 @@ export function Messages({ display, handleAddNotifications, handleDisplayNotific
                 ))
             }
 
-            <div className="answer">     
+            <div className="answer"> 
                 <img src= { emojis } alt="" id='emoticone' onClick={ handleEmojisClick } />
                 <textarea 
                     name="answer-text" 
@@ -142,7 +151,7 @@ export function Messages({ display, handleAddNotifications, handleDisplayNotific
 
 
 Messages.propTypes = {
-    display: PropTypes.func.isRequired,
+    display: PropTypes.func,
     handleAddNotifications: PropTypes.func.isRequired,
     handleDisplayNotification: PropTypes.func.isRequired
 }

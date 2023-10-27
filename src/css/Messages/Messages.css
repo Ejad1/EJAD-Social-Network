@@ -123,3 +123,34 @@
 .fade-out.hide {
     opacity: 0;
 }
+
+/* Discussions list and conversations box styles */
+.discussions-conversations {
+    display: flex;
+}
+
+.discussions-conversations .discussions-list {
+    width: 1000px;
+    user-select: none;
+    padding: 10px;
+}
+
+.discussions-conversations .conversation h1 {
+    color: white;
+    text-align: center;
+    margin-top: 50%;
+    transform: translateY(-50%);
+}
+
+.discussions-conversations .conversation h2 {
+    margin-left: 10px;
+    margin-top: 8px;
+}
+
+.discussions-conversations .conversation p {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: gray;
+}
