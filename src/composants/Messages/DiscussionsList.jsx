@@ -34,7 +34,11 @@ export function DiscussionsList({ discussionsList, callback }) {
                                 }}></Avatar>
                             </Badge>
                         </ListItemAvatar>
-                        <ListItemText primary={ element.discussionName } secondary={ element.message } />
+                        <ListItemText 
+                            primary={ element.discussionName } 
+                            secondary={ element.message }
+                            sx={{ height: '40px', overflow: 'hidden'}}
+                        />
                     </ListItem>
                 ))
             }

@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react'
 import { PropTypes } from "prop-types";
-import { UserAnswer } from './UserAnswer'
-import { Emoticones } from './Emoticones'
+import { UserAnswer } from './AConversation/UserAnswer/UserAnswer'
+import { Emoticones } from './AConversation/UserAnswer/Emoticones'
 import '../../css/Messages/Messages.css'
-import profile from '../../assets/person-circle.svg'
 import envoyer from '../../assets/send.svg'
 import emojis from '../../assets/face-smile-beam-regular.svg'
 import { DiscussionsList } from './DiscussionsList';
-import { Conversation } from './Conversation';
+import { Conversation } from './AConversation/Conversation';
 
-export function Messages({ display, handleAddNotifications, handleDisplayNotification }) {
+export function Messages({ handleAddNotifications, handleDisplayNotification }) {
     const [messagesTop, setMessagesTop] = useState(13.5);
 
     const [conversationCibleInfos, setConversationCibleInfos] = useState({});
@@ -23,7 +22,8 @@ export function Messages({ display, handleAddNotifications, handleDisplayNotific
         {
             id: 1,
             discussionName: "EJAD",
-            message: ["How are you"]
+            message: ["How are you Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aperiam veritatis quas minus assumenda quae ut atque odio, autem soluta consequatur nihil beatae facere blanditiis voluptatem animi similique iste vel."]
+            
         },
         {
             id: 2,
@@ -100,9 +100,6 @@ export function Messages({ display, handleAddNotifications, handleDisplayNotific
         }
     }
 
-    const handleCloseClick = () => {
-        display(false);
-    }
 
     return (
         <div className="messages" 
@@ -111,17 +108,6 @@ export function Messages({ display, handleAddNotifications, handleDisplayNotific
             <div className="discussions-conversations">
                 <DiscussionsList discussionsList = { discussionsList } callback={ handleCallback }></DiscussionsList>
                 <Conversation conversationCible={ conversationCibleInfos }></Conversation>
-            </div>
-            <h2 className="close-messages" onClick={ handleCloseClick }>X</h2>
-            <div className="messages-received">
-                <div id="en-tete">
-                    <img src={ profile } alt="Photo de profil" />
-                    <h3>Nom et Prénoms</h3>
-                </div>
-                <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem quos ad mollitia enim, magni alias atque officiis 
-                    dolores qui libero et quod dignissimos doloremque fuga. Placeat dolore numquam repellat recusandae?
-                </p>
             </div>
 
             {

@@ -1,7 +1,6 @@
 import { PropTypes } from "prop-types";
 import { useState } from 'react'
 import { NewPublication } from './Publications/NewPublication'
-import { Messages } from './Messages/Messages'
 import { Link } from 'react-router-dom'
 import '../css/Nav.css'
 import messages from '../assets/envelope.svg'
@@ -12,7 +11,6 @@ import search from '../assets/search.svg'
 
 export function Navbar({ handleAddNotifications, handleDisplayNotification, state, addPub, longueur, userName }) {
     const [clickPub, setClickPub] = useState(false);
-    const [messageClick, setMessageClick] = useState(false);
 
     const MakeAPublication = (state) => {
         setClickPub(state);
@@ -47,10 +45,6 @@ export function Navbar({ handleAddNotifications, handleDisplayNotification, stat
         )
     }
 
-    const handleDisplayMessage = (state) => {
-        setMessageClick(state);
-    }
-
     const handleNotificationsClick = () => {
         handleDisplayNotification(!state);
     }
@@ -69,10 +63,9 @@ export function Navbar({ handleAddNotifications, handleDisplayNotification, stat
                         <img src={ publication } alt="" />
                         <h3 id='make-pub'>Faire une publication</h3>
                     </div>
-                    <div className="messages-div" onClick={ () => handleDisplayMessage(true) }>
-                        <img src={ messages } alt="" />
+                    <div className="messages-div">
+                        <img src={ messages } alt="Message icon" />
                         <Link to="/messages">Messages</Link>
-                        <h3 id='messages'>Messages</h3>
                     </div>
                     <div className="notifs-div" onClick={ handleNotificationsClick }>
                         <img src={ notification } alt=""/> 
@@ -90,15 +83,6 @@ export function Navbar({ handleAddNotifications, handleDisplayNotification, stat
                 </div>
                 { clickPub && <NewPublication afficher = { MakeAPublication } addPub = { addPub } longueur = { longueur }/> }
             </nav>
-
-           { messageClick 
-                && 
-             <Messages 
-                display = { handleDisplayMessage } 
-                handleAddNotifications = { handleAddNotifications }
-                handleDisplayNotification = { handleDisplayNotification }
-             ></Messages> 
-            }
         </>
     )
 }

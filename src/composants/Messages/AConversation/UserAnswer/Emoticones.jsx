@@ -1,6 +1,6 @@
 import { PropTypes } from "prop-types";
 import { AnEmoticone } from './AnEmoticone'
-import '../../css/Emoticones.css'
+import '../../../../css/Emoticones.css'
 
 
 export function Emoticones({ changeFunction }) {

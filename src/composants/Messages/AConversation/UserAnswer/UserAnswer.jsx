@@ -1,5 +1,5 @@
 import { PropTypes } from "prop-types";
-import '../../css/UserAnswer.css'
+import '../../../../css/UserAnswer.css'
 
 export function UserAnswer({ answer }) {
     return (
