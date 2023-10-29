@@ -1,6 +1,7 @@
 .user-answer {
     position: relative;
     bottom: 0;
+    right: 1%;
     margin-bottom: 10px;
     padding: 2px;
     text-align: bottom;
@@ -13,20 +14,17 @@
     width: fit-content;
     max-width: 200px;
     overflow: hidden;
-    border: 1px solid aqua;
-    border-radius: 8px;
-    background-color: rgb(0, 220, 220);
-    box-shadow: 2px 2px 2px black;
+    border: 2px solid #2196F3;
+    border-radius: 10px;
     position: inherit;
-    right: 0;
     left: 100%;
     transform: translateX(-100%);
 }
 
 /* Mobile user answer box style */
-@media screen and (max-width: 555px) {
+/* @media screen and (max-width: 555px) {
     .user-answer {
         margin-top: 20%;
         margin-left: 30%;
     }
-}
+} */

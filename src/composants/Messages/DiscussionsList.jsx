@@ -73,6 +73,17 @@ export function DiscussionsList({ discussionsList, callback }) {
             </ListItemAvatar>
             <ListItemText primary="Vacation" secondary="July 20, 2014" />
         </ListItem>
+        <ListItem>
+            <ListItemAvatar>
+            <Avatar sx={{ 
+                width: 44, 
+                height: 44 
+            }}>
+                <BeachAccessIcon />
+            </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="Vacation" secondary="July 20, 2014" />
+        </ListItem>
         </List>
        </section>
     )

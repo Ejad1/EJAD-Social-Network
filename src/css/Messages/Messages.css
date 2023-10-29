@@ -6,45 +6,11 @@
     right: .5%;
     width: 97%;
     padding: 15px;
-    box-shadow: -2px 2px 2px black;
-}
-
-.messages .close-messages {
-    user-select: none;
-    color: red;
-    padding: 2%;
-    border: 1px solid red;
-    border-radius: 8px;
-    margin-left: 80%;
-    text-align: center;
-    transition: all .3s;
-}
-
-.messages .close-messages:hover {
-    background-color: red;
-    color: white;
-    box-shadow: 2px 2px 2px black;
-}
-
-.messages .messages-received #en-tete {
-    display: flex;
-    color: rgb(0, 0, 109);
-}
-
-.messages .messages-received #en-tete h3 {
-    margin-left: 5%;
 }
 
 .messages .messages-received p {
     width: 150px;
-    margin: 1% 0 2% 10%;
-    color: white;
-}
-
-.messages .answer {
-    position: inherit;
-    bottom: 2%;
-    display: flex;
+    margin: 1% 0 2% 2%;
 }
 
 .messages .answer #emoticone {
@@ -61,26 +27,6 @@
 .messages .answer #send:hover {
     background-color: aqua;
     box-shadow: 2px 2px 2px black;
-}
-
-.messages .answer textarea {
-    border-radius: 10px;
-    resize: none;
-    min-height: 7%;
-    padding: 1%;
-}
-
-.messages .answer #send {
-    border: 1px solid white;
-    background-color: white;
-    border-radius: 8px;
-    margin-left: 1%;
-    padding: 4%;
-    transition: all .5s;
-}
-
-.messages .answer #send:hover {
-    border: 1px solid aqua;
 }
 
 /* Mobile messages box style */
@@ -103,24 +49,6 @@
     }
 }
 
-.fade-in {
-    opacity: 0;
-    transition: all .3s;
-}
-
-.fade-in.show {
-    opacity: 1;
-}
-
-.fade-out {
-    opacity: 1;
-    transition: all .3s;
-}
-
-.fade-out.hide {
-    opacity: 0;
-}
-
 /* Discussions list and conversations box styles */
 .discussions-conversations {
     display: flex;
@@ -133,11 +61,12 @@
 }
 
 .discussions-conversations .conversation {
-    margin-left: -17.2%;
-    margin-top: .7%;
+    margin-top: 1%;
+    border: 2px solid #2196F3;
+    border-bottom: none;
 }
 
-.discussions-conversations .conversation h1 {
+.discussions-conversations .conversationNull h1 {
     text-align: center;
     margin-top: 40%;
     transform: translateY(-50%);
@@ -155,5 +84,12 @@
     border-radius: 10px;
     padding: 1% 2% 2%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: white;
+    width: fit-content;
+    min-width: 150px;
+    max-width: 350px;
+    overflow: auto;
+}
+
+.textField {
+    width: 550px;
 }

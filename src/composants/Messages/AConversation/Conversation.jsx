@@ -2,8 +2,15 @@ import { PropTypes } from "prop-types";
 import ConversationHead from "./ConversationHead";
 import { ConversationFoot } from "./ConversationFoot";
 import { ConversationMain } from "./ConversationMain";
+import { useState } from "react";
 
 export function Conversation({ conversationCible }) {
+    // User answers array
+    const [answers, setAnswers] = useState([]);
+
+    const handleSetAnswers = (newAnswers) => {
+        setAnswers([...answers, newAnswers])
+    }
 
     if (conversationCible.display) {
         return (
@@ -15,9 +22,9 @@ export function Conversation({ conversationCible }) {
                     </p>
                 </div>
     
-                <ConversationMain></ConversationMain>
+                <ConversationMain answersArray = { answers }></ConversationMain>
     
-               <ConversationFoot></ConversationFoot>
+               <ConversationFoot setAnswers = { handleSetAnswers }></ConversationFoot>
     
                 {/* { isClicked && <Emoticones changeFunction = { handleAnswerChange } ></Emoticones> } */}
             </div>
@@ -25,7 +32,7 @@ export function Conversation({ conversationCible }) {
     }
     else {
         return ( 
-            <div className="conversation">
+            <div className="conversationNull">
                 <h1>Select a discussion to send or read a message</h1>
             </div>
         )

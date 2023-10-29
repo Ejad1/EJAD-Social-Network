@@ -1,39 +1,58 @@
+import { PropTypes } from "prop-types";
 import { Box, IconButton, TextField } from '@mui/material'
 import { InsertEmoticon, Send } from '@mui/icons-material'
+import { useState } from 'react'
+import { Emoticones } from './UserAnswer/Emoticones';
 
-export function ConversationFoot() {
+export function ConversationFoot({ setAnswers }) {
+    const [displayEmoticons, setDisplayEmoticons] = useState(false);
+    const [message, setMessage] = useState("");
+
+    const handleDisplayEmoticons = () => {
+        setDisplayEmoticons(!displayEmoticons);
+    }
+
+    const handleAnswerChange = (e) => {
+        setMessage(e);
+    }
+
+    const handleSendAnser = () => {
+        if (message !== "") {
+            setAnswers(message);
+            setMessage("");
+        }
+    }
+
     return (
-        <Box sx={{ position: 'fixed', bottom: '0'}}>   
-            {/* <img src= { emojis } alt="" id='emoticone' onClick={ handleEmojisClick } /> */}
-            <IconButton>
+        <Box sx={{ position: 'fixed', bottom: '5px', border: '2px solid #2196F3', borderTop: 'none', paddingBottom: '5px' }}>
+            <IconButton onClick={ handleDisplayEmoticons }>
                 <InsertEmoticon sx={{
-                    border: '1px solid white',
-                    borderRadius: '10px',
                     width: '40px', 
                     height: '40px',
-                    padding: '5px'
                 }}
                 ></InsertEmoticon>
             </IconButton>
-            <TextField placeholder="Your message" multiline maxRows={4} sx={{ borderRadius: '10px', color: 'red'}}></TextField>
-            <IconButton>
+
+            <TextField
+                multiline maxRows={2} 
+                className='textField'
+                placeholder="Your message"
+                value= { message }
+                onChange={ (e) => handleAnswerChange(e.target.value) }
+            ></TextField>
+
+            <IconButton onClick={ handleSendAnser }>
                 <Send sx={{
-                    borderRadius: '10px',
                     width: '40px', 
                     height: '40px',
-                    padding: '5px'
                 }}></Send>
             </IconButton>
-            <textarea 
-                name="answer-text" 
-                id="answer-text" 
-                placeholder='@Votre réponse' 
-                cols="20" rows="2"
-                // value= { message }
-                // onChange={ (e) => handleAnswerChange(e.target.value) }
-            >
-            </textarea>
-            {/* <img src={ envoyer } alt="" id='send' onClick={ handleSendClick } /> */}
+
+            { displayEmoticons && <Emoticones changeFunction = { handleAnswerChange }></Emoticones>}
         </Box>
     )
+}
+
+ConversationFoot.propTypes = {
+    setAnswers: PropTypes.func.isRequired
 }
