@@ -25,8 +25,6 @@ export function Conversation({ conversationCible }) {
                 <ConversationMain answersArray = { answers }></ConversationMain>
     
                <ConversationFoot setAnswers = { handleSetAnswers }></ConversationFoot>
-    
-                {/* { isClicked && <Emoticones changeFunction = { handleAnswerChange } ></Emoticones> } */}
             </div>
         )
     }
