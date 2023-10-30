@@ -4,7 +4,7 @@ import { InsertEmoticon, Send } from '@mui/icons-material'
 import { useState } from 'react'
 import { Emoticones } from './UserAnswer/Emoticones';
 
-export function ConversationFoot({ setAnswers }) {
+export function ConversationFoot({ setAnswers, conversationName }) {
     const [displayEmoticons, setDisplayEmoticons] = useState(false);
     const [message, setMessage] = useState("");
 
@@ -18,7 +18,11 @@ export function ConversationFoot({ setAnswers }) {
 
     const handleSendAnser = () => {
         if (message !== "") {
-            setAnswers(message);
+            const userAnswer = {
+                nom: conversationName,
+                message: message
+            }
+            setAnswers(userAnswer);
             setMessage("");
         }
     }
@@ -54,5 +58,6 @@ export function ConversationFoot({ setAnswers }) {
 }
 
 ConversationFoot.propTypes = {
-    setAnswers: PropTypes.func.isRequired
+    setAnswers: PropTypes.func.isRequired,
+    conversationName: PropTypes.string.isRequired
 }

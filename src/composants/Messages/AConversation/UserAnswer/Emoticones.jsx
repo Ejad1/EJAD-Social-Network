@@ -23,31 +23,31 @@ export function Emoticones({ changeFunction }) {
         },
         {
             id: 4,
-            image: '😊'
-        },
-        {
-            id: 5,
-            image: '💖'
-        },
-        {
-            id: 6,
-            image: '⭐'
-        },
-        {
-            id: 7,
             image: '😆'
         },
         {
-            id: 8,
+            id: 5,
             image: '😅'
         },
         {
-            id: 9,
+            id: 6,
+            image: '😂'
+        },
+        {
+            id: 7,
             image: '🤣'
         },
         {
+            id: 8,
+            image: '😊'
+        },
+        {
+            id: 9,
+            image: '😇'
+        },
+        {
             id: 10,
-            image: '😂'
+            image: '⭐'
         },
         {
             id: 11,
@@ -63,7 +63,7 @@ export function Emoticones({ changeFunction }) {
         },
         {
             id: 14,
-            image: '😇'
+            image: '😎'
         },
         {
             id: 15,
@@ -75,15 +75,15 @@ export function Emoticones({ changeFunction }) {
         },
         {
             id: 17,
-            image: '❤️'
-        },
-        {
-            id: 18,
             image: '😘'
         },
         {
+            id: 18,
+            image: '❤️'
+        },
+        {
             id: 19,
-            image: '😎'
+            image: '💖'
         },
         {
             id: 20,

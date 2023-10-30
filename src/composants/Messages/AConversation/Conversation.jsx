@@ -22,9 +22,15 @@ export function Conversation({ conversationCible }) {
                     </p>
                 </div>
     
-                <ConversationMain answersArray = { answers }></ConversationMain>
+                <ConversationMain 
+                    answersArray = { answers }
+                    conversationName = { conversationCible.nomDiscussion }
+                ></ConversationMain>
     
-               <ConversationFoot setAnswers = { handleSetAnswers }></ConversationFoot>
+               <ConversationFoot 
+                    setAnswers = { handleSetAnswers }
+                    conversationName = { conversationCible.nomDiscussion }
+                ></ConversationFoot>
             </div>
         )
     }

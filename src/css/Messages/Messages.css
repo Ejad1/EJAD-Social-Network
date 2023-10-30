@@ -85,11 +85,17 @@
     padding: 1% 2% 2%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: fit-content;
-    min-width: 150px;
     max-width: 350px;
     overflow: auto;
 }
 
 .textField {
     width: 550px;
+}
+
+.discussions-conversations .conversation .user-answer p {
+    background-color: #2196F3;
+    color: white;
+    text-align: end;
+    width: fit-content;
 }
