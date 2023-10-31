@@ -6,7 +6,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import WorkIcon from '@mui/icons-material/Work';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
-import '../../css/Messages/DiscussionsList.css'
+import '../../../css/Messages/DiscussionsList.css'
 import { ADiscussion } from "./ADiscussions";
 
 export function DiscussionsList({ discussionsList, callback }) {
@@ -20,7 +20,7 @@ export function DiscussionsList({ discussionsList, callback }) {
                     <ADiscussion 
                         key={ index }
                         callback = { callback }
-                        nom = { element.discussionsName }
+                        nom = { element.discussionName }
                         message = { element.message }
                     ></ADiscussion>
                 ))

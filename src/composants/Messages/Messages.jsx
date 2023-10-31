@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import '../../css/Messages/Messages.css'
-import { DiscussionsList } from './DiscussionsList';
+import { DiscussionsList } from './Discussions/DiscussionsList';
 import { Conversation } from './AConversation/Conversation';
 import { MessageHead } from './MessageHead';
 

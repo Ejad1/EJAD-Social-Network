@@ -40,5 +40,5 @@ export function ADiscussion({ callback, nom, message }) {
 ADiscussion.propTypes = {
     callback: PropTypes.func.isRequired,
     nom: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired
+    message: PropTypes.array.isRequired
 }

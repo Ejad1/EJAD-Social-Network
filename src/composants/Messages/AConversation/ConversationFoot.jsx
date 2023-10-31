@@ -28,7 +28,17 @@ export function ConversationFoot({ setAnswers, conversationName }) {
     }
 
     return (
-        <Box sx={{ position: 'fixed', bottom: '5px', border: '2px solid #2196F3', borderTop: 'none', paddingBottom: '5px' }}>
+        <Box sx={{ 
+            position: 'fixed',
+            bottom: '5px',
+            border: '2px solid #2196F3',
+            borderTop: 'none',
+            paddingBottom: '5px',
+            paddingLeft: '2px',
+            paddingRight: '5px',
+            marginLeft: '-1px'
+        }}
+        >
             <IconButton onClick={ handleDisplayEmoticons }>
                 <InsertEmoticon sx={{
                     width: '40px', 
