@@ -55,7 +55,7 @@
 }
 
 .discussions-conversations .discussions-list {
-    width: 1000px;
+    max-width: 500px;
     user-select: none;
     padding: 10px;
 }

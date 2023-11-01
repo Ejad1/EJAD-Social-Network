@@ -1,4 +1,5 @@
 // import { Link } from "react-router-dom";
+import { PropTypes } from "prop-types";
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -6,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import SvgIcon from '@mui/material/SvgIcon';
+import { useState } from 'react';
 
 
 function HomeIcon(props) {
@@ -16,7 +18,9 @@ function HomeIcon(props) {
   );
 }
 
-export function MessageHead() {
+export function MessageHead({ discussionsList, setDiscussions }) {
+    const [searchText, setSearchText] = useState('');
+    const discussions = discussionsList;
     
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -60,6 +64,13 @@ export function MessageHead() {
         },
     }));
 
+    const handleSearchChange = (e) => {
+        const searchValue = e.target.value;
+        setSearchText(e.target.value);
+        const results = discussions.filter(item => item.discussionName.toLowerCase().includes(searchValue.toLowerCase()));
+        
+        searchValue === '' ? setDiscussions(discussions) : setDiscussions(results);
+    }
 
 
     return (
@@ -84,13 +95,21 @@ export function MessageHead() {
             </Typography>
             <Search>
                 <SearchIconWrapper>
-                <SearchIcon />
+                    <SearchIcon />
                 </SearchIconWrapper>
                 <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
-            /></Search>
+                    placeholder="Search…"
+                    inputProps={{ 'aria-label': 'search' }}
+                    value={ searchText }
+                    onChange={ handleSearchChange }
+                />
+            </Search>
         </Toolbar>
       </AppBar>
     )
+}
+
+MessageHead.propTypes = {
+    discussionsList: PropTypes.array.isRequired,
+    setDiscussions: PropTypes.func.isRequired
 }

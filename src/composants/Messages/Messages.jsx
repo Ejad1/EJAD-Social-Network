@@ -12,7 +12,7 @@ export function Messages() {
         setConversationCibleInfos(informations)
     }
 
-    const discussionsList = [
+    const [discussionsList, setDiscussionsList] = useState([
         {
             id: 1,
             discussionName: "EJAD",
@@ -34,12 +34,56 @@ export function Messages() {
             discussionName: "You",
             message: ["Okay very good"]
         },
-    ]
+        {
+            id: 5,
+            discussionName: "Ice boy",
+            message: ["Je suis trop frais : j'suis un vrai homme"]
+        },
+        {
+            id: 6,
+            discussionName: "Ewan",
+            message: ["Allez à l'eglise est mieux que d'écouter Gazo"]
+        },
+        {
+            id: 7,
+            discussionName: "Romu Romu",
+            message: ["Ka boboba..."]
+        },
+        {
+            id: 8,
+            discussionName: "Léléndouch",
+            message: ["Je vais te mordre"]
+        },
+        {
+            id: 9,
+            discussionName: "Claudianounet",
+            message: ["Ohhh c'est trop mignon"]
+        },
+        {
+            id: 10,
+            discussionName: "Flo",
+            message: ["J'ai une nouvelle moto"]
+        },
+        {
+            id: 11,
+            discussionName: "Fan Choco",
+            message: ["Merci beaucoup c'est très gentil de ta part"]
+        },
+        {
+            id: 12,
+            discussionName: "Matthi",
+            message: ["Barça est le meilleur club"]
+        },
+    ])
+
+    const handleSetDiscussionsList = (newList) => {
+        setDiscussionsList(newList);
+    }
 
 
     return (
         <div className="messages">
-            <MessageHead></MessageHead>
+            <MessageHead discussionsList={ discussionsList } setDiscussions = { handleSetDiscussionsList }></MessageHead>
             <div className="discussions-conversations">
                 <DiscussionsList discussionsList = { discussionsList } callback={ handleCallback }></DiscussionsList>
                 <Conversation conversationCible={ conversationCibleInfos }></Conversation>
