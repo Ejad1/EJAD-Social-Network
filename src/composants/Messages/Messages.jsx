@@ -78,6 +78,11 @@ export function Messages() {
             discussionName: "Matthi",
             message: ["Barça est le meilleur club"]
         },
+        {
+            id: 13,
+            discussionName: "Victoria",
+            message: ["J'ai regardé un film d'horreur hier soir et c'était trop cool.", "Tu veux connaitre le nom du film ???"]
+        },
     ])
 
     const handleSetDiscussionsList = (newList) => {

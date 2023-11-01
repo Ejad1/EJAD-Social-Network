@@ -124,6 +124,54 @@ export function Emoticones({ changeFunction }) {
         {
             id: 29,
             image: '💋'
+        },
+        {
+            id: 30,
+            image: '🙂'
+        },
+        {
+            id: 31,
+            image: '😋'
+        },
+        {
+            id: 32,
+            image: '😛'
+        },
+        {
+            id: 33,
+            image: '🤑'
+        },
+        {
+            id: 34,
+            image: '😳'
+        },
+        {
+            id: 35,
+            image: '🤐'
+        },
+        {
+            id: 36,
+            image: '🤫'
+        },
+        {
+            id: 37,
+            image: '🤗'
+        },
+        {
+            id: 38,
+            image: '🤧'
+        },
+        {
+            id: 39,
+            image: '😥'
+        },
+        {
+            id: 40,
+            image: '😭'
+        },
+        {
+            id: 41,
+            image: '😨'
         }
     ]
 
