@@ -10,7 +10,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 export default function ConversationHead({ conversationName }) {
 
   return (
-    <Box sx={{ width: '670px', marginBottom: '10px' }}>
+    <Box sx={{ width: '900px', marginBottom: '10px' }}>
       <AppBar position="static">
         <Toolbar>
             <div>

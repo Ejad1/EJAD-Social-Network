@@ -16,13 +16,13 @@ export function Messages() {
         {
             id: 1,
             discussionName: "EJAD",
-            message: ["How are you Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aperiam veritatis quas minus assumenda quae ut atque odio, autem soluta consequatur nihil beatae facere blanditiis voluptatem animi similique iste vel."]
+            message: ["How are you ?", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aperiam veritatis quas minus assumenda quae ut atque odio, autem soluta consequatur nihil beatae facere blanditiis voluptatem animi similique iste vel."]
             
         },
         {
             id: 2,
             discussionName: "Elle",
-            message: ["How are you ?"]
+            message: ["How are you ?", "I was very happy to spend this time with you"]
         },
         {
             id: 3,
@@ -47,7 +47,7 @@ export function Messages() {
         {
             id: 7,
             discussionName: "Romu Romu",
-            message: ["Ka boboba..."]
+            message: ["Ka boboba...", "Le vieux c'est comment ?", "Sinon c'est ma femme hein", "Tchaitsaaaa...."]
         },
         {
             id: 8,

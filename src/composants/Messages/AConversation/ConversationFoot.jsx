@@ -17,10 +17,18 @@ export function ConversationFoot({ setAnswers, conversationName }) {
     }
 
     const handleSendAnser = () => {
+        const currentDate = new Date();
+
+        const hours = currentDate.getHours();
+        const minutes = currentDate.getMinutes();
+
+        const myTime = hours + ": " + minutes;
+
         if (message !== "") {
             const userAnswer = {
                 nom: conversationName,
-                message: message
+                message: message,
+                answerTime: myTime
             }
             setAnswers(userAnswer);
             setMessage("");
@@ -35,8 +43,8 @@ export function ConversationFoot({ setAnswers, conversationName }) {
             borderTop: 'none',
             paddingBottom: '5px',
             paddingLeft: '2px',
-            paddingRight: '5px',
-            marginLeft: '-1px'
+            paddingRight: '6px',
+            marginLeft: '-2px'
         }}
         >
             <IconButton onClick={ handleDisplayEmoticons }>
@@ -53,6 +61,7 @@ export function ConversationFoot({ setAnswers, conversationName }) {
                 placeholder="Your message"
                 value= { message }
                 onChange={ (e) => handleAnswerChange(e.target.value) }
+                sx={{ width: '780px' }}
             ></TextField>
 
             <IconButton onClick={ handleSendAnser }>

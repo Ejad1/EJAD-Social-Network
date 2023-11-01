@@ -13,13 +13,15 @@ export function Conversation({ conversationCible }) {
     }
 
     if (conversationCible.display) {
+        const messagesReceived = conversationCible.messageDiscussion;
+
         return (
             <div className="conversation">
                 <ConversationHead conversationName = { conversationCible.nomDiscussion }></ConversationHead>
                 <div className="messages-received">
-                    <p>
-                        { conversationCible.messageDiscussion }
-                    </p>
+                    { messagesReceived.map((element, index) => (
+                        <p key={ index }> { element } </p>
+                    )) }
                 </div>
     
                 <ConversationMain 

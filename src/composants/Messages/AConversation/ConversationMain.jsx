@@ -15,7 +15,7 @@ export function ConversationMain({ answersArray, conversationName }) {
         <div>
         {
             userAnswers.map((anAnswer, index) => (
-                <UserAnswer key={ index } answer={ anAnswer.message }></UserAnswer>
+                <UserAnswer key={ index } answer={ anAnswer.message } answerTime= { anAnswer.answerTime }></UserAnswer>
             ))
         }
         </div>

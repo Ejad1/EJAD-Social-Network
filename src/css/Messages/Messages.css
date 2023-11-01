@@ -23,12 +23,6 @@
     transition: all .5s;
 }
 
-.messages .answer #emoticone:hover,
-.messages .answer #send:hover {
-    background-color: aqua;
-    box-shadow: 2px 2px 2px black;
-}
-
 /* Mobile messages box style */
 @media screen and (max-width: 555px) {
     .messages {
@@ -52,6 +46,8 @@
 /* Discussions list and conversations box styles */
 .discussions-conversations {
     display: flex;
+    overflow-y: auto;
+    height: 650px;
 }
 
 .discussions-conversations .discussions-list {
@@ -61,15 +57,20 @@
 }
 
 .discussions-conversations .conversation {
+    position: fixed;
+    left: 35%;
+    height: 600px;
     margin-top: 1%;
     border: 2px solid #2196F3;
     border-bottom: none;
 }
 
 .discussions-conversations .conversationNull h1 {
+    position: fixed;
     text-align: center;
-    margin-top: 40%;
-    transform: translateY(-50%);
+    margin-top: 19%;
+    margin-left: 10%;
+    width: 500px;
 }
 
 .discussions-conversations .conversation h2 {
@@ -78,24 +79,13 @@
 }
 
 .discussions-conversations .conversation p {
-    color: black;
     text-align: start;
     border: 1px solid black;
     border-radius: 10px;
     padding: 1% 2% 2%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: fit-content;
+    /* min-width: 100px; */
     max-width: 350px;
     overflow: auto;
-}
-
-.textField {
-    width: 550px;
-}
-
-.discussions-conversations .conversation .user-answer p {
-    background-color: #2196F3;
-    color: white;
-    text-align: end;
-    width: fit-content;
 }

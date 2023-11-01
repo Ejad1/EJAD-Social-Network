@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Avatar, Badge, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 
 export function ADiscussion({ callback, nom, message }) {
-    const [discussionBadge, setDiscussionBadge] = useState(1);
+    const [discussionBadge, setDiscussionBadge] = useState(message.length);
 
     const handleDiscussionClick = (nom, message) => {
         setDiscussionBadge(0);
@@ -30,7 +30,7 @@ export function ADiscussion({ callback, nom, message }) {
             </ListItemAvatar>
             <ListItemText 
                 primary={ nom } 
-                secondary={ message }
+                secondary={ message[message.length - 1] }
                 sx={{ height: '40px', overflow: 'hidden'}}
             />
         </ListItem>
