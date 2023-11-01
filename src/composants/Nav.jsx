@@ -1,7 +1,7 @@
 import { PropTypes } from "prop-types";
 import { useState } from 'react'
 import { NewPublication } from './Publications/NewPublication'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../css/Nav.css'
 import messages from '../assets/envelope.svg'
 import publication from '../assets/card-text.svg'
@@ -10,6 +10,7 @@ import search from '../assets/search.svg'
 
 
 export function Navbar({ handleAddNotifications, handleDisplayNotification, state, addPub, longueur, userName }) {
+    const navigate = useNavigate();
     const [clickPub, setClickPub] = useState(false);
 
     const MakeAPublication = (state) => {
@@ -49,6 +50,10 @@ export function Navbar({ handleAddNotifications, handleDisplayNotification, stat
         handleDisplayNotification(!state);
     }
 
+    const handleMessageClick = () => {
+        navigate("/messages", { state: { userInfos: {userName} } })
+    }
+
     return (
         <>
             <nav>
@@ -65,7 +70,14 @@ export function Navbar({ handleAddNotifications, handleDisplayNotification, stat
                     </div>
                     <div className="messages-div">
                         <img src={ messages } alt="Message icon" />
-                        <Link to="/messages">Messages</Link>
+                        <h3 onClick={ handleMessageClick }>Messages</h3>
+                        {/* <Link  to={{
+                            pathname: '/messages',
+                            state: { userInfos: {userName} }
+                            }}
+                        >
+                            Messages
+                        </Link> */}
                     </div>
                     <div className="notifs-div" onClick={ handleNotificationsClick }>
                         <img src={ notification } alt=""/> 

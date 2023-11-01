@@ -3,8 +3,12 @@ import '../../css/Messages/Messages.css'
 import { DiscussionsList } from './Discussions/DiscussionsList';
 import { Conversation } from './AConversation/Conversation';
 import { MessageHead } from './MessageHead';
+import { useLocation } from 'react-router-dom';
 
 export function Messages() {
+    const location = useLocation();
+    const userInfos = location.state.userInfos;
+
     const [conversationCibleInfos, setConversationCibleInfos] = useState({});
 
     // Callback funcion to display a conversation
@@ -80,10 +84,16 @@ export function Messages() {
         setDiscussionsList(newList);
     }
 
+    console.log(userInfos);
+
 
     return (
         <div className="messages">
-            <MessageHead discussionsList={ discussionsList } setDiscussions = { handleSetDiscussionsList }></MessageHead>
+            <MessageHead 
+                discussionsList={ discussionsList }
+                setDiscussions = { handleSetDiscussionsList }
+                userInfos = { userInfos }
+            ></MessageHead>
             <div className="discussions-conversations">
                 <DiscussionsList discussionsList = { discussionsList } callback={ handleCallback }></DiscussionsList>
                 <Conversation conversationCible={ conversationCibleInfos }></Conversation>

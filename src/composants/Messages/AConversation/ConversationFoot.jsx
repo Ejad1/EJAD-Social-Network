@@ -1,6 +1,8 @@
 import { PropTypes } from "prop-types";
 import { Box, IconButton, TextField } from '@mui/material'
 import { InsertEmoticon, Send } from '@mui/icons-material'
+import AttachFileIcon from '@mui/icons-material/AttachFile';
+import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 import { useState } from 'react'
 import { Emoticones } from './UserAnswer/Emoticones';
 
@@ -44,9 +46,17 @@ export function ConversationFoot({ setAnswers, conversationName }) {
             paddingBottom: '5px',
             paddingLeft: '2px',
             paddingRight: '6px',
-            marginLeft: '-2px'
+            marginLeft: '-2px',
+            width: '59.99%'
         }}
         >
+            <IconButton>
+                <AttachFileIcon sx={{
+                    width: '35px', 
+                    height: '35px',
+                }}/>
+            </IconButton>
+
             <IconButton onClick={ handleDisplayEmoticons }>
                 <InsertEmoticon sx={{
                     width: '40px', 
@@ -61,8 +71,16 @@ export function ConversationFoot({ setAnswers, conversationName }) {
                 placeholder="Your message"
                 value= { message }
                 onChange={ (e) => handleAnswerChange(e.target.value) }
-                sx={{ width: '780px' }}
+                // sx={{ width: '678px' }}
+                sx={{ width: '75%' }}
             ></TextField>
+
+            <IconButton>
+                <KeyboardVoiceIcon sx={{
+                    width: '35px', 
+                    height: '35px',
+                }}/>
+            </IconButton>
 
             <IconButton onClick={ handleSendAnser }>
                 <Send sx={{

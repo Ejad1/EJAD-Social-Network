@@ -28,14 +28,14 @@ export default function ConversationHead({ conversationName }) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             { conversationName }
           </Typography>
-            <IconButton
+          <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+          <MenuIcon />
           </IconButton>
         </Toolbar>
       </AppBar>

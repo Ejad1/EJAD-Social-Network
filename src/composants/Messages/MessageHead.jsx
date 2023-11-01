@@ -7,7 +7,12 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import SvgIcon from '@mui/material/SvgIcon';
-import { useState } from 'react';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import DonutLargeIcon from '@mui/icons-material/DonutLarge';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useRef, useState } from 'react';
+import { IconButton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 
 function HomeIcon(props) {
@@ -18,7 +23,9 @@ function HomeIcon(props) {
   );
 }
 
-export function MessageHead({ discussionsList, setDiscussions }) {
+export function MessageHead({ discussionsList, setDiscussions,  userInfos }) {
+    const navigate = useNavigate();
+    const searchBarRef = useRef(null);
     const [searchText, setSearchText] = useState('');
     const discussions = discussionsList;
     
@@ -70,34 +77,64 @@ export function MessageHead({ discussionsList, setDiscussions }) {
         const results = discussions.filter(item => item.discussionName.toLowerCase().includes(searchValue.toLowerCase()));
         
         searchValue === '' ? setDiscussions(discussions) : setDiscussions(results);
+        searchBarRef.current.focus();
     }
 
+    const handleHomeClick = () => {
+        navigate("/esn", { state: { myUser: {userInfos} } });
+    }
 
     return (
       <AppBar position="static">
         <Toolbar>
-            <HomeIcon sx={{ fontSize: 40 }} />
+
+            <HomeIcon onClick={ handleHomeClick }></HomeIcon>
+            <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                onClick={ handleHomeClick }
+            >
+                Home
+            </Typography>
+
+            <GroupAddIcon sx={{ marginRight: '10px'}}></GroupAddIcon>
             <Typography
                 variant="h6"
                 noWrap
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
             >
-                Friends
+                New crew
             </Typography>
+
+            <DonutLargeIcon sx={{ marginRight: '10px'}}></DonutLargeIcon>
             <Typography
                 variant="h6"
                 noWrap
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
             >
-                Publications
+                Stories
             </Typography>
+
+            <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 10 }}
+            >
+                <MenuIcon />
+            </IconButton>
+
             <Search>
                 <SearchIconWrapper>
                     <SearchIcon />
                 </SearchIconWrapper>
                 <StyledInputBase
+                    ref={ searchBarRef }
                     placeholder="Search…"
                     inputProps={{ 'aria-label': 'search' }}
                     value={ searchText }
@@ -111,5 +148,6 @@ export function MessageHead({ discussionsList, setDiscussions }) {
 
 MessageHead.propTypes = {
     discussionsList: PropTypes.array.isRequired,
-    setDiscussions: PropTypes.func.isRequired
+    setDiscussions: PropTypes.func.isRequired,
+    userInfos: PropTypes.object.isRequired
 }
