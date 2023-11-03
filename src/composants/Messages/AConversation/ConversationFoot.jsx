@@ -3,10 +3,11 @@ import { Box, IconButton, TextField } from '@mui/material'
 import { InsertEmoticon, Send } from '@mui/icons-material'
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Emoticones } from './UserAnswer/Emoticones';
 
 export function ConversationFoot({ setAnswers, conversationName }) {
+    const attachedFiles = useRef(null);
     const [displayEmoticons, setDisplayEmoticons] = useState(false);
     const [message, setMessage] = useState("");
 
@@ -37,6 +38,10 @@ export function ConversationFoot({ setAnswers, conversationName }) {
         }
     }
 
+    const handleAttachedFiles = () => {
+        attachedFiles.current.click();
+    }
+
     return (
         <Box sx={{ 
             position: 'fixed',
@@ -50,7 +55,9 @@ export function ConversationFoot({ setAnswers, conversationName }) {
             width: '59.99%'
         }}
         >
-            <IconButton>
+            <input type="file" name="" id="file" style={{ display: 'none' }} ref={ attachedFiles } />
+
+            <IconButton onClick={ handleAttachedFiles }>
                 <AttachFileIcon sx={{
                     width: '35px', 
                     height: '35px',
