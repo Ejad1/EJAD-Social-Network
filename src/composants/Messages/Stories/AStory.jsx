@@ -2,7 +2,7 @@ import { PropTypes } from "prop-types";
 
 export default function AStory({ story }) {
   return (
-    <div>{ story }</div>
+    <div style={{ display: "inline-block" }}>{ story }</div>
   )
 }
 

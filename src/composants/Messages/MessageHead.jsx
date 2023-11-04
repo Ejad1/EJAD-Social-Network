@@ -12,7 +12,7 @@ import DonutLargeIcon from '@mui/icons-material/DonutLarge';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useRef, useState } from 'react';
 import { IconButton } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 function HomeIcon(props) {
@@ -116,6 +116,7 @@ export function MessageHead({ discussionsList, setDiscussions,  userInfos }) {
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
             >
+                <Link to={'/stories'} sx={{ color: "white"}}>Stories</Link>
                 Stories
             </Typography>
 
