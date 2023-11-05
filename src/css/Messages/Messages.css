@@ -45,7 +45,7 @@
 .discussions-conversations {
     display: flex;
     overflow-y: auto;
-    height: 650px;
+    height: 680px;
 }
 
 .discussions-conversations .discussions-list {
@@ -86,4 +86,9 @@
     /* min-width: 100px; */
     max-width: 350px;
     overflow: auto;
+}
+
+.conversationMain {
+    height: 510px;
+    overflow-y: auto;
 }

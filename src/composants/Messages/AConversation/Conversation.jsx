@@ -17,16 +17,12 @@ export function Conversation({ conversationCible }) {
 
         return (
             <div className="conversation">
-                <ConversationHead conversationName = { conversationCible.nomDiscussion }></ConversationHead>
-                <div className="messages-received">
-                    { messagesReceived.map((element, index) => (
-                        <p key={ index }> { element } </p>
-                    )) }
-                </div>
-    
+                <ConversationHead conversationName = { conversationCible.nomDiscussion }></ConversationHead>        
+        
                 <ConversationMain 
                     answersArray = { answers }
                     conversationName = { conversationCible.nomDiscussion }
+                    messagesReceived = { messagesReceived }
                 ></ConversationMain>
     
                <ConversationFoot 
