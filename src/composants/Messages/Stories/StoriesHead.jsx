@@ -23,7 +23,7 @@ function HomeIcon(props) {
   );
 }
 
-export function MessageHead({ discussionsList, setDiscussions,  userInfos }) {
+export default function StoriesHead({ discussionsList, setDiscussions,  userInfos }) {
     const navigate = useNavigate();
     const searchBarRef = useRef(null);
     const [searchText, setSearchText] = useState('');
@@ -84,6 +84,10 @@ export function MessageHead({ discussionsList, setDiscussions,  userInfos }) {
         navigate("/esn", { state: { myUser: {userInfos} } });
     }
 
+    const handleMessageClick = () => {
+        navigate("/messages", { state: { userInfos: {userInfos} } })
+    }
+
     return (
       <AppBar position="static">
         <Toolbar>
@@ -99,14 +103,14 @@ export function MessageHead({ discussionsList, setDiscussions,  userInfos }) {
                 Home
             </Typography>
 
-            <GroupAddIcon sx={{ marginRight: '8px'}}></GroupAddIcon>
+            <GroupAddIcon sx={{ marginRight: '10px'}}></GroupAddIcon>
             <Typography
                 variant="h6"
                 noWrap
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
             >
-                New crew
+                New story
             </Typography>
 
             <DonutLargeIcon sx={{ marginRight: '10px'}}></DonutLargeIcon>
@@ -115,9 +119,10 @@ export function MessageHead({ discussionsList, setDiscussions,  userInfos }) {
                 noWrap
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                onClick={ handleMessageClick }
             >
-                <Link to={'/stories'} sx={{ color: "white"}}>Stories</Link>
-                Stories
+                <Link to={'/messages'} sx={{ color: "white"}}>Messages</Link>
+                Messages
             </Typography>
 
             <IconButton
@@ -147,8 +152,9 @@ export function MessageHead({ discussionsList, setDiscussions,  userInfos }) {
     )
 }
 
-MessageHead.propTypes = {
+StoriesHead.propTypes = {
     discussionsList: PropTypes.array.isRequired,
     setDiscussions: PropTypes.func.isRequired,
     userInfos: PropTypes.object.isRequired
 }
+

@@ -1,14 +1,14 @@
 // import { PropTypes } from "prop-types";
 import { useState } from "react";
 import AStory from "./AStory";
-import { MessageHead } from "../MessageHead";
+import StoriesHead from "./StoriesHead";
 
 export default function Stories() {
     const storiesArray = useState(["Cool", "Mon statut"]);
 
   return (
     <>
-      <MessageHead></MessageHead>
+       <StoriesHead></StoriesHead>
       <div style={{ display: "flex" }}>
           { storiesArray.map((story, index) => (
               <AStory key={ index } story={ story }></AStory>

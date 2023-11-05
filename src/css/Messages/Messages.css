@@ -2,10 +2,8 @@
     font-family: 'Times New Roman', Times, serif;
     position: fixed;
     top: 0;
-    left: .5%;
-    right: .5%;
-    width: 97%;
-    padding: 15px;
+    left: .1%;
+    right: .1%;
 }
 
 .messages .messages-received p {

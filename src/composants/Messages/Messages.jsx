@@ -83,6 +83,12 @@ export function Messages() {
             discussionName: "Victoria",
             message: ["J'ai regardé un film d'horreur hier soir et c'était trop cool.", "Tu veux connaitre le nom du film ???"]
         },
+        {
+            id: 14,
+            discussionName: "Promo 1 Crunch Time",
+            message: ["Ewan : Hello à vous.", "Mec bien : POF le vendredi ça vous dit ?", 
+                        "Romu Romu : On doit se mettre sérieusement au travail", "Ice Boy : J'ai changé maintenant", "Léléndouch : ..."]
+        }
     ])
 
     const handleSetDiscussionsList = (newList) => {
