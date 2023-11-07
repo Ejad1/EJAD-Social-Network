@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { PropTypes } from "prop-types";
-// import Stack from '@mui/material/Stack';
-// import Button from '@mui/material/Button';
-import profile from '../../assets/person-circle.svg'
 import { UpdatePublication } from "./UpdatePublication";
+import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton } from "@mui/material";
+import { red } from '@mui/material/colors';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export function Publication({ id, content, imageSource, modifications, deletePub, addNotifs, handleDisplayNotification }) {
     const [pubContent, setPubContent] = useState(content);
@@ -59,26 +61,43 @@ export function Publication({ id, content, imageSource, modifications, deletePub
 
     return (
         <>
-            {/* <Stack spacing={2} direction="row">
-                <Button variant="text">Text</Button>
-                <Button variant="contained">Contained</Button>
-                <Button variant="outlined">Outlined</Button>
-            </Stack> */}
-            <div className="publication">
-                <div id="en-tete">
-                    <img src={ profile } alt="Photo de profil" /> <h3>EJAD</h3>
-                    <h2 id="close-publication" onClick={ handleDeletePublication }>X</h2>
-                </div>
-                <p>
-                    { pubContent }
-                </p>
-                { imageSource && <img src={ pubImageSource } alt="Image de la publication" id='image-publication'></img> }
-                <div id='bas'>
-                    <h3 onClick={ handleLike }>{ like } 👍</h3>
-                    <h3 onClick={ () => handleUpdateClick(!update) }>Modifier</h3>
-                    <h3 onClick={ handleShare }>{ share } Partages</h3>
-                </div>
-            </div>
+            <Card sx={{ border: '2px solid #2196F3', backgroundColor: 'azure', marginTop: '5%', marginBottom: '10%' }}>
+                <CardHeader
+                    avatar={
+                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                            E
+                        </Avatar>
+                    }
+                    action={
+                    <IconButton aria-label="delete"  onClick={ handleDeletePublication }>
+                        <DeleteIcon sx={{ color: 'red' }}></DeleteIcon>
+                    </IconButton>
+                    }
+                    title="Shrimp and Chorizo Paella"
+                    subheader="September 14, 2016"
+                ></CardHeader>
+
+                <CardContent sx={{ fontSize: 'large' }}>{ pubContent }</CardContent>
+
+                <CardMedia 
+                    component="img"
+                    height="auto"
+                    image={ pubImageSource }
+                    alt="Publication Image"
+                ></CardMedia>
+
+                <CardActions disableSpacing>
+                    <IconButton aria-label="add to favorites"  onClick={ handleLike }>
+                        { like } <FavoriteIcon />
+                    </IconButton>
+                    
+                    <h2 onClick={ () => handleUpdateClick(!update) } style={{ cursor: "pointer"}}>Modifier</h2>
+
+                    <IconButton aria-label="share"  onClick={ handleShare }>
+                        { share } <ShareIcon />
+                    </IconButton>
+                </CardActions>
+            </Card>
 
             {   update 
                     && 

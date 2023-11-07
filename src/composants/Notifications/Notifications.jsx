@@ -4,7 +4,7 @@ import { ANotification } from './ANotification'
 import { useEffect, useState } from "react";
 
 export function Notifications({ monTableau }) {
-    const [notifsTop, setNotifsTop] = useState(13.5);
+    const [notifsTop, setNotifsTop] = useState(11);
 
     useEffect(() => {
         let lastScrollTop = document.documentElement.scrollTop;
@@ -22,7 +22,7 @@ export function Notifications({ monTableau }) {
             }
             else {
                 if (window.scrollY < 4) {
-                    setNotifsTop(13.5);
+                    setNotifsTop(11);
                 }
                 else {
                     setNotifsTop(notifsTop + (window.scrollY / 30));

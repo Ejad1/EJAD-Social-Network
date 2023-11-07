@@ -1,5 +1,6 @@
 import { useRef, useState } from "react"
 import { PropTypes } from "prop-types";
+import { Button } from "@mui/material";
 
 export function NewPublication({ afficher, addPub, longueur }) {
     const [imageName, setImageName] = useState("No image has been selected");
@@ -72,7 +73,12 @@ export function NewPublication({ afficher, addPub, longueur }) {
                     />
                     <p className = { `${imageSelected ? 'imageSelected' : ''}` }>{ imageName }</p>
                 </div>
-                <button type="submit" id="submit" onClick={ handleSubmit }>Publier</button>
+                
+                <Button 
+                    variant="contained"
+                    onClick={ handleSubmit }
+                    sx={{ marginTop: '1%', marginLeft: '47%', transform: 'translateX(-50%)' }}
+                >Publier</Button>
             </div>
         </div>
     )

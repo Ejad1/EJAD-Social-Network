@@ -1,14 +1,3 @@
-// import { PropTypes } from "prop-types";
-// import { useState } from 'react'
-// import { NewPublication } from './Publications/NewPublication'
-// import { Link, useNavigate } from 'react-router-dom'
-// import '../css/Nav.css'
-// import messages from '../assets/envelope.svg'
-// import publication from '../assets/card-text.svg'
-// import notification from '../assets/bell.svg'
-// import search from '../assets/search.svg'
-
-
 // export function Navbar({ handleAddNotifications, handleDisplayNotification, state, addPub, longueur, userName }) {
 //     const navigate = useNavigate();
 //     const [clickPub, setClickPub] = useState(false);
@@ -63,35 +52,27 @@
 //     )
 // }
 
-// Navbar.propTypes = {
-//     handleAddNotifications: PropTypes.func.isRequired,
-//     handleDisplayNotification: PropTypes.func.isRequired,
-//     state: PropTypes.bool.isRequired,
-//     addPub: PropTypes.func.isRequired,
-//     longueur: PropTypes.number.isRequired,
-//     userName: PropTypes.object
-// }
 
-
-// import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
+import { NewPublication } from './Publications/NewPublication'
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import EmailIcon from '@mui/icons-material/Email';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import AddCommentIcon from '@mui/icons-material/AddComment';
 import { useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-export function Navbar({ handleDisplayNotification, state, userName, discussionsList, setDiscussions,  userInfos }) {
+export function Navbar({ handleDisplayNotification, state, addPub, longueur, userName, discussionsList, setDiscussions,  userInfos }) {
     const navigate = useNavigate();
     const searchBarRef = useRef(null);
     const [searchText, setSearchText] = useState('');
     const discussions = discussionsList;
+    const [clickPub, setClickPub] = useState(false);
     
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -148,6 +129,10 @@ export function Navbar({ handleDisplayNotification, state, userName, discussions
         navigate("/esn", { state: { myUser: {userInfos} } });
     }
 
+    const MakeAPublication = (state) => {
+        setClickPub(state);
+    }
+
     const handleMessageClick = () => {
         navigate("/messages", { state: { userInfos: {userInfos} } })
     }
@@ -157,69 +142,79 @@ export function Navbar({ handleDisplayNotification, state, userName, discussions
     }
 
     return (
-      <AppBar position="static" sx={{ height: "75px", paddingTop: ".3%"}}>
-        <Toolbar>
+        <>
+            <AppBar position="static" sx={{ height: "75px", paddingTop: ".3%"}}>
+            <Toolbar>
+    
+                <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
+                    onClick={ handleHomeClick }
+                >
+                    { userName.nom + " " + userName.lastName }
+                </Typography>
+    
+                <AddCommentIcon sx={{ marginRight: '10px'}}></AddCommentIcon>
+                <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
+                    onClick={ () => MakeAPublication(true) }
+                >
+                    Faire une publication
+                </Typography>
+    
+                <EmailIcon sx={{ marginRight: '10px'}}></EmailIcon>
+                <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
+                    onClick={ handleMessageClick }
+                >
+                    Messages
+                </Typography>
+    
+                <NotificationsIcon sx={{ marginRight: '10px'}}  onClick={ handleNotificationsClick }></NotificationsIcon>
+                <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
+                    onClick={ handleNotificationsClick }
+                >
+                    Notifications
+                </Typography>
+    
+                <Search>
+                    <SearchIconWrapper>
+                        <SearchIcon />
+                    </SearchIconWrapper>
+                    <StyledInputBase
+                        ref={ searchBarRef }
+                        placeholder="Search…"
+                        inputProps={{ 'aria-label': 'search' }}
+                        value={ searchText }
+                        onChange={ handleSearchChange }
+                    />
+                </Search>
+            </Toolbar>
+            </AppBar>
 
-            <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
-                onClick={ handleHomeClick }
-            >
-               { userName.nom + " " + userName.lastName }
-            </Typography>
-
-            <GroupAddIcon sx={{ marginRight: '10px'}}></GroupAddIcon>
-            <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
-            >
-                Faire une publication
-            </Typography>
-
-            <EmailIcon sx={{ marginRight: '10px'}}></EmailIcon>
-            <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
-                onClick={ handleMessageClick }
-            >
-                Messages
-            </Typography>
-
-            <NotificationsIcon sx={{ marginRight: '10px'}}  onClick={ handleNotificationsClick }></NotificationsIcon>
-            <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
-                onClick={ handleNotificationsClick }
-            >
-                Notifications
-            </Typography>
-
-            <Search>
-                <SearchIconWrapper>
-                    <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                    ref={ searchBarRef }
-                    placeholder="Search…"
-                    inputProps={{ 'aria-label': 'search' }}
-                    value={ searchText }
-                    onChange={ handleSearchChange }
-                />
-            </Search>
-        </Toolbar>
-      </AppBar>
+            { clickPub && <NewPublication afficher = { MakeAPublication } addPub = { addPub } longueur = { longueur }/> }
+        </>
     )
 }
 
 Navbar.propTypes = {
+    // handleAddNotifications: PropTypes.func.isRequired,
+    handleDisplayNotification: PropTypes.func.isRequired,
+    state: PropTypes.bool.isRequired,
+    addPub: PropTypes.func.isRequired,
+    longueur: PropTypes.number.isRequired,
     discussionsList: PropTypes.array.isRequired,
     setDiscussions: PropTypes.func.isRequired,
     userInfos: PropTypes.object.isRequired,
