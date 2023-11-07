@@ -69,9 +69,9 @@ export function Publication({ id, content, imageSource, modifications, deletePub
                         </Avatar>
                     }
                     action={
-                    <IconButton aria-label="delete"  onClick={ handleDeletePublication }>
-                        <DeleteIcon sx={{ color: 'red' }}></DeleteIcon>
-                    </IconButton>
+                        <IconButton aria-label="delete"  onClick={ handleDeletePublication }>
+                            <DeleteIcon sx={{ color: 'red' }}></DeleteIcon>
+                        </IconButton>
                     }
                     title="Shrimp and Chorizo Paella"
                     subheader="September 14, 2016"
@@ -79,7 +79,7 @@ export function Publication({ id, content, imageSource, modifications, deletePub
 
                 <CardContent sx={{ fontSize: 'large' }}>{ pubContent }</CardContent>
 
-                <CardMedia 
+                <CardMedia
                     component="img"
                     height="auto"
                     image={ pubImageSource }
