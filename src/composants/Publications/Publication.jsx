@@ -87,11 +87,11 @@ export function Publication({ id, content, imageSource, modifications, deletePub
                 ></CardMedia>
 
                 <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites"  onClick={ handleLike }>
+                    <IconButton aria-label="add to favorites"  onClick={ handleLike } sx={{ marginRight: '40%' }}>
                         { like } <FavoriteIcon />
                     </IconButton>
                     
-                    <h2 onClick={ () => handleUpdateClick(!update) } style={{ cursor: "pointer"}}>Modifier</h2>
+                    <h2 onClick={ () => handleUpdateClick(!update) } style={{ cursor: "pointer", marginRight: '35%' }}>Modifier</h2>
 
                     <IconButton aria-label="share"  onClick={ handleShare }>
                         { share } <ShareIcon />
