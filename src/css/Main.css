@@ -9,15 +9,9 @@ main {
     }
 }
 
-.publication, .new-publication {
-    margin-top: 5%;    
-    border: 1px solid #1b6c68;
-    background: fixed #31cdc5;
-    padding: 10px;
-}
 
 @media screen and (max-width: 555px) {
-    .publication, .new-publication {
+    .new-publication {
         width: 70%;
         margin-left: 10%;
     }
@@ -27,12 +21,12 @@ main {
 .new-publication {
     position: fixed;
     top: 10%;
-    left: 30%;
-    width: 45%;
+    left: 25%;
+    width: 50%;
     height: 450px;
     margin-top: 5%;
     border: 1px solid #1b6c68;
-    background: fixed #2bb1ab;
+    background: fixed #2196F3;
     padding: 10px;
     z-index: 800;
 }
@@ -143,15 +137,14 @@ main {
     padding: 10px;
     margin-top: 3%;
     margin-left: 22%;
-    background-color: #1b6c68;
+    background-color: rgba(5, 83, 146, 0.803);
     user-select: none;
     transition: all .5s;
 }
 
 .new-publication .my_buttons .input-image p.imageSelected {
     text-align: center;
-    background-color: rgb(0, 214, 214);
-    border: 2px solid #2bb1ab;
+    background-color: #2196F3;
     box-shadow: 2px 2px 2px black;
 }
 
