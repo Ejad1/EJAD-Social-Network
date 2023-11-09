@@ -1,11 +1,36 @@
 // import { PropTypes } from "prop-types";
-import { useState } from "react";
 import StoriesHead from "./StoriesHead";
 import StoriesList from "./StoriesList";
 import DisplayStory from "./DisplayStory";
 
 export default function Stories() {
-    const storiesArray = useState(["Cool", "Mon statut", "Encore un autre"]);
+    const storiesArray = [
+      {
+        id: 1,
+        nom: "EJAD",
+        statut: ["Dieu est l'Eternel de grâce"]
+      }, 
+      {
+        id: 2,
+        nom: "Lui",
+        statut: ["Mon statut", "C'est bon on sait"]
+      },
+      { 
+        id: 3,
+        nom: "Fan choco",
+        statut: ["Encore un autre"]
+      },
+      { 
+        id: 4,
+        nom: "Elle",
+        statut: ["Encore un autre"]
+      },
+      { 
+        id: 5,
+        nom: "Ewan",
+        statut: ["Cool"]
+      },
+    ];
 
   return (
     <>
