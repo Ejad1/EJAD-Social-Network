@@ -6,9 +6,11 @@
     flex-wrap: wrap;
     border-radius: 10px;
     box-shadow: 2px 2px 2px black;
-    /* background-color: #49a8f6; */
-    width: 280px;
+    width: 290px;
     z-index: 900;
+    background-color: azure;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .emoticones span {

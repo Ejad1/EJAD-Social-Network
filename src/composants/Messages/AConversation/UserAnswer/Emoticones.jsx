@@ -1,6 +1,6 @@
 import { PropTypes } from "prop-types";
 import { AnEmoticone } from './AnEmoticone'
-import '../../../../css/Emoticones.css'
+import '../../../../css/Messages/Emoticones.css'
 
 
 export function Emoticones({ changeFunction }) {
@@ -172,6 +172,42 @@ export function Emoticones({ changeFunction }) {
         {
             id: 41,
             image: '😨'
+        },
+        {
+            id: 42,
+            image: '👋'
+        },
+        {
+            id: 43,
+            image: '👋🏾'
+        },
+        {
+            id: 44,
+            image: '🤲'
+        },
+        {
+            id: 45,
+            image: '🤲🏾'
+        },
+        {
+            id: 46,
+            image: '🍇'
+        },
+        {
+            id: 47,
+            image: '🍒'
+        },
+        {
+            id: 48,
+            image: '🍉'
+        },
+        {
+            id: 49,
+            image: '🥥'
+        },
+        {
+            id: 50,
+            image: '🍧'
         }
     ]
 
