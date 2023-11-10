@@ -1,6 +1,7 @@
 import { PropTypes } from "prop-types";
 import { UserAnswer } from "./UserAnswer/UserAnswer";
 import { useEffect, useState } from "react";
+import AudioRecorder from "./AudioRecord";
 
 export function ConversationMain({ answersArray, conversationName, messagesReceived }) {
     const [userAnswers, setUserAnswer] = useState(answersArray);
@@ -19,6 +20,8 @@ export function ConversationMain({ answersArray, conversationName, messagesRecei
                     <p key={ index }> { element } </p>
                 )) }
             </div>
+
+            <AudioRecorder></AudioRecorder>
 
             {
                 userAnswers.map((anAnswer, index) => (

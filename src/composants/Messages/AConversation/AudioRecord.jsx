@@ -1,51 +1,55 @@
-// import { Component } from 'react';
-// import MicRecorder from 'mic-recorder-to-mp3';
+import { useState, useRef } from 'react';
 
-// const Mp3Recorder = new MicRecorder({ bitRate: 128 });
+const AudioRecorder = () => {
+    const [isRecording, setIsRecording] = useState(false);
+    const [audioBlob, setAudioBlob] = useState(null);
+    const mediaRecorder = useRef(null);
 
-// class AudioRecorder extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       isRecording: false,
-//       blobURL: '',
-//     };
-//   }
+    const startRecording = () => {
+        navigator.mediaDevices.getUserMedia({ audio: true })
+        .then((stream) => {
+            mediaRecorder.current = new MediaRecorder(stream);
+            const chunks = [];
 
-//   startRecording = () => {
-//     Mp3Recorder.start().then(() => {
-//       this.setState({ isRecording: true });
-//     }).catch((e) => console.error(e));
-//   };
+            mediaRecorder.current.ondataavailable = (event) => {
+            if (event.data.size > 0) {
+                chunks.push(event.data);
+            }
+            };
 
-//   stopRecording = () => {
-//     Mp3Recorder
-//       .stop()
-//       .getMp3()
-//       .then(([buffer, blob]) => {
-//         const blobURL = URL.createObjectURL(blob);
-//         this.setState({ isRecording: false, blobURL });
-//       }).catch((e) => console.log(e));
-//   };
+            mediaRecorder.current.onstop = () => {
+            const blob = new Blob(chunks, { type: 'audio/wav' });
+            setAudioBlob(blob);
+            };
 
-//   render() {
-//     return (
-//       <div>
-//         <button onClick={this.startRecording} disabled={this.state.isRecording}>
-//           Démarrer enregistrement
-//         </button>
-//         <button onClick={this.stopRecording} disabled={!this.state.isRecording}>
-//           Arrêter enregistrement
-//         </button>
-//         {this.state.blobURL && (
-//           <audio controls>
-//             <source src={this.state.blobURL} />
-//           </audio>
-//         )}
-//       </div>
-//     );
-//   }
-// }
+            mediaRecorder.current.start();
+            setIsRecording(true);
+        })
+        .catch((error) => console.error('Erreur lors de la demande d\'autorisation pour l\'audio :', error));
+    };
 
-// export default AudioRecorder;
+    const stopRecording = () => {
+        if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {
+        mediaRecorder.current.stop();
+        setIsRecording(false);
+        }
+    };
 
+    return (
+        <div>
+        <button onClick={startRecording} disabled={isRecording}>
+            Démarrer enregistrement
+        </button>
+        <button onClick={stopRecording} disabled={!isRecording}>
+            Arrêter enregistrement
+        </button>
+        {audioBlob && (
+            <audio controls>
+            <source src={URL.createObjectURL(audioBlob)} type="audio/wav" />
+            </audio>
+        )}
+        </div>
+    );
+};
+
+export default AudioRecorder;
