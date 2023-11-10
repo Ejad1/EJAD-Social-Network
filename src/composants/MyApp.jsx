@@ -4,6 +4,8 @@ import { Main } from './Main'
 // import { Advertising } from './composants/Advertising'
 import { Notifications } from './Notifications/Notifications'
 import imagePublication from '../assets/cat.jpg'
+import dogImage from '../assets/dog.jpg'
+import socialImage from '../assets/social.jpg'
 import { useLocation } from 'react-router-dom'
 
 function MyApp() {
@@ -15,43 +17,43 @@ function MyApp() {
   const [displayNotifications, setDisplayNotifications] = useState(false);
 
   const publicationText = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates a dolore veritatis, ";
-  const publicationImage = imagePublication;
+  const publicationImage = [imagePublication, dogImage, socialImage];
   // Publications array
   const [userPublications, setUserPublications] = useState([
     {
       id: 1,
       text: publicationText,
-      photo: publicationImage,
+      photo: publicationImage[ Math.floor(Math.random() * 2) ],
     },
     {
       id: 2,
       text: publicationText,
-      photo: publicationImage,
+      photo: publicationImage[ Math.floor(Math.random() * 2) ],
     },
     {
       id: 3,
       text: publicationText,
-      photo: publicationImage,
+      photo: publicationImage[ Math.floor(Math.random() * 2) ],
     },
     {
       id: 4,
       text: publicationText,
-      photo: publicationImage,
+      photo: publicationImage[ Math.floor(Math.random() * 2) ],
     },
     {
       id: 5,
       text: publicationText,
-      photo: publicationImage,
+      photo: publicationImage[ Math.floor(Math.random() * 2) ],
     },
     {
       id: 6,
       text: publicationText,
-      photo: publicationImage,
+      photo: publicationImage[ Math.floor(Math.random() * 2) ],
     },
     {
       id: 7,
       text: publicationText,
-      photo: publicationImage,
+      photo: publicationImage[ Math.floor(Math.random() * 2) ],
     }
   ])
 

@@ -29,17 +29,14 @@ export default function DisplayStory() {
             ></CardMedia>
 
             <CardActions disableSpacing>
-                
                 <Box sx={{ 
                     position: 'fixed',
                     bottom: '5px',
-                    border: '2px solid #2196F3',
-                    borderTop: 'none',
                     paddingBottom: '5px',
                     paddingLeft: '2px',
                     paddingRight: '6px',
                     marginLeft: '-2px',
-                    width: '60%'
+                    width: '68%'
                 }}>
                     <input type="file" name="" id="file" style={{ display: 'none' }}/>
 
@@ -62,7 +59,7 @@ export default function DisplayStory() {
                         multiline maxRows={2} 
                         className='textField'
                         placeholder="Your message"
-                        sx={{ width: '75%' }}
+                        sx={{ width: '80%' }}
                     ></TextField>
 
                     <IconButton>
@@ -76,6 +73,7 @@ export default function DisplayStory() {
                         <Send sx={{
                             width: '40px', 
                             height: '40px',
+                            marginRight: '-15px'
                         }}></Send>
                     </IconButton>
 

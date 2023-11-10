@@ -37,6 +37,7 @@ export default function Stories() {
       <StoriesHead></StoriesHead>
       <div style={{ display: "flex", marginTop: '1%' }} className="storiesBox">
         <StoriesList storiesArray = { storiesArray }></StoriesList>
+        <div style={{ border: '2px solid #2196F3', height: '650px', position: "fixed", marginLeft: '29.5%' }}></div>
         <DisplayStory></DisplayStory>
       </div>
     </>
