@@ -1,4 +1,3 @@
-// import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -9,10 +8,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import SvgIcon from '@mui/material/SvgIcon';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import DonutLargeIcon from '@mui/icons-material/DonutLarge';
-import MenuIcon from '@mui/icons-material/Menu';
 import { useRef, useState } from 'react';
-import { IconButton } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 function HomeIcon(props) {
@@ -97,7 +94,7 @@ export default function StoriesHead({ discussionsList, setDiscussions,  userInfo
                 variant="h6"
                 noWrap
                 component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
                 onClick={ handleHomeClick }
             >
                 Home
@@ -108,7 +105,7 @@ export default function StoriesHead({ discussionsList, setDiscussions,  userInfo
                 variant="h6"
                 noWrap
                 component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
             >
                 New story
             </Typography>
@@ -118,22 +115,11 @@ export default function StoriesHead({ discussionsList, setDiscussions,  userInfo
                 variant="h6"
                 noWrap
                 component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
                 onClick={ handleMessageClick }
             >
-                <Link to={'/messages'} sx={{ color: "white"}}>Messages</Link>
                 Messages
             </Typography>
-
-            <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{ mr: 10 }}
-            >
-                <MenuIcon />
-            </IconButton>
 
             <Search>
                 <SearchIconWrapper>

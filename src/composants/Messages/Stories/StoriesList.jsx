@@ -2,7 +2,7 @@ import { PropTypes } from "prop-types";
 import AStory from "./AStory";
 import { List } from "@mui/material";
 
-export default function StoriesList({ storiesArray }) {
+export default function StoriesList({ storiesArray, storySelect }) {
   const mesStories = storiesArray;
 
   return (
@@ -12,6 +12,7 @@ export default function StoriesList({ storiesArray }) {
                 <AStory 
                     key={ index }
                     story={ story }
+                    storySelect = { storySelect }
                 ></AStory>
             ))}
         </List>
@@ -20,5 +21,6 @@ export default function StoriesList({ storiesArray }) {
 }
 
 StoriesList.propTypes = {
-    storiesArray: PropTypes.array.isRequired
+    storiesArray: PropTypes.array.isRequired,
+    storySelect: PropTypes.func.isRequired
 }

@@ -1,14 +1,23 @@
-import { Avatar, Badge, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 import { PropTypes } from "prop-types";
+import { Avatar, Badge, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 
-export default function AStory({ story }) {
+export default function AStory({ story, storySelect }) {
+
+  const handleStoryClick = () => {
+    const infos = {
+      story: story,
+      display: true 
+    }
+
+    storySelect(infos);
+  }
   
   return (
     <div>
-      <ListItem>
+      <ListItem onClick={ handleStoryClick } sx={{ userSelect: 'none' }}>
         <ListItemAvatar>
             <Badge 
-                badgeContent={ story.statut.length }
+                badgeContent={ story.statuts.length }
                 color="primary"
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
             >
@@ -19,10 +28,7 @@ export default function AStory({ story }) {
             </Badge>
         </ListItemAvatar>
         <ListItemText
-            // secondary={ message[message.length - 1] }
-            primary= { story.nom } 
-            secondary= { story.statut[story.statut.length - 1] }
-            sx={{ height: '40px', overflow: 'hidden'}}
+            primary= { story.nom }
         />
       </ListItem>
     </div>
@@ -30,5 +36,6 @@ export default function AStory({ story }) {
 }
 
 AStory.propTypes = {
-  story: PropTypes.object.isRequired
+  story: PropTypes.object.isRequired,
+  storySelect: PropTypes.func.isRequired
 }
