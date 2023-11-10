@@ -1,5 +1,5 @@
 import { PropTypes } from "prop-types";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MobileStepper from '@mui/material/MobileStepper';
@@ -10,34 +10,13 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 
 
-// const images = [
-//   {
-//     label: 'San Francisco – Oakland Bay Bridge, United States',
-//     imgPath:
-//       'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
-//   },
-//   {
-//     label: 'Bird',
-//     imgPath:
-//       'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
-//   },
-//   {
-//     label: 'Bali, Indonesia',
-//     imgPath:
-//       'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250',
-//   },
-//   {
-//     label: 'Goč, Serbia',
-//     imgPath:
-//       'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
-//   },
-// ];
-
 export default function StoryCarousel({ elements }) {
     const storyElements = elements;
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
     const maxSteps = storyElements.length;
+
+    console.log("Mon activeStep est : " + activeStep);
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -47,82 +26,74 @@ export default function StoryCarousel({ elements }) {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
+    useEffect(() => {
+        if (maxSteps > 0 && activeStep >= maxSteps) {
+          setActiveStep(0);
+        }
+    }, [elements, activeStep, maxSteps]);
+
     return (
         <Box sx={{ flexGrow: 1 }}>
-        <Paper
-            square
-            elevation={0}
-            sx={{
-            display: 'flex',
-            alignItems: 'center',
-            height: 50,
-            pl: 2,
-            bgcolor: 'background.default',
-            }}
-        >
-            { storyElements[activeStep].displayCommentaires && <Typography>{ storyElements[activeStep].commentaires }</Typography> }
-        </Paper>
-
-        { storyElements[activeStep].type === "Text"
-            &&
-            <div>
-                <Box
+            { storyElements[activeStep].displayCommentaires && 
+                <Paper
+                    square
+                    elevation={0}
                     sx={{
-                        height: 'auto',
+                    display: 'flex',
+                    alignItems: 'center',
+                    height: 40,
+                    pl: 2,
+                    bgcolor: 'background.default',
+                    }}
+                >
+                    <Typography>{ storyElements[activeStep].commentaires }</Typography>
+                </Paper>
+            }
+
+            { storyElements[activeStep].type === "Text"
+                &&
+                <div>
+                    <Box
+                        sx={{
+                            minHeight: '400px',
+                            display: 'block',
+                            overflow: 'hidden',
+                            width: '800px'
+                        }}
+                    >
+                        <Typography variant="body1" sx={{ textAlign: 'center', marginTop: '25%', fontSize: 'large' }}>
+                            { storyElements[activeStep].file }
+                        </Typography>
+                    </Box>
+                </div>
+            }
+
+            {
+                storyElements[activeStep].type === "Image"
+                    &&
+                <Box
+                    component="img"
+                    sx={{
+                        height: '480px',
                         display: 'block',
                         overflow: 'hidden',
                         width: '100%'
                     }}
-                >
-                    <Typography variant="body1">
-                        { storyElements[activeStep].file }
-                    </Typography>
-        
-                    <MobileStepper
-                        steps={maxSteps}
-                        position="static"
-                        activeStep={activeStep}
-                        nextButton={
-                        <Button
-                            size="small"
-                            onClick={handleNext}
-                            disabled={activeStep === maxSteps - 1}
-                        >
-                            Next
-                            {theme.direction === 'rtl' ? (
-                            <KeyboardArrowLeft />
-                            ) : (
-                            <KeyboardArrowRight />
-                            )}
-                        </Button>
-                        }
-                        backButton={
-                        <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                            {theme.direction === 'rtl' ? (
-                            <KeyboardArrowRight />
-                            ) : (
-                            <KeyboardArrowLeft />
-                            )}
-                            Back
-                        </Button>
-                        }
-                    />
-                </Box>
-            </div>
-        }
+                    src={ storyElements[activeStep].file }
+                    alt= "Story image"
+                />
+            }
 
-        <Box
-            component="img"
-            sx={{
-                height: 'auto',
-                display: 'block',
-                overflow: 'hidden',
-                width: '100%'
-            }}
-            // src={images[activeStep].imgPath}
-            src={ storyElements[activeStep].file }
-            alt={ storyElements[activeStep].type }
-        />
+            {
+                storyElements[activeStep].type === "Video"
+                    &&
+                <video controls width="100%" height="480px">
+                    <source src={storyElements[activeStep].file} type="video/mp4" />
+                    Votre navigateur ne prend pas en charge la balise vidéo.
+                </video>
+            }
+
+            {/*  */}
 
             <MobileStepper
                 steps={maxSteps}

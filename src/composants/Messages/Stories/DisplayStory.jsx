@@ -1,8 +1,6 @@
 import { PropTypes } from "prop-types";
-import { Avatar, Card, CardContent, CardHeader, CardMedia, IconButton } from "@mui/material";
+import { Avatar, Card, CardHeader, IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import storyVideo from '../../../assets/Dan Romer - Ending Theme [THE GOOD DOCTOR SOUNDTRACK].mp4'
-import storyImage from '../../../assets/story.jpg'
 import StoryCarousel from "./StoryCarousel";
 
 export default function DisplayStory({ maStory }) {
@@ -22,24 +20,7 @@ export default function DisplayStory({ maStory }) {
                         subheader="November 07, 2023"
                     ></CardHeader>
 
-                    <StoryCarousel elements = { maStory.story.statuts }></StoryCarousel>           
-    
-                    <CardMedia
-                        component="img"
-                        height="480px"
-                        image={ storyImage }
-                        alt="Story"
-                    ></CardMedia>
-    
-                    { maStory.story.displayCommentaires && <CardContent>{ maStory.story.commentaires }</CardContent> }
-    
-                    <CardMedia
-                        component="video"
-                        height="500px"
-                        controls
-                        src={ storyVideo }
-                        alt="Story"
-                    ></CardMedia>
+                    <StoryCarousel elements = { maStory.story.statuts } begin = { 0 }></StoryCarousel>
                 </Card>
             </div>
         )
