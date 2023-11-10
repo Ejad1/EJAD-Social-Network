@@ -12,7 +12,7 @@ import DonutLargeIcon from '@mui/icons-material/DonutLarge';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useRef, useState } from 'react';
 import { IconButton } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 function HomeIcon(props) {
@@ -84,6 +84,10 @@ export function MessageHead({ discussionsList, setDiscussions,  userInfos }) {
         navigate("/esn", { state: { myUser: {userInfos} } });
     }
 
+    const handleStoryClick = () => {
+        navigate("/stories", { state: { myUser: {userInfos} } });
+    }
+
     return (
       <AppBar position="static">
         <Toolbar>
@@ -93,7 +97,7 @@ export function MessageHead({ discussionsList, setDiscussions,  userInfos }) {
                 variant="h6"
                 noWrap
                 component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: 'pointer' } }}
                 onClick={ handleHomeClick }
             >
                 Home
@@ -104,7 +108,7 @@ export function MessageHead({ discussionsList, setDiscussions,  userInfos }) {
                 variant="h6"
                 noWrap
                 component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: 'pointer' } }}
             >
                 New crew
             </Typography>
@@ -114,9 +118,9 @@ export function MessageHead({ discussionsList, setDiscussions,  userInfos }) {
                 variant="h6"
                 noWrap
                 component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: 'pointer' } }}
+                onClick={ handleStoryClick }
             >
-                <Link to={'/stories'} sx={{ color: "white"}}>Stories</Link>
                 Stories
             </Typography>
 

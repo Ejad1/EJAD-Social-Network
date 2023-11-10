@@ -5,10 +5,12 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 import { useRef, useState } from 'react'
 import { Emoticones } from './UserAnswer/Emoticones';
+import AudioRecorder from "./AudioRecord";
 
 export function ConversationFoot({ setAnswers, conversationName }) {
     const attachedFiles = useRef(null);
     const [displayEmoticons, setDisplayEmoticons] = useState(false);
+    const [recordAudio, setRecordAudio] = useState(false);
     const [message, setMessage] = useState("");
 
     const handleDisplayEmoticons = () => {
@@ -40,6 +42,10 @@ export function ConversationFoot({ setAnswers, conversationName }) {
 
     const handleAttachedFiles = () => {
         attachedFiles.current.click();
+    }
+
+    const handleAudioClick = () => {
+        setRecordAudio(!recordAudio);
     }
 
     return (
@@ -82,7 +88,7 @@ export function ConversationFoot({ setAnswers, conversationName }) {
                 sx={{ width: '75%' }}
             ></TextField>
 
-            <IconButton>
+            <IconButton onClick={ handleAudioClick }>
                 <KeyboardVoiceIcon sx={{
                     width: '35px', 
                     height: '35px',
@@ -97,6 +103,8 @@ export function ConversationFoot({ setAnswers, conversationName }) {
             </IconButton>
 
             { displayEmoticons && <Emoticones changeFunction = { handleAnswerChange }></Emoticones>}
+
+            { recordAudio && <AudioRecorder></AudioRecorder> }
         </Box>
     )
 }
