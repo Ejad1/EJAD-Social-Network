@@ -13,6 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useRef, useState } from 'react';
 import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { NewCrew } from "./NewCrew";
 
 
 function HomeIcon(props) {
@@ -24,6 +25,7 @@ function HomeIcon(props) {
 }
 
 export function MessageHead({ discussionsList, setDiscussions,  userInfos }) {
+    const [displayNewCrewForm, setDisplayNewCrewForm] = useState(false);
     const navigate = useNavigate();
     const searchBarRef = useRef(null);
     const [searchText, setSearchText] = useState('');
@@ -88,66 +90,75 @@ export function MessageHead({ discussionsList, setDiscussions,  userInfos }) {
         navigate("/stories", { state: { myUser: {userInfos} } });
     }
 
+    const handleNewCrewClick = (state) => {
+        setDisplayNewCrewForm(state);
+    }
+
     return (
-      <AppBar position="static">
-        <Toolbar>
+        <>
+            <AppBar position="static">
+            <Toolbar>
+    
+                <HomeIcon onClick={ handleHomeClick }></HomeIcon>
+                <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: 'pointer' } }}
+                    onClick={ handleHomeClick }
+                >
+                    Home
+                </Typography>
+    
+                <GroupAddIcon sx={{ marginRight: '8px'}}></GroupAddIcon>
+                <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: 'pointer' } }}
+                    onClick={ () => handleNewCrewClick(true) }
+                >
+                    New crew
+                </Typography>
+    
+                <DonutLargeIcon sx={{ marginRight: '10px'}}></DonutLargeIcon>
+                <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: 'pointer' } }}
+                    onClick={ handleStoryClick }
+                >
+                    Stories
+                </Typography>
+    
+                <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mr: 10 }}
+                >
+                    <MenuIcon />
+                </IconButton>
+    
+                <Search>
+                    <SearchIconWrapper>
+                        <SearchIcon />
+                    </SearchIconWrapper>
+                    <StyledInputBase
+                        ref={ searchBarRef }
+                        placeholder="Search…"
+                        inputProps={{ 'aria-label': 'search' }}
+                        value={ searchText }
+                        onChange={ handleSearchChange }
+                    />
+                </Search>
+            </Toolbar>
+            </AppBar>
 
-            <HomeIcon onClick={ handleHomeClick }></HomeIcon>
-            <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: 'pointer' } }}
-                onClick={ handleHomeClick }
-            >
-                Home
-            </Typography>
-
-            <GroupAddIcon sx={{ marginRight: '8px'}}></GroupAddIcon>
-            <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: 'pointer' } }}
-            >
-                New crew
-            </Typography>
-
-            <DonutLargeIcon sx={{ marginRight: '10px'}}></DonutLargeIcon>
-            <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: 'pointer' } }}
-                onClick={ handleStoryClick }
-            >
-                Stories
-            </Typography>
-
-            <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{ mr: 10 }}
-            >
-                <MenuIcon />
-            </IconButton>
-
-            <Search>
-                <SearchIconWrapper>
-                    <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                    ref={ searchBarRef }
-                    placeholder="Search…"
-                    inputProps={{ 'aria-label': 'search' }}
-                    value={ searchText }
-                    onChange={ handleSearchChange }
-                />
-            </Search>
-        </Toolbar>
-      </AppBar>
+            { displayNewCrewForm && <NewCrew afficher = { handleNewCrewClick }></NewCrew>}
+        </>
     )
 }
 
