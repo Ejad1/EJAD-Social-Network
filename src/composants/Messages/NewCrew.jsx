@@ -18,7 +18,7 @@ import Select from '@mui/material/Select';
 
 const defaultTheme = createTheme();
 
-export function NewCrew({ display }) {
+export function NewCrew({ display, discussions }) {
 
   const [errorPresent, setErrorPresent] = useState(true);
   const [nameErrorPresent, setNameErrorPresent] = useState(false);
@@ -120,7 +120,6 @@ export function NewCrew({ display }) {
               <Grid item xs={10} sm={12}>
                 <TextField
                 inputRef={ lastname }
-                  required
                   fullWidth
                   id="lastName"
                   label="Description (optionnel)"
@@ -138,30 +137,24 @@ export function NewCrew({ display }) {
           id="demo-simple-select-standard"
           value={age}
           onChange={handleChange}
-          label="Age"
+          label="Members list"
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          { discussions.map((membre, index) => (
+            <MenuItem key={ index } value={ 10 }>{ membre.discussionName }</MenuItem>
+          ))}
         </Select>
       </FormControl>
-      <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-filled-label">Age</InputLabel>
+      <FormControl variant="filled" sx={{ m: 1, minWidth: 100 }}>
+        <InputLabel id="demo-simple-select-filled-label">Add +</InputLabel>
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
           value={age}
           onChange={handleChange}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          { discussions.map((membre, index) => (
+            <MenuItem key={ index } value={ 10 }>{ membre.discussionName }</MenuItem>
+          ))}
         </Select>
       </FormControl>
     </div>
@@ -191,6 +184,7 @@ export function NewCrew({ display }) {
 
 NewCrew.propTypes = {
     display: PropTypes.func.isRequired,
+    discussions: PropTypes.array.isRequired,
     // addPub: PropTypes.func,
     // longueur: PropTypes.number
 }

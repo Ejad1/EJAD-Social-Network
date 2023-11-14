@@ -157,7 +157,7 @@ export function MessageHead({ discussionsList, setDiscussions,  userInfos }) {
             </Toolbar>
             </AppBar>
 
-            { displayNewCrewForm && <NewCrew afficher = { handleNewCrewClick }></NewCrew>}
+            { displayNewCrewForm && <NewCrew afficher = { handleNewCrewClick } discussions = { discussions }></NewCrew>}
         </>
     )
 }
