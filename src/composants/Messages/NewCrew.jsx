@@ -14,11 +14,12 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { useEffect } from "react";
 
 
 const defaultTheme = createTheme();
 
-export function NewCrew({ display, discussions }) {
+export function NewCrew({ discussions }) {
 
   const [errorPresent, setErrorPresent] = useState(true);
   const [nameErrorPresent, setNameErrorPresent] = useState(false);
@@ -65,11 +66,11 @@ export function NewCrew({ display, discussions }) {
         userName = userName.toUpperCase();
 
         const myUser = {
-        nom: userName,
-        lastName: data.get('lastName'),
-        number: data.get('number'),
-        email: data.get('email'),
-        password: data.get('password'),
+          nom: userName,
+          lastName: data.get('lastName'),
+          number: data.get('number'),
+          email: data.get('email'),
+          password: data.get('password'),
         }
 
         console.log(myUser);
@@ -78,10 +79,22 @@ export function NewCrew({ display, discussions }) {
     }
   };  
 
-  const [age, setAge] = useState('');
+  const [members, setMembers] = useState('');
+  const [membersList, setMembersList] = useState([]);
+  let membersSelect = null;
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setMembers(event.target.value);
+    setMembersList((prevList) => [...prevList, members]);
+
+    useEffect[() => {
+      membersList.map((element) => {
+        membersSelect = membersSelect + " " + element;
+        return membersSelect;
+      })
+    }, members]
+
+    console.log("La liste qui doit s'afficher est : " + membersList);
   };
 
   return (
@@ -131,17 +144,14 @@ export function NewCrew({ display, discussions }) {
 
     <div>
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <Typography>Membres</Typography>
         <InputLabel id="demo-simple-select-standard-label">Membres</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
-          value={age}
-          onChange={handleChange}
+          value={ membersList }
           label="Members list"
         >
-          { discussions.map((membre, index) => (
-            <MenuItem key={ index } value={ 10 }>{ membre.discussionName }</MenuItem>
-          ))}
         </Select>
       </FormControl>
       <FormControl variant="filled" sx={{ m: 1, minWidth: 100 }}>
@@ -149,11 +159,12 @@ export function NewCrew({ display, discussions }) {
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
-          value={age}
+          value={members}
           onChange={handleChange}
         >
+          <MenuItem value={ null }>None</MenuItem>
           { discussions.map((membre, index) => (
-            <MenuItem key={ index } value={ 10 }>{ membre.discussionName }</MenuItem>
+            <MenuItem key={ index } value={ membre.discussionName }>{ membre.discussionName }</MenuItem>
           ))}
         </Select>
       </FormControl>
