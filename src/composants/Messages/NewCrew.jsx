@@ -79,23 +79,22 @@ export function NewCrew({ discussions }) {
     }
   };  
 
-  const [members, setMembers] = useState('');
+  const [members, setMembers] = useState();
   const [membersList, setMembersList] = useState([]);
-  let membersSelect = null;
+  let membersSelect = "";
 
   const handleChange = (event) => {
     setMembers(event.target.value);
-    setMembersList((prevList) => [...prevList, members]);
+    // setMembersList((prevList) => [...prevList, members]);
 
-    useEffect[() => {
-      membersList.map((element) => {
-        membersSelect = membersSelect + " " + element;
-        return membersSelect;
-      })
-    }, members]
+    membersSelect = membersSelect + " " + members;
 
-    console.log("La liste qui doit s'afficher est : " + membersList);
+    console.log("La liste qui doit s'afficher est : " + membersSelect);
   };
+
+  useEffect(() => {
+    setMembersList((prevList) => [...prevList, members]);
+  }, [members]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -142,33 +141,22 @@ export function NewCrew({ discussions }) {
                 <p style={{ color: 'red' }}>{ lastNameError }</p>
               </Grid>
 
-    <div>
-      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <Typography>Membres</Typography>
-        <InputLabel id="demo-simple-select-standard-label">Membres</InputLabel>
-        <Select
-          labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
-          value={ membersList }
-          label="Members list"
-        >
-        </Select>
-      </FormControl>
-      <FormControl variant="filled" sx={{ m: 1, minWidth: 100 }}>
-        <InputLabel id="demo-simple-select-filled-label">Add +</InputLabel>
-        <Select
-          labelId="demo-simple-select-filled-label"
-          id="demo-simple-select-filled"
-          value={members}
-          onChange={handleChange}
-        >
-          <MenuItem value={ null }>None</MenuItem>
-          { discussions.map((membre, index) => (
-            <MenuItem key={ index } value={ membre.discussionName }>{ membre.discussionName }</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
+              <div>
+                { membersList.length > 1 && <Typography>Membres : { membersList.join(', ') }</Typography> }
+                <FormControl variant="filled" sx={{ m: 1, minWidth: 100 }}>
+                  <InputLabel id="demo-simple-select-filled-label">Add +</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-filled-label"
+                    id="demo-simple-select-filled"
+                    value={members}
+                    onChange={handleChange}
+                  >
+                    { discussions.map((membre, index) => (
+                      <MenuItem key={ index } value={ membre.discussionName }>{ membre.discussionName }</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </div>
 
 
               <Grid item xs={1} sm={1}></Grid>

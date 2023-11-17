@@ -63,16 +63,16 @@ function MyApp() {
   const handleAddNewPublication = (newPub, len) => {
     setUserPublications((prevPubs) => [newPub, ...prevPubs]);
 
-    useEffect[() => {
-      const copy = [...userPublications];
-      for (let i = 0; i < userPublications.length; i++) {
-        copy[i].id = i + 1;
-      }
-      setUserPublications(copy);
-    }, userPublications]
-
     setPublicationsArraLength(len + 1);
   }
+
+  useEffect(() => {
+    const copy = [...userPublications];
+    for (let i = 0; i < userPublications.length; i++) {
+      copy[i].id = i + 1;
+    }
+    setUserPublications(copy);
+  }, [userPublications])
 
   // Publication text and/or image modification function
   const handleSetPublication = (id, newText, newImage) => {
