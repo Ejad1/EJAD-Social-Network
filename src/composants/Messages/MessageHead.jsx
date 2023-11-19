@@ -24,7 +24,7 @@ function HomeIcon(props) {
   );
 }
 
-export function MessageHead({ discussionsList, setDiscussions,  userInfos }) {
+export function MessageHead({ discussionsList, setDiscussions, addDiscussion,  userInfos }) {
     const [displayNewCrewForm, setDisplayNewCrewForm] = useState(false);
     const navigate = useNavigate();
     const searchBarRef = useRef(null);
@@ -157,7 +157,14 @@ export function MessageHead({ discussionsList, setDiscussions,  userInfos }) {
             </Toolbar>
             </AppBar>
 
-            { displayNewCrewForm && <NewCrew discussions = { discussions }></NewCrew>}
+            { displayNewCrewForm 
+                && 
+              <NewCrew 
+                display = { handleNewCrewClick }
+                discussions = { discussions }
+                addDiscussion = { addDiscussion }
+              ></NewCrew>
+            }
         </>
     )
 }
@@ -165,5 +172,6 @@ export function MessageHead({ discussionsList, setDiscussions,  userInfos }) {
 MessageHead.propTypes = {
     discussionsList: PropTypes.array.isRequired,
     setDiscussions: PropTypes.func.isRequired,
+    addDiscussion: PropTypes.func.isRequired,
     userInfos: PropTypes.object.isRequired
 }

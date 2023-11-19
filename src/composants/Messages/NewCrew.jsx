@@ -15,86 +15,90 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useEffect } from "react";
+import { red } from "@mui/material/colors";
 
 
 const defaultTheme = createTheme();
 
-export function NewCrew({ discussions }) {
+export function NewCrew({ display, discussions, addDiscussion }) {
+
+  const [members, setMembers] = useState("");
+  const [membersList, setMembersList] = useState([]);
 
   const [errorPresent, setErrorPresent] = useState(true);
-  const [nameErrorPresent, setNameErrorPresent] = useState(false);
-  const [lastNameErrorPresent, setLastNameErrorPresent] = useState(false);
 
-  // Errors messages
-  const [generalError, setGeneralError] = useState("");
-  const [nameError, setNameError] = useState("");
-  const [lastNameError, setLastNameError] = useState("");
+  // Error message
+  const [error, setError] = useState("");
 
   // Inputs ref
-  const firstname = useRef(null);
-  const lastname = useRef(null);
+  const crewName = useRef(null);
+  const CrewDescription = useRef(null);
+
+  // Inputs values
+  const [nameOfTheCrew, setNameOfTheCrew] = useState("");
+  const [descriptionOfTheCrew, setDescriptionOfTheCrew] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const data = new FormData(event.currentTarget);
 
     // @ --- Empty form area verifications --- @ //
-    firstname.current.value === null
-    ? (setNameError("Please enter your last name"), setNameErrorPresent(true) ) 
-    : (setNameError(""), setNameErrorPresent(false) );
-
-    lastname.current.value === null
-    ? (setLastNameError("Please enter your first name"), setLastNameErrorPresent(true) ) 
-    : (setLastNameError(""), setLastNameErrorPresent(false) );
+    data.get('crewName') === ""
+    ? (setError("Please enter the crew name"), setErrorPresent(true) ) 
+    : (setError(""), setErrorPresent(false) );
     // @ --- End of empty form area verifications --- @ //
-
-    if (nameErrorPresent || lastNameErrorPresent) {
-        setErrorPresent(true)
-    }
-    else {
-      setErrorPresent(false);
-    }
 
     console.log(errorPresent);
 
-    if (errorPresent) {
-      setGeneralError("Veuillez remplir tous les champs du formulaire");
+    if (data.get('crewName') !== "" && membersList.length > 0) {
+
+      setMembersList((prevList) => prevList.filter((member) => member !== ""));
+
+      console.log(membersList);
+
+      const myDiscussion = {
+        id: 0,
+        discussionName: data.get('crewName'),
+        message: [],
+        description : data.get('description'),
+        crew : true,
+        members : { membersList }
+      }
+
+      addDiscussion(myDiscussion);
+
+      setMembersList([]);
+      setMembers("");
+      setNameOfTheCrew("");
+      setDescriptionOfTheCrew("");
+      display(false);
     }
-    else {
-        const data = new FormData(event.currentTarget);
-
-        let userName = data.get('firstName');
-        userName = userName.toUpperCase();
-
-        const myUser = {
-          nom: userName,
-          lastName: data.get('lastName'),
-          number: data.get('number'),
-          email: data.get('email'),
-          password: data.get('password'),
-        }
-
-        console.log(myUser);
-
-        setGeneralError("");
-    }
-  };  
-
-  const [members, setMembers] = useState();
-  const [membersList, setMembersList] = useState([]);
-  let membersSelect = "";
+  };
 
   const handleChange = (event) => {
-    setMembers(event.target.value);
-    // setMembersList((prevList) => [...prevList, members]);
-
-    membersSelect = membersSelect + " " + members;
-
-    console.log("La liste qui doit s'afficher est : " + membersSelect);
+    if (!membersList.includes(event.target.value)) {
+      setMembers(event.target.value);
+    }
   };
 
   useEffect(() => {
     setMembersList((prevList) => [...prevList, members]);
+    setMembersList((prevList) => prevList.filter((member) => member !== ""));
   }, [members]);
+
+  // Inputs values changing
+  const handleNameChange = (e) => {
+    setNameOfTheCrew(e.target.value);
+  }
+
+  const handleDescriptionChange = (e) => {
+    setDescriptionOfTheCrew(e.target.value);
+  }
+
+  // Annulation du formulaire
+  const handleForget = () => {
+    display(false);
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -102,7 +106,8 @@ export function NewCrew({ discussions }) {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 10,
+            marginTop: 15,
+            marginBottom: 100,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -118,40 +123,46 @@ export function NewCrew({ discussions }) {
             <Grid container spacing={2}>
               <Grid item xs={10} sm={12}>
                 <TextField
-                  inputRef={ firstname }
+                  inputRef={ crewName }
                   autoComplete="given-name"
                   name="crewName"
                   required
                   fullWidth
-                  id="firstName"
+                  id="crewName"
                   label="Nom du groupe"
                   autoFocus
+                  value={ nameOfTheCrew }
+                  onChange={ handleNameChange }
                 />
-                <p style={{ color: 'red' }}>{ nameError }</p>
               </Grid>
               <Grid item xs={10} sm={12}>
                 <TextField
-                inputRef={ lastname }
+                inputRef={ CrewDescription }
                   fullWidth
-                  id="lastName"
+                  id="CrewDescription"
                   label="Description (optionnel)"
-                  name="lastName"
-                  autoComplete="family-name"
+                  name="CrewDescription"
+                  autoComplete="Crew Description"
+                  value = { descriptionOfTheCrew }
+                  onChange={ handleDescriptionChange }
                 />
-                <p style={{ color: 'red' }}>{ lastNameError }</p>
               </Grid>
 
-              <div>
-                { membersList.length > 1 && <Typography>Membres : { membersList.join(', ') }</Typography> }
-                <FormControl variant="filled" sx={{ m: 1, minWidth: 100 }}>
-                  <InputLabel id="demo-simple-select-filled-label">Add +</InputLabel>
+              <div style={{ marginLeft: "10px" }}>
+                { membersList.length > 0 
+                    && 
+                  <Typography sx={{ margin: '15px' }}>
+                    Membres : { membersList.join(', ') }
+                  </Typography> }
+                <FormControl variant="filled" sx={{ m: 1, minWidth: 400 }}>
+                  <InputLabel id="demo-simple-select-filled-label">Add members +</InputLabel>
                   <Select
                     labelId="demo-simple-select-filled-label"
                     id="demo-simple-select-filled"
                     value={members}
                     onChange={handleChange}
                   >
-                    { discussions.map((membre, index) => (
+                    { discussions.filter(membre => membre.crew === false).map((membre, index) => (
                       <MenuItem key={ index } value={ membre.discussionName }>{ membre.discussionName }</MenuItem>
                     ))}
                   </Select>
@@ -162,7 +173,7 @@ export function NewCrew({ discussions }) {
               <Grid item xs={1} sm={1}></Grid>
 
               <Grid item xs={6} sm={10}>
-                <p style={{ color: 'red', textAlign: 'center' }}>{ generalError }</p>
+                <p style={{ color: 'red', textAlign: 'center' }}>{ error }</p>
               </Grid>
               
             </Grid>
@@ -174,6 +185,15 @@ export function NewCrew({ discussions }) {
             >
               Créer le groupe
             </Button>
+
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{ backgroundColor: red[900] }}
+              onClick={ handleForget }
+            >
+              Annuler
+            </Button>
           </Box>
         </Box>
       </Container>
@@ -184,6 +204,7 @@ export function NewCrew({ discussions }) {
 NewCrew.propTypes = {
     display: PropTypes.func.isRequired,
     discussions: PropTypes.array.isRequired,
+    addDiscussion: PropTypes.func.isRequired,
     // addPub: PropTypes.func,
     // longueur: PropTypes.number
 }

@@ -20,79 +20,97 @@ export function Messages() {
         {
             id: 1,
             discussionName: "EJAD",
-            message: ["How are you ?", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aperiam veritatis quas minus assumenda quae ut atque odio, autem soluta consequatur nihil beatae facere blanditiis voluptatem animi similique iste vel."]
-            
+            message: ["How are you ?", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aperiam veritatis quas minus assumenda quae ut atque odio, autem soluta consequatur nihil beatae facere blanditiis voluptatem animi similique iste vel."],
+            crew : false
         },
         {
             id: 2,
             discussionName: "Elle",
-            message: ["How are you ?", "I was very happy to spend this time with you"]
+            message: ["How are you ?", "I was very happy to spend this time with you"],
+            crew : false
         },
         {
             id: 3,
             discussionName: "Moi",
-            message: ["Nice to meet you"]
+            message: ["Nice to meet you"],
+            crew : false
         },
         {
             id: 4,
             discussionName: "You",
-            message: ["Okay very good"]
+            message: ["Okay very good"],
+            crew : false
         },
         {
             id: 5,
             discussionName: "Ice boy",
-            message: ["Je suis trop frais : j'suis un vrai homme"]
+            message: ["Je suis trop frais : j'suis un vrai homme"],
+            crew : false
         },
         {
             id: 6,
             discussionName: "Ewan",
-            message: ["Allez à l'eglise est mieux que d'écouter Gazo"]
+            message: ["Allez à l'eglise est mieux que d'écouter Gazo"],
+            crew : false            
         },
         {
             id: 7,
             discussionName: "Romu Romu",
-            message: ["Ka boboba...", "Le vieux c'est comment ?", "Sinon c'est ma femme hein", "Tchaitsaaaa...."]
+            message: ["Ka boboba...", "Le vieux c'est comment ?", "Sinon c'est ma femme hein", "Tchaitsaaaa...."],
+            crew : false
         },
         {
             id: 8,
             discussionName: "Léléndouch",
-            message: ["Je vais te mordre"]
+            message: ["Je vais te mordre"],
+            crew : false
         },
         {
             id: 9,
             discussionName: "Claudianounet",
-            message: ["Ohhh c'est trop mignon"]
+            message: ["Ohhh c'est trop mignon"],
+            crew : false
         },
         {
             id: 10,
             discussionName: "Flo",
-            message: ["J'ai une nouvelle moto"]
+            message: ["J'ai une nouvelle moto"],
+            crew : false
         },
         {
             id: 11,
             discussionName: "Fan Choco",
-            message: ["Merci beaucoup c'est très gentil de ta part"]
+            message: ["Merci beaucoup c'est très gentil de ta part"],
+            crew : false
         },
         {
             id: 12,
             discussionName: "Matthi",
-            message: ["Barça est le meilleur club"]
+            message: ["Barça est le meilleur club"],
+            crew : false
         },
         {
             id: 13,
             discussionName: "Victoria",
-            message: ["J'ai regardé un film d'horreur hier soir et c'était trop cool.", "Tu veux connaitre le nom du film ???"]
+            message: ["J'ai regardé un film d'horreur hier soir et c'était trop cool.", "Tu veux connaitre le nom du film ???"],
+            crew : false
         },
         {
             id: 14,
             discussionName: "Promo 1 Crunch Time",
             message: ["Ewan : Hello à vous.", "Mec bien : POF le vendredi ça vous dit ?", 
-                        "Romu Romu : On doit se mettre sérieusement au travail", "Ice Boy : J'ai changé maintenant", "Léléndouch : ..."]
+                        "Romu Romu : On doit se mettre sérieusement au travail", "Ice Boy : J'ai changé maintenant", "Léléndouch : ..."],
+            crew : true,
+            members : ["Ewan", "Mec bien", "Romu Romu", "Ice Boy", "Léléndouch", "Claudianounet"]
         }
     ])
 
     const handleSetDiscussionsList = (newList) => {
         setDiscussionsList(newList);
+    }
+
+    const handleAddDiscussion = (discussionAdded) => {
+        setDiscussionsList([discussionAdded, ...discussionsList]);
     }
 
     console.log(userInfos);
@@ -103,6 +121,7 @@ export function Messages() {
             <MessageHead 
                 discussionsList={ discussionsList }
                 setDiscussions = { handleSetDiscussionsList }
+                addDiscussion = { handleAddDiscussion }
                 userInfos = { userInfos }
             ></MessageHead>
             <div className="discussions-conversations">
