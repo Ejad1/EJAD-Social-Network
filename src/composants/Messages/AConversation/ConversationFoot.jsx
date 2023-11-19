@@ -24,8 +24,10 @@ export function ConversationFoot({ setAnswers, conversationName }) {
     const handleSendAnser = () => {
         const currentDate = new Date();
 
-        const hours = currentDate.getHours();
-        const minutes = currentDate.getMinutes();
+        let hours = currentDate.getHours();
+        let minutes = currentDate.getMinutes();
+        hours < 10 ? hours = "0" + hours : hours;
+        minutes < 10 ? minutes = "0" + minutes : minutes;
 
         const myTime = hours + ": " + minutes;
 
