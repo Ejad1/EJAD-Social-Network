@@ -98,10 +98,16 @@ export function Messages() {
         {
             id: 14,
             discussionName: "Promo 1 Crunch Time",
-            message: ["Ewan : Hello à vous.", "Mec bien : POF le vendredi ça vous dit ?", 
-                        "Romu Romu : On doit se mettre sérieusement au travail", "Ice Boy : J'ai changé maintenant", "Léléndouch : ..."],
             crew : true,
-            members : ["Ewan", "Mec bien", "Romu Romu", "Ice Boy", "Léléndouch", "Claudianounet"]
+            members : ["Ewan", "Mec bien", "Romu Romu", "Ice Boy", "Léléndouch", "Claudianounet"],
+            message: {
+                "Ewan": "Hello à vous.", 
+                "Mec bien": "POF le vendredi ça vous dit ?",
+                "Romu Romu": "On doit se mettre sérieusement au travail",
+                "Ice Boy": "J'ai changé maintenant", 
+                "Léléndouch": "...",
+                "Claudianounet": "Chouchoutez moi"
+            },
         }
     ])
 
