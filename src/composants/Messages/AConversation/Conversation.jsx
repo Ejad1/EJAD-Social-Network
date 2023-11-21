@@ -28,7 +28,7 @@ export function Conversation({ conversationCible }) {
     
                <ConversationFoot 
                     setAnswers = { handleSetAnswers }
-                    conversation = { conversationCible }
+                    conversationName = { conversationCible.discussionName }
                 ></ConversationFoot>
             </div>
         )

@@ -25,8 +25,6 @@ export function NewCrew({ display, discussions, addDiscussion }) {
   const [members, setMembers] = useState("");
   const [membersList, setMembersList] = useState([]);
 
-  const [errorPresent, setErrorPresent] = useState(true);
-
   // Error message
   const [error, setError] = useState("");
 
@@ -44,25 +42,21 @@ export function NewCrew({ display, discussions, addDiscussion }) {
 
     // @ --- Empty form area verifications --- @ //
     data.get('crewName') === ""
-    ? (setError("Please enter the crew name"), setErrorPresent(true) ) 
-    : (setError(""), setErrorPresent(false) );
-    // @ --- End of empty form area verifications --- @ //
-
-    console.log(errorPresent);
+    ? (setError("Please enter the crew name") ) 
+    : (setError(""));
+    // @ --- End of empty form area verifications --- @ /
 
     if (data.get('crewName') !== "" && membersList.length > 0) {
 
       setMembersList((prevList) => prevList.filter((member) => member !== ""));
 
-      console.log(membersList);
-
       const myDiscussion = {
-        id: 0,
+        id: discussions.length,
         discussionName: data.get('crewName'),
         message: [],
         description : data.get('description'),
         crew : true,
-        members : [ membersList ]
+        members : membersList
       }
 
       addDiscussion(myDiscussion);
@@ -189,7 +183,10 @@ export function NewCrew({ display, discussions, addDiscussion }) {
             <Button
               fullWidth
               variant="contained"
-              sx={{ backgroundColor: red[900] }}
+              sx={{ backgroundColor: red[700],
+                '&:hover': {
+                  backgroundColor: red[900]
+                }, }}
               onClick={ handleForget }
             >
               Annuler
