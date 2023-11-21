@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
-export default function ConversationHead({ conversationName }) {
+export default function ConversationHead({ conversation }) {
 
   return (
     <Box sx={{ width: '900px', marginBottom: '10px' }}>
@@ -26,8 +26,9 @@ export default function ConversationHead({ conversationName }) {
             </div>
          
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            { conversationName }
+            { conversation.discussionName }
           </Typography>
+          { conversation.crew && <Typography>{ conversation.members.join(", ") }</Typography>}
           <IconButton
             size="large"
             edge="start"
@@ -44,5 +45,5 @@ export default function ConversationHead({ conversationName }) {
 }
 
 ConversationHead.propTypes = {
-    conversationName: PropTypes.string.isRequired
+    conversation: PropTypes.object.isRequired
 }

@@ -13,21 +13,22 @@ export function Conversation({ conversationCible }) {
     }
 
     if (conversationCible.display) {
-        const messagesReceived = conversationCible.messageDiscussion;
+        const messagesReceived = conversationCible.message;
 
         return (
             <div className="conversation">
-                <ConversationHead conversationName = { conversationCible.nomDiscussion }></ConversationHead>        
+                <ConversationHead conversationName = { conversationCible.discussionName }
+                conversation = { conversationCible }></ConversationHead>        
         
-                <ConversationMain 
+                <ConversationMain
                     answersArray = { answers }
-                    conversationName = { conversationCible.nomDiscussion }
+                    conversation = { conversationCible }
                     messagesReceived = { messagesReceived }
                 ></ConversationMain>
     
                <ConversationFoot 
                     setAnswers = { handleSetAnswers }
-                    conversationName = { conversationCible.nomDiscussion }
+                    conversation = { conversationCible }
                 ></ConversationFoot>
             </div>
         )

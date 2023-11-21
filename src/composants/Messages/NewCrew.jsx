@@ -62,7 +62,7 @@ export function NewCrew({ display, discussions, addDiscussion }) {
         message: [],
         description : data.get('description'),
         crew : true,
-        members : { membersList }
+        members : [ membersList ]
       }
 
       addDiscussion(myDiscussion);

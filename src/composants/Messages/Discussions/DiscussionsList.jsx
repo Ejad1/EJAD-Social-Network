@@ -23,6 +23,7 @@ export function DiscussionsList({ discussionsList, callback }) {
                                 callback = { callback }
                                 nom = { element.discussionName }
                                 message = { element.message }
+                                discussion = { element }
                             ></ADiscussion>
                         ))
                     }

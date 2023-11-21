@@ -2,21 +2,19 @@ import { PropTypes } from "prop-types";
 import { useState } from "react";
 import { Avatar, Badge, Divider, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 
-export function ADiscussion({ callback, nom, message }) {
+export function ADiscussion({ callback, nom, message, discussion }) {
     const [discussionBadge, setDiscussionBadge] = useState(message.length);
+    const discussionCible = discussion;
 
-    const handleDiscussionClick = (nom, message) => {
+    const handleDiscussionClick = () => {
         setDiscussionBadge(0);
-        callback({
-            nomDiscussion: nom,
-            messageDiscussion: message,
-            display: true
-        })
+        discussionCible.display = true;
+        callback(discussionCible)
     }
 
     return (
         <>
-            <ListItem onClick={ () => handleDiscussionClick(nom, message) }>
+            <ListItem onClick={ handleDiscussionClick }>
                 <ListItemAvatar>
                     <Badge 
                         badgeContent={ discussionBadge }
@@ -43,5 +41,6 @@ export function ADiscussion({ callback, nom, message }) {
 ADiscussion.propTypes = {
     callback: PropTypes.func.isRequired,
     nom: PropTypes.string.isRequired,
-    message: PropTypes.array.isRequired
+    message: PropTypes.array.isRequired,
+    discussion: PropTypes.object.isRequired
 }
