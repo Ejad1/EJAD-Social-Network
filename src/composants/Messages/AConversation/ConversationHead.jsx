@@ -28,7 +28,7 @@ export default function ConversationHead({ conversation }) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             { conversation.discussionName }
           </Typography>
-          { conversation.crew && <Typography>{ conversation.members.join(", ") }</Typography>}
+          { conversation.crew && <h4>( { conversation.members.join(", ") } )</h4> }
           <IconButton
             size="large"
             edge="start"
