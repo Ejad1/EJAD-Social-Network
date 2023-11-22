@@ -10,6 +10,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import DonutLargeIcon from '@mui/icons-material/DonutLarge';
 import { useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { NewStory } from "./NewStory";
 
 
 function HomeIcon(props) {
@@ -25,6 +26,7 @@ export default function StoriesHead({ discussionsList, setDiscussions,  userInfo
     const searchBarRef = useRef(null);
     const [searchText, setSearchText] = useState('');
     const discussions = discussionsList;
+    const [displayNewStory, setDisplayNewStory] = useState(false);
     
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -85,56 +87,65 @@ export default function StoriesHead({ discussionsList, setDiscussions,  userInfo
         navigate("/messages", { state: { userInfos: {userInfos} } })
     }
 
+    const handleNewStoryClick = (state) => {
+        setDisplayNewStory(state);
+    }
+
     return (
-      <AppBar position="static">
-        <Toolbar>
+        <>  
+            <AppBar position="static">
+                <Toolbar>
 
-            <HomeIcon onClick={ handleHomeClick }></HomeIcon>
-            <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
-                onClick={ handleHomeClick }
-            >
-                Home
-            </Typography>
+                    <HomeIcon onClick={ handleHomeClick }></HomeIcon>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
+                        onClick={ handleHomeClick }
+                    >
+                        Home
+                    </Typography>
 
-            <GroupAddIcon sx={{ marginRight: '10px'}}></GroupAddIcon>
-            <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
-            >
-                New story
-            </Typography>
+                    <GroupAddIcon sx={{ marginRight: '10px'}}></GroupAddIcon>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
+                        onClick={ () => handleNewStoryClick(true) }
+                    >
+                        New story
+                    </Typography>
 
-            <DonutLargeIcon sx={{ marginRight: '10px'}}></DonutLargeIcon>
-            <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
-                onClick={ handleMessageClick }
-            >
-                Messages
-            </Typography>
+                    <DonutLargeIcon sx={{ marginRight: '10px'}}></DonutLargeIcon>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
+                        onClick={ handleMessageClick }
+                    >
+                        Messages
+                    </Typography>
 
-            <Search>
-                <SearchIconWrapper>
-                    <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                    ref={ searchBarRef }
-                    placeholder="Search…"
-                    inputProps={{ 'aria-label': 'search' }}
-                    value={ searchText }
-                    onChange={ handleSearchChange }
-                />
-            </Search>
-        </Toolbar>
-      </AppBar>
+                    <Search>
+                        <SearchIconWrapper>
+                            <SearchIcon />
+                        </SearchIconWrapper>
+                        <StyledInputBase
+                            ref={ searchBarRef }
+                            placeholder="Search…"
+                            inputProps={{ 'aria-label': 'search' }}
+                            value={ searchText }
+                            onChange={ handleSearchChange }
+                        />
+                    </Search>
+                </Toolbar>
+            </AppBar>
+
+            { displayNewStory && <NewStory display={ handleNewStoryClick }></NewStory> }
+        </>
     )
 }
 
