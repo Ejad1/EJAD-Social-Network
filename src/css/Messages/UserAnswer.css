@@ -3,7 +3,6 @@
     bottom: 0;
     right: 1%;
     margin-bottom: 10px;
-    padding: 2px;
     text-align: bottom;
 }
 
@@ -18,12 +17,11 @@
 }
 
 .user-answer #answer-date {
-    position: fixed;
-    left: 93.5%;
+    position: absolute;
+    left: 95%;
     color: white;
     border: none;
-    margin-top: -1.2%;
-    transform: translateX(-100%);
+    margin-top: -2%;
 }
 
 /* Mobile user answer box style */

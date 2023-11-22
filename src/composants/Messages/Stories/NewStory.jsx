@@ -10,10 +10,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+// import InputLabel from '@mui/material/InputLabel';
+// import MenuItem from '@mui/material/MenuItem';
+// import FormControl from '@mui/material/FormControl';
+// import Select from '@mui/material/Select';
 import { useEffect } from "react";
 import { red } from "@mui/material/colors";
 
@@ -69,11 +69,11 @@ export function NewStory({ display, discussions, addDiscussion }) {
     }
   };
 
-  const handleChange = (event) => {
-    if (!membersList.includes(event.target.value)) {
-      setMembers(event.target.value);
-    }
-  };
+//   const handleChange = (event) => {
+//     if (!membersList.includes(event.target.value)) {
+//       setMembers(event.target.value);
+//     }
+//   };
 
   useEffect(() => {
     setMembersList((prevList) => [...prevList, members]);
