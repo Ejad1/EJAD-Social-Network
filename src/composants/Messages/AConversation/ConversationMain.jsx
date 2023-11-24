@@ -1,17 +1,26 @@
 import { PropTypes } from "prop-types";
 import { UserAnswer } from "./UserAnswer/UserAnswer";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { yellow } from "@mui/material/colors";
 
 export function ConversationMain({ answersArray, conversation, messagesReceived }) {
     const [userAnswers, setUserAnswer] = useState(answersArray);
     const friendsMessages = messagesReceived;
+    const scroolToBottom = useRef(null);
 
     useEffect(() => {
         // Filtrer les réponses pour n'inclure que celles avec le bon nom
         const filteredAnswers = answersArray.filter(item => item.nom === conversation.discussionName);
         setUserAnswer(filteredAnswers);
     }, [answersArray, conversation.discussionName]);
+
+    const scroll = () => {
+        scroolToBottom.current.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    useEffect(() => {
+        scroll();
+    }, [userAnswers]);
 
     if (conversation.crew) {
         if (conversation.message.length !== 0) {
@@ -31,6 +40,8 @@ export function ConversationMain({ answersArray, conversation, messagesReceived 
                             <UserAnswer key={ index } answer={ anAnswer.message } answerTime= { anAnswer.answerTime }></UserAnswer>
                         ))
                     }
+
+                    <div ref={ scroolToBottom }></div>
                 </div> 
             )
         }
@@ -71,6 +82,8 @@ export function ConversationMain({ answersArray, conversation, messagesReceived 
                         <UserAnswer key={ index } answer={ anAnswer.message } answerTime= { anAnswer.answerTime }></UserAnswer>
                     ))
                 }
+
+                <div ref={ scroolToBottom }></div>
             </div>
         )
     }
