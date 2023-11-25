@@ -106,7 +106,8 @@ export function ConversationFoot({ setAnswers, conversationName }) {
 
             { displayEmoticons && <Emoticones changeFunction = { handleAnswerChange }></Emoticones>}
 
-            { recordAudio && <AudioRecorder></AudioRecorder> }
+            { recordAudio && <AudioRecorder sendAudio = { setAnswers }></AudioRecorder> }
+
         </Box>
     )
 }

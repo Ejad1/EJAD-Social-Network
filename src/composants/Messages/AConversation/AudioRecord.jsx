@@ -1,11 +1,12 @@
+import { PropTypes } from "prop-types";
 import { useState, useRef } from 'react';
 
-const AudioRecorder = () => {
+export default function AudioRecorder({ sendAudio }) {
     const [isRecording, setIsRecording] = useState(true);
     const [audioBlob, setAudioBlob] = useState(null);
     const mediaRecorder = useRef(null);
 
-    // Starting of the recording
+    // Start recording
     navigator.mediaDevices.getUserMedia({ audio: true })
     .then((stream) => {
         mediaRecorder.current = new MediaRecorder(stream);
@@ -34,6 +35,20 @@ const AudioRecorder = () => {
         }
     };
 
+    if (audioBlob) {
+        let myAudio =   <audio controls>
+                            <source src={URL.createObjectURL(audioBlob)} type="audio/wav" />
+                        </audio>
+
+        console.log("L'audio : " + myAudio);
+
+        let myAudioSrc = URL.createObjectURL(audioBlob);
+
+        console.log("La source : " + myAudioSrc);
+
+        // sendAudio(myAudio);
+    }
+
     return (
         <div>
         <button onClick={stopRecording} disabled={!isRecording}>
@@ -46,6 +61,8 @@ const AudioRecorder = () => {
         )}
         </div>
     );
-};
+}
 
-export default AudioRecorder;
+AudioRecorder.propTypes = {
+    sendAudio: PropTypes.func.isRequired
+}
