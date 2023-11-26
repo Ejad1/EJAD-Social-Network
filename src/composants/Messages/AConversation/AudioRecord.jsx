@@ -1,10 +1,12 @@
 import { PropTypes } from "prop-types";
 import { useState, useRef } from 'react';
 
-export default function AudioRecorder({ sendAudio }) {
+export default function AudioRecorder({ sendAudio, nomConv }) {
     const [isRecording, setIsRecording] = useState(true);
     const [audioBlob, setAudioBlob] = useState(null);
     const mediaRecorder = useRef(null);
+
+    let myAudio;
 
     // Start recording
     navigator.mediaDevices.getUserMedia({ audio: true })
@@ -19,8 +21,14 @@ export default function AudioRecorder({ sendAudio }) {
         };
 
         mediaRecorder.current.onstop = () => {
-        const blob = new Blob(chunks, { type: 'audio/wav' });
-        setAudioBlob(blob);
+            const blob = new Blob(chunks, { type: 'audio/wav' });
+            setAudioBlob(blob);
+
+            myAudio = {
+                nom: { nomConv },
+                type: "audio",
+                data: { blob }
+            }
         };
 
         mediaRecorder.current.start();
@@ -31,23 +39,18 @@ export default function AudioRecorder({ sendAudio }) {
     const stopRecording = () => {
         if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {
             mediaRecorder.current.stop();
+
+            myAudio = {
+                nom: { nomConv },
+                type: "audio",
+                data: { audioBlob }
+            }
+            console.log("The audio object is : " + myAudio);
+
             setIsRecording(false);
+            sendAudio(myAudio);
         }
     };
-
-    if (audioBlob) {
-        let myAudio =   <audio controls>
-                            <source src={URL.createObjectURL(audioBlob)} type="audio/wav" />
-                        </audio>
-
-        console.log("L'audio : " + myAudio);
-
-        let myAudioSrc = URL.createObjectURL(audioBlob);
-
-        console.log("La source : " + myAudioSrc);
-
-        // sendAudio(myAudio);
-    }
 
     return (
         <div>
@@ -56,7 +59,7 @@ export default function AudioRecorder({ sendAudio }) {
         </button>
         {audioBlob && (
             <audio controls>
-            <source src={URL.createObjectURL(audioBlob)} type="audio/wav" />
+                <source src={URL.createObjectURL(audioBlob)} type="audio/wav" />
             </audio>
         )}
         </div>
@@ -64,5 +67,6 @@ export default function AudioRecorder({ sendAudio }) {
 }
 
 AudioRecorder.propTypes = {
-    sendAudio: PropTypes.func.isRequired
+    sendAudio: PropTypes.func.isRequired,
+    nomConv: PropTypes.string.isRequired
 }

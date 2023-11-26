@@ -22,6 +22,8 @@ export function ConversationMain({ answersArray, conversation, messagesReceived 
         scroll();
     }, [userAnswers]);
 
+    console.log(userAnswers);
+
     if (conversation.crew) {
         if (conversation.message.length !== 0) {
             return (
@@ -58,12 +60,12 @@ export function ConversationMain({ answersArray, conversation, messagesReceived 
                             }}
                         >There is no messages for the moment</h2>
                     </div>
-        
+{/*         
                     {
                         userAnswers.map((anAnswer, index) => (
                             <UserAnswer key={ index } answer={ anAnswer.message } answerTime= { anAnswer.answerTime }></UserAnswer>
                         ))
-                    }
+                    } */}
                 </div> 
             )
         }
@@ -79,7 +81,7 @@ export function ConversationMain({ answersArray, conversation, messagesReceived 
     
                 {
                     userAnswers.map((anAnswer, index) => (
-                        <UserAnswer key={ index } answer={ anAnswer.message } answerTime= { anAnswer.answerTime }></UserAnswer>
+                        <UserAnswer key={ index } answer={ anAnswer } answerTime= { anAnswer.answerTime }></UserAnswer>
                     ))
                 }
 
@@ -91,6 +93,6 @@ export function ConversationMain({ answersArray, conversation, messagesReceived 
 
 ConversationMain.propTypes = {
     answersArray: PropTypes.array.isRequired,
-    conversation: PropTypes.string.isRequired,
+    conversation: PropTypes.object.isRequired,
     messagesReceived: PropTypes.array.isRequired
 }

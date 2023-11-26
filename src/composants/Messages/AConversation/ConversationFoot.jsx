@@ -35,7 +35,8 @@ export function ConversationFoot({ setAnswers, conversationName }) {
             const userAnswer = {
                 nom: conversationName,
                 message: message,
-                answerTime: myTime
+                answerTime: myTime,
+                type: "string"
             }
             setAnswers(userAnswer);
             setMessage("");
@@ -106,7 +107,7 @@ export function ConversationFoot({ setAnswers, conversationName }) {
 
             { displayEmoticons && <Emoticones changeFunction = { handleAnswerChange }></Emoticones>}
 
-            { recordAudio && <AudioRecorder sendAudio = { setAnswers }></AudioRecorder> }
+            { recordAudio && <AudioRecorder sendAudio = { setAnswers } nomConv = { conversationName }></AudioRecorder> }
 
         </Box>
     )
