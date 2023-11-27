@@ -18,7 +18,6 @@ export function UserAnswer({ answer, answerTime }) {
     else {
         return (
             <>
-                Can you hear me ???
                 <audio controls>
                     <source src={ URL.createObjectURL(answer.data) } type="audio/wav" />
                 </audio>
