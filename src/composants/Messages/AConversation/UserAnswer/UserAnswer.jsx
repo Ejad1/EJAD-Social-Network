@@ -21,7 +21,6 @@ export function UserAnswer({ answer, answerTime }) {
                 <audio controls>
                     <source src={ URL.createObjectURL(answer.data) } type="audio/wav" />
                 </audio>
-                <h2>Send me her number</h2>
             </>
         )
     }
