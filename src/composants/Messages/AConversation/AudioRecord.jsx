@@ -9,7 +9,7 @@ export default function AudioRecorder({ sendAudio, nomConv }) {
     let myAudio;
 
     // Start recording
-    navigator.mediaDevices.getUserMedia({ audio: true })
+    navigator.mediaDevices.getUserMedia({ audio: true, })
     .then((stream) => {
         mediaRecorder.current = new MediaRecorder(stream);
         const chunks = [];
