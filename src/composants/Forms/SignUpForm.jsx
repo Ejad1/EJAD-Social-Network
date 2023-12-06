@@ -37,13 +37,6 @@ export function SignUpForm() {
   const navigate = useNavigate();
 
   const [errorPresent, setErrorPresent] = useState(true);
-  const [nameErrorPresent, setNameErrorPresent] = useState(false);
-  const [lastNameErrorPresent, setLastNameErrorPresent] = useState(false);
-  const [numberErrorPresent, setNumberErrorPresent] = useState(false);
-  const [emailErrorPresent, setEmailErrorPresent] = useState(false);
-  const [emailConfErrorPresent, setEmailConfErrorPresent] = useState(false);
-  const [passwordErrorPresent, setPasswordErrorPresent] = useState(false);
-  const [passwordConfErrorPresent, setPasswordConfErrorPresent] = useState(false);
 
   // Errors messages
   const [generalError, setGeneralError] = useState("");
@@ -55,13 +48,10 @@ export function SignUpForm() {
   const [passwordError, setPasswordError] = useState("");
   const [passwordConfError, setPasswordConfError] = useState("");
   
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState(null);
   const [genderError, setGenderError] = useState("");
 
   // Inputs ref
-  const firstname = useRef(null);
-  const lastname = useRef(null);
-  const number = useRef(null);
   const email = useRef(null);
   const emailConf = useRef(null);
   const password = useRef(null);
@@ -73,48 +63,34 @@ export function SignUpForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
+    const data = new FormData(event.currentTarget);
 
     // @ --- Empty form area verifications --- @ //
-    firstname.current.value === null
-    ? (setNameError("Please enter your last name"), setNameErrorPresent(true) ) 
-    : (setNameError(""), setNameErrorPresent(false) );
+    data.get("firstName") === "" ? setNameError("Please enter your last name") : setNameError("");
 
-    lastname.current.value === null
-    ? (setLastNameError("Please enter your first name"), setLastNameErrorPresent(true) ) 
-    : (setLastNameError(""), setLastNameErrorPresent(false) );
+    data.get("lastName") === "" ? setLastNameError("Please enter your first name") : setLastNameError("");
 
-    number.current.value === null
-    ? (setNumberError("Please enter your contact"), setNumberErrorPresent(true) ) 
-    : (setNumberError(""), setNumberErrorPresent(false) );
+    data.get("number") === "" ? setNumberError("Please enter your contact") : setNumberError("") ;
 
-    email.current.value === null
-    ? (setEmailError("Please enter your mail"), setEmailErrorPresent(true) ) 
-    : (setEmailError(""), setEmailErrorPresent(false) );
+    data.get("email") === "" ? setEmailError("Please enter your mail") : setEmailError("") ;
 
-    emailConf.current.value === null 
-    ? (setEmailConfError("Please confirm your mail address"), setEmailConfErrorPresent(true) ) 
-    : (setEmailConfError(""), setEmailConfErrorPresent(false) );
+    data.get("emailConf") === "" ? setEmailConfError("Please confirm your mail address") : setEmailConfError("") ;
 
-    password.current.value === null
-    ? (setPasswordError("Please enter your password"), setPasswordErrorPresent(true) ) 
-    : (setPasswordError(""), setPasswordErrorPresent(false) );
+    data.get("password") === "" ? setPasswordError("Please enter your password") : setPasswordError("") ;
 
-    passwordConf.current.value === null 
-    ? (setPasswordConfError("Please confirm your password"), setPasswordConfErrorPresent(true) ) 
-    : (setPasswordConfError(""), setPasswordConfErrorPresent(false) );
+    data.get("passwordConf") === "" ? setPasswordConfError("Please confirm your password") : setPasswordConfError("") ;
 
     gender === null ? setGenderError("Enter your gender") : setGenderError("")
     // @ --- End of empty form area verifications --- @ //
 
-    if (nameErrorPresent || lastNameErrorPresent || numberErrorPresent || emailErrorPresent || emailConfErrorPresent || 
-      passwordErrorPresent || passwordConfErrorPresent) {
-        setErrorPresent(true)
+    if ( data.get("firstName") === "" || data.get("lastName") === "" || data.get("number") === "" || data.get("email") === "" || 
+          data.get("emailConf") === "" || data.get("password") === "" || data.get("passwordConf") === "" ) {
+        setErrorPresent(true);
     }
     else {
       setErrorPresent(false);
     }
-
-    console.log(errorPresent);
 
     if (errorPresent) {
       setGeneralError("Veuillez remplir tous les champs du formulaire");
@@ -122,7 +98,6 @@ export function SignUpForm() {
     else {
       if (email.current.value === emailConf.current.value) {
         if (password.current.value === passwordConf.current.value) {
-          const data = new FormData(event.currentTarget);
 
           let userName = data.get('firstName');
           userName = userName.toUpperCase();
@@ -143,11 +118,11 @@ export function SignUpForm() {
           setGeneralError("");
         }
         else {
-          setGeneralError("Les deux mots de passe que vous avez entrez ne sont pas conformes");
+          setGeneralError("Les deux mots de passe que vous avez entrez ne sont pas identiques");
         }
       }
       else {
-        setGeneralError("Les deux emails que vous avez entrez ne sont pas conformes");
+        setGeneralError("Les deux emails que vous avez entrez ne sont pas identiques");
       }
     }
   };
@@ -174,7 +149,6 @@ export function SignUpForm() {
             <Grid container spacing={2}>
               <Grid item xs={10} sm={6}>
                 <TextField
-                  inputRef={ firstname }
                   autoComplete="given-name"
                   name="firstName"
                   required
@@ -187,7 +161,6 @@ export function SignUpForm() {
               </Grid>
               <Grid item xs={10} sm={6}>
                 <TextField
-                inputRef={ lastname }
                   required
                   fullWidth
                   id="lastName"
@@ -200,7 +173,6 @@ export function SignUpForm() {
 
               <Grid item xs={12} sm={6}>
                 <TextField
-                inputRef={ number }
                   required
                   fullWidth
                   type = 'number'
@@ -247,7 +219,7 @@ export function SignUpForm() {
                   fullWidth
                   id="emailConf"
                   label="Email Confirmation"
-                  name="email"
+                  name="emailConf"
                   autoComplete="email"
                 />
                 <p style={{ color: 'red' }}>{ emailConfError }</p>
@@ -270,7 +242,7 @@ export function SignUpForm() {
                   inputRef={ passwordConf }
                   required
                   fullWidth
-                  name="password"
+                  name="passwordConf"
                   label="Password confirmation"
                   type="password"
                   id="password-confirmation"
