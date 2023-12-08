@@ -41,14 +41,14 @@ export default function AudioRecorder({ sendAudio, nomConv }) {
             mediaRecorder.current.stop();
 
             myAudio = {
-                nom: { nomConv },
+                nom: nomConv,
                 type: "audio",
-                data: { audioBlob }
+                data: audioBlob
             }
             console.log("The audio object is : " + myAudio);
 
-            setIsRecording(false);
             sendAudio(myAudio);
+            setIsRecording(false);
         }
     };
 

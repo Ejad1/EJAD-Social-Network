@@ -33,5 +33,5 @@ export function UserAnswer({ answer, answerTime }) {
 
 UserAnswer.propTypes = {
     answer: PropTypes.object.isRequired,
-    answerTime: PropTypes.string.isRequired
+    answerTime: PropTypes.string
 }
