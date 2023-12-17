@@ -24,11 +24,11 @@ export default function AudioRecorder({ sendAudio, nomConv }) {
             const blob = new Blob(chunks, { type: 'audio/wav' });
             setAudioBlob(blob);
 
-            myAudio = {
-                nom: { nomConv },
-                type: "audio",
-                data: { blob }
-            }
+            // myAudio = {
+            //     nom: { nomConv },
+            //     type: "audio",
+            //     data: { blob }
+            // }
         };
 
         mediaRecorder.current.start();
@@ -43,7 +43,7 @@ export default function AudioRecorder({ sendAudio, nomConv }) {
             myAudio = {
                 nom: nomConv,
                 type: "audio",
-                data: audioBlob
+                data: { audioBlob }
             }
             console.log("The audio object is : " + myAudio);
 

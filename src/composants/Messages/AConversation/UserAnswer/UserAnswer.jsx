@@ -18,7 +18,18 @@ export function UserAnswer({ answer, answerTime }) {
     else if (answer.type === "audio") {
         console.log("My answer in the audio block is : " + answer);
 
-        return <p>Je suis frais</p>
+        return (
+            <div className="user-answer">
+                <p>The audio will be here</p>
+                <p>Between me and </p>
+                <audio controls>
+                    <source src={ answer.data }></source>
+                    {/* { answer.data } */}
+                </audio>
+                <p>Me</p>
+                <h5 id="answer-date">{ answerTime }</h5>
+            </div>
+        )
     }
     else {
         return (
