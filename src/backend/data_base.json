@@ -1,0 +1,48 @@
+{
+    "project-name": "EJAD-Social-Network",
+    "author": "EJAD",
+    "date": "September 2023",
+    "place": "Togokomé / Lomé -- TOGO",
+
+
+    "user-informations": {
+        "nom": "user Name",
+        "lastName": "user last name",
+        "number": "user number",
+        "gender": "user gender",
+        "email": "user email",
+        "password": "user password"
+    },
+
+
+    "publications": [
+        {
+            "text": "publicationText",
+            "photo": "publicationImage[ Math.floor(Math.random() * 2) ]"
+        },
+        {
+            "text": "publicationText",
+            "photo": "publicationImage[ Math.floor(Math.random() * 2) ]"
+        },
+        {
+           "text": "publicationText",
+            "photo": "publicationImage[ Math.floor(Math.random() * 2) ]"
+        },
+        {
+            "text": "publicationText",
+            "photo": "publicationImage[ Math.floor(Math.random() * 2) ]"
+        },
+        {
+            "text": "publicationText",
+            "photo": "publicationImage[ Math.floor(Math.random() * 2) ]"
+        },
+        {
+            "text": "publicationText",
+            "photo": "publicationImage[ Math.floor(Math.random() * 2) ]"
+        },
+        {
+            "text": "publicationText",
+            "photo": "publicationImage[ Math.floor(Math.random() * 2) ]"
+        }
+    ]
+}
