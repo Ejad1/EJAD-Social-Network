@@ -1,0 +1,133 @@
+{
+    "project-name": "EJAD-Social-Network",
+    "author": "EJAD",
+    "date": "September 2023",
+    "place": "Togokomé / Lomé -- TOGO",
+
+
+    "user-informations": {
+        "nom": "user Name",
+        "lastName": "user last name",
+        "number": "user number",
+        "gender": "user gender",
+        "email": "user email",
+        "password": "user password"
+    },
+
+
+    "publications": [
+        {
+            "text": "publicationText",
+            "photo": "publicationImage[ Math.floor(Math.random() * 2) ]"
+        },
+        {
+            "text": "publicationText",
+            "photo": "publicationImage[ Math.floor(Math.random() * 2) ]"
+        },
+        {
+           "text": "publicationText",
+            "photo": "publicationImage[ Math.floor(Math.random() * 2) ]"
+        },
+        {
+            "text": "publicationText",
+            "photo": "publicationImage[ Math.floor(Math.random() * 2) ]"
+        },
+        {
+            "text": "publicationText",
+            "photo": "publicationImage[ Math.floor(Math.random() * 2) ]"
+        },
+        {
+            "text": "publicationText",
+            "photo": "publicationImage[ Math.floor(Math.random() * 2) ]"
+        },
+        {
+            "text": "publicationText",
+            "photo": "publicationImage[ Math.floor(Math.random() * 2) ]"
+        }
+    ],
+
+
+    "discussions-lists": [
+        {
+            "discussionName": "EJAD",
+            "message": ["How are you ?", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui aperiam veritatis quas minus assumenda quae ut atque odio, autem soluta consequatur nihil beatae facere blanditiis voluptatem animi similique iste vel."],
+            "crew" : false
+        },
+        {
+            "discussionName": "Elle",
+            "message": ["How are you ?", "I was very happy to spend this time with you"],
+            "crew" : false
+        },
+        {
+            "discussionName": "Moi",
+            "message": ["Nice to meet you"],
+            "crew" : false
+        },
+        {
+            "discussionName": "You",
+            "message": ["Okay very good"],
+            "crew" : false
+        },
+        {
+            "discussionName": "Ice boy",
+            "message": ["Je suis trop frais : j'suis un vrai homme"],
+            "crew" : false
+        },
+        {
+            "discussionName": "Ewan",
+            "message": ["Allez à l'eglise est mieux que d'écouter Gazo"],
+            "crew" : false            
+        },
+        {
+            "discussionName": "Romu Romu",
+            "message": ["Ka boboba...", "Le vieux c'est comment ?", "Sinon c'est ma femme hein", "Tchaitsaaaa...."],
+            "crew" : false
+        },
+        {
+            "discussionName": "Léléndouch",
+            "message": ["Je vais te mordre"],
+            "crew" : false
+        },
+        {
+            "discussionName": "Claudianounet",
+            "message": ["Ohhh c'est trop mignon"],
+            "crew" : false
+        },
+        {
+            "discussionName": "Flo",
+            "message": ["J'ai une nouvelle moto"],
+            "crew" : false
+        },
+        {
+            "discussionName": "Fan Choco",
+            "message": ["Merci beaucoup c'est très gentil de ta part"],
+            "crew" : false
+        },
+        {
+            "discussionName": "Matthi",
+            "message": ["Barça est le meilleur club"],
+            "crew" : false
+        },
+        {
+            "discussionName": "Victoria",
+            "message": ["J'ai regardé un film d'horreur hier soir et c'était trop cool.", "Tu veux connaitre le nom du film ???"],
+            "crew" : false
+        },
+        {
+            "discussionName": "Promo 1 Crunch Time",
+            "crew" : true,
+            "members" : ["Ewan", "Mec bien", "Romu Romu", "Ice Boy", "Léléndouch", "Claudianounet"],
+            "message": {
+                "Ewan": "Hello à vous.", 
+                "Mec bien": "POF le vendredi ça vous dit ?",
+                "Romu Romu": "On doit se mettre sérieusement au travail",
+                "Ice Boy": "J'ai changé maintenant", 
+                "Léléndouch": "...",
+                "Claudianounet": "Chouchoutez moi"
+            }
+        }
+    ]
+
+
+    
+}
