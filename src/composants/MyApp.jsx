@@ -57,22 +57,14 @@ function MyApp() {
     }
   ])
 
-  const [publicationArrayLength, setPublicationsArraLength] = useState(userPublications.length);
+  const [publicationArrayLength, setPublicationsArrayLength] = useState(userPublications.length);
 
   // Add new publication
   const handleAddNewPublication = (newPub, len) => {
-    setUserPublications((prevPubs) => [newPub, ...prevPubs]);
+    setUserPublications((prevPubs) => [newPub ,...prevPubs]);
 
-    setPublicationsArraLength(len + 1);
+    setPublicationsArrayLength(len + 1);
   }
-
-  useEffect(() => {
-    const copy = [...userPublications];
-    for (let i = 0; i < userPublications.length; i++) {
-      copy[i].id = i + 1;
-    }
-    setUserPublications(copy);
-  }, [userPublications])
 
   // Publication text and/or image modification function
   const handleSetPublication = (id, newText, newImage) => {
@@ -102,7 +94,7 @@ function MyApp() {
       setUserPublications(copy);
     }, userPublications]
 
-    setPublicationsArraLength(userPublications.length);
+    setPublicationsArrayLength(userPublications.length);
 
     console.log(userPublications);
   }
