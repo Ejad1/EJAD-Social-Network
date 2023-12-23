@@ -92,10 +92,7 @@ export function SignUpForm() {
       setErrorPresent(false);
     }
 
-    if (errorPresent) {
-      setGeneralError("Veuillez remplir tous les champs du formulaire");
-    }
-    else {
+    if (!errorPresent) {
       if (email.current.value === emailConf.current.value) {
         if (password.current.value === passwordConf.current.value) {
 

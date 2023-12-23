@@ -22,7 +22,7 @@ export function ConversationMain({ answersArray, conversation, messagesReceived 
         scroll();
     }, [userAnswers]);
 
-    console.log("The answers are : " + userAnswers + ".And there length is : " + userAnswers.length);
+    console.log("The answers are : " + userAnswers + ". And there length are : " + userAnswers.length);
 
     if (conversation.crew) {
         if (conversation.message.length !== 0) {
