@@ -7,6 +7,7 @@ export default function AudioRecorder({ sendAudio, nomConv }) {
     const mediaRecorder = useRef(null);
 
     let myAudio;
+    let blob;
 
     // Start recording
     navigator.mediaDevices.getUserMedia({ audio: true, })
@@ -21,7 +22,7 @@ export default function AudioRecorder({ sendAudio, nomConv }) {
         };
 
         mediaRecorder.current.onstop = () => {
-            const blob = new Blob(chunks, { type: 'audio/wav' });
+            blob = new Blob(chunks, { type: 'audio/wav' });
             setAudioBlob(blob);
 
             // myAudio = {
@@ -43,10 +44,11 @@ export default function AudioRecorder({ sendAudio, nomConv }) {
             myAudio = {
                 nom: nomConv,
                 type: "audio",
-                data: { audioBlob }
-            }
-            console.log("The audio object is : " + myAudio);
-
+                data: audioBlob // Utilisez directement audioBlob ici
+            };
+    
+            console.log("The audio object is :", myAudio);
+    
             sendAudio(myAudio);
             setIsRecording(false);
         }

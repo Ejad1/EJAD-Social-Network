@@ -18,6 +18,12 @@ export function UserAnswer({ answer, answerTime }) {
     else if (answer.type === "audio") {
         console.log("My answer in the audio block is : " + answer);
 
+        if (answer.data instanceof Blob) {
+            console.log("Blob data is valid");
+        } else {
+            console.error("Invalid Blob data");
+        }
+
         return (
             <div className="user-answer">
                 <p>The audio will be here</p>
