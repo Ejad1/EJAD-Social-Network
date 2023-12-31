@@ -44,7 +44,7 @@ export default function AudioRecorder({ sendAudio, nomConv }) {
             myAudio = {
                 nom: nomConv,
                 type: "audio",
-                data: audioBlob // Utilisez directement audioBlob ici
+                data: audioBlob
             };
     
             console.log("The audio object is :", myAudio);
