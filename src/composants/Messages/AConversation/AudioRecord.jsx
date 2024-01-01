@@ -6,8 +6,8 @@ export default function AudioRecorder({ sendAudio, nomConv }) {
     const [audioBlob, setAudioBlob] = useState(null);
     const mediaRecorder = useRef(null);
 
-    let myAudio;
-    let blob;
+    // let myAudio;
+    // let blob;
 
     // Start recording
     navigator.mediaDevices.getUserMedia({ audio: true, })
@@ -22,35 +22,44 @@ export default function AudioRecorder({ sendAudio, nomConv }) {
         };
 
         mediaRecorder.current.onstop = () => {
-            blob = new Blob(chunks, { type: 'audio/wav' });
-            setAudioBlob(blob);
-
-            // myAudio = {
-            //     nom: { nomConv },
-            //     type: "audio",
-            //     data: { blob }
-            // }
+            if (mediaRecorder.current && mediaRecorder.current.mimeType) {
+                const blob = new Blob(chunks, { type: mediaRecorder.current.mimeType });
+                setAudioBlob(blob);
+                // ...
+            }
         };
+
+        // mediaRecorder.current.onstop = () => {
+        //     blob = new Blob(chunks, { type: 'audio/wav' });
+        //     setAudioBlob(blob);
+
+        //     // myAudio = {
+        //     //     nom: { nomConv },
+        //     //     type: "audio",
+        //     //     data: { blob }
+        //     // }
+        // };
 
         mediaRecorder.current.start();
         setIsRecording(true);
     })
     .catch((error) => console.error('Erreur lors de la demande d\'autorisation pour l\'audio :', error));
 
+
     const stopRecording = () => {
         if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {
             mediaRecorder.current.stop();
+            setIsRecording(false);
 
-            myAudio = {
+            const myAudio = {
                 nom: nomConv,
                 type: "audio",
                 data: audioBlob
             };
-    
+
             console.log("The audio object is :", myAudio);
-    
+
             sendAudio(myAudio);
-            setIsRecording(false);
         }
     };
 
