@@ -24,6 +24,11 @@
     margin-top: -2%;
 }
 
+.user-answer .audio-part audio {
+    margin-left: 100%;
+    /* transform: translateX(-100%); */
+}
+
 /* Mobile user answer box style */
 /* @media screen and (max-width: 555px) {
     .user-answer {
