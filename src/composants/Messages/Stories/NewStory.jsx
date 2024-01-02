@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Radio, RadioGroup, FormControlLabel, FormControl } from '@mui/material';
 // import InputLabel from '@mui/material/InputLabel';
 // import MenuItem from '@mui/material/MenuItem';
 // import FormControl from '@mui/material/FormControl';
@@ -21,6 +22,10 @@ import { red } from "@mui/material/colors";
 const defaultTheme = createTheme();
 
 export function NewStory({ display, discussions, addDiscussion }) {
+
+  const [storyType, setstoryType] = useState(null);
+  const [selectedValue, setSelectedValue] = useState(null);
+  const [displayStoryTypeForm, setDisplayStoryTypeForm] = useState(true);
 
   const [members, setMembers] = useState("");
   const [membersList, setMembersList] = useState([]);
@@ -94,103 +99,177 @@ export function NewStory({ display, discussions, addDiscussion }) {
     display(false);
   }
 
-  return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 15,
-            marginBottom: 100,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <GroupIcon></GroupIcon>
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Story informations
-          </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={10} sm={12}>
-                <TextField
-                  inputRef={ crewName }
-                  autoComplete="given-name"
-                  name="crewName"
-                  required
-                  fullWidth
-                  id="crewName"
-                  label="Nom du groupe"
-                  autoFocus
-                  value={ nameOfTheCrew }
-                  onChange={ handleNameChange }
-                />
-              </Grid>
-              <Grid item xs={10} sm={12}>
-                <TextField
-                inputRef={ CrewDescription }
-                  fullWidth
-                  id="CrewDescription"
-                  label="Commentaires (optionnel)"
-                  name="CrewDescription"
-                  autoComplete="Crew Description"
-                  value = { descriptionOfTheCrew }
-                  onChange={ handleDescriptionChange }
-                />
-              </Grid>
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
 
-              {/* <div style={{ marginLeft: "10px" }}>
-                <FormControl variant="filled" sx={{ m: 1, minWidth: 400 }}>
-                  <InputLabel id="demo-simple-select-filled-label">Add members +</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-filled-label"
-                    id="demo-simple-select-filled"
-                    value={members}
-                    onChange={handleChange}
+  const handleSubmitTypeStory = () => {
+    if (selectedValue) {
+      setstoryType(selectedValue);
+      setDisplayStoryTypeForm(false);
+    }
+    else {
+      setDisplayStoryTypeForm(true);
+    }
+  }
+
+
+  if (displayStoryTypeForm) {
+    return (
+      <ThemeProvider theme={defaultTheme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 15,
+              marginBottom: 100,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <GroupIcon></GroupIcon>
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Story informations
+            </Typography>
+
+
+            <Box component="form" container noValidate sx={{ mt: 3, mb: 2 }}>
+                <Typography component="h1" variant="h5">Select the type of the story</Typography>
+
+                <FormControl component="fieldset" sx={{ mt:2, mb: 2, ml: 13 }}>
+                  <RadioGroup value={selectedValue} onChange={handleChange}>
+                    <FormControlLabel value="text" control={<Radio />} label="Text" />
+                    <FormControlLabel value="image" control={<Radio />} label="Image" />
+                    <FormControlLabel value="video" control={<Radio />} label="Video" />
+                  </RadioGroup>
+
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2, ml: -1 }}
+                    onClick={ handleSubmitTypeStory }
                   >
-                    { discussions.filter(membre => membre.crew === false).map((membre, index) => (
-                      <MenuItem key={ index } value={ membre.discussionName }>{ membre.discussionName }</MenuItem>
-                    ))}
-                  </Select>
+                    Choose
+                  </Button>
                 </FormControl>
-              </div> */}
-
-
-              <Grid item xs={1} sm={1}></Grid>
-
-              <Grid item xs={6} sm={10}>
-                <p style={{ color: 'red', textAlign: 'center' }}>{ error }</p>
-              </Grid>
-              
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Publier la story
-            </Button>
-
-            <Button
-              fullWidth
-              variant="contained"
-              sx={{ backgroundColor: red[700],
-                '&:hover': {
-                  backgroundColor: red[900]
-                }, }}
-              onClick={ handleForget }
-            >
-              Annuler
-            </Button>
+            </Box>  
           </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
-  );
+        </Container>
+      </ThemeProvider>
+    );
+  }
+  else {
+    if (storyType === "Text") {
+
+        return (
+          <ThemeProvider theme={defaultTheme}>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Box
+              sx={{
+                marginTop: 15,
+                marginBottom: 100,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
+              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <GroupIcon></GroupIcon>
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                Story informations
+              </Typography>
+
+
+
+
+              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={10} sm={12}>
+          <TextField
+            inputRef={ crewName }
+            autoComplete="given-name"
+            name="storyText"
+            required
+            fullWidth
+            id="storyText"
+            label="Contenu de la story"
+            autoFocus
+            value={ nameOfTheCrew }
+            onChange={ handleNameChange }
+          />
+        </Grid>
+        <Grid item xs={10} sm={12}>
+          <TextField
+          inputRef={ CrewDescription }
+            fullWidth
+            id="CrewDescription"
+            label="Commentaires (optionnel)"
+            name="CrewDescription"
+            autoComplete="Crew Description"
+            value = { descriptionOfTheCrew }
+            onChange={ handleDescriptionChange }
+          />
+        </Grid>
+
+        {/* <div style={{ marginLeft: "10px" }}>
+          <FormControl variant="filled" sx={{ m: 1, minWidth: 400 }}>
+            <InputLabel id="demo-simple-select-filled-label">Add members +</InputLabel>
+            <Select
+              labelId="demo-simple-select-filled-label"
+              id="demo-simple-select-filled"
+              value={members}
+              onChange={handleChange}
+            >
+              { discussions.filter(membre => membre.crew === false).map((membre, index) => (
+                <MenuItem key={ index } value={ membre.discussionName }>{ membre.discussionName }</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div> */}
+
+
+        <Grid item xs={1} sm={1}></Grid>
+
+        <Grid item xs={6} sm={10}>
+          <p style={{ color: 'red', textAlign: 'center' }}>{ error }</p>
+        </Grid>
+        
+      </Grid>
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+      >
+        Publier la story
+      </Button>
+
+      <Button
+        fullWidth
+        variant="contained"
+        sx={{ backgroundColor: red[700],
+          '&:hover': {
+            backgroundColor: red[900]
+          }, }}
+        onClick={ handleForget }
+      >
+        Annuler
+      </Button>
+    </Box>
+
+    </Box>
+        </Container>
+      </ThemeProvider>
+        )
+
+    }
+  }
 }
 
 NewStory.propTypes = {

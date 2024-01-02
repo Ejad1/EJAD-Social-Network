@@ -27,7 +27,7 @@ export default function DisplayStory({ maStory }) {
     }
     else {
         return (
-            <h1 style={{ textAlign: 'center', marginTop: '20%', marginLeft: '25%' }}>Cool y a rien encore</h1>
+            <h1 style={{ textAlign: 'center', marginTop: '20%', marginLeft: '25%' }}>Click on one story to display it</h1>
         )
     }
 }
