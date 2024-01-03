@@ -10,11 +10,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Radio, RadioGroup, FormControlLabel, FormControl } from '@mui/material';
-// import InputLabel from '@mui/material/InputLabel';
-// import MenuItem from '@mui/material/MenuItem';
-// import FormControl from '@mui/material/FormControl';
-// import Select from '@mui/material/Select';
+import { Radio, RadioGroup, FormControlLabel, FormControl, Input } from '@mui/material';
 import { useEffect } from "react";
 import { red } from "@mui/material/colors";
 
@@ -27,6 +23,9 @@ export function NewStory({ display, discussions, addDiscussion }) {
   const [selectedValue, setSelectedValue] = useState(null);
   const [displayStoryTypeForm, setDisplayStoryTypeForm] = useState(true);
 
+  // Variable of the file selected
+  const [selectedFile, setSelectedFile] = useState(null);
+
   const [members, setMembers] = useState("");
   const [membersList, setMembersList] = useState([]);
 
@@ -35,11 +34,9 @@ export function NewStory({ display, discussions, addDiscussion }) {
 
   // Inputs ref
   const crewName = useRef(null);
-  const CrewDescription = useRef(null);
 
   // Inputs values
   const [nameOfTheCrew, setNameOfTheCrew] = useState("");
-  const [descriptionOfTheCrew, setDescriptionOfTheCrew] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -69,16 +66,9 @@ export function NewStory({ display, discussions, addDiscussion }) {
       setMembersList([]);
       setMembers("");
       setNameOfTheCrew("");
-      setDescriptionOfTheCrew("");
       display(false);
     }
   };
-
-//   const handleChange = (event) => {
-//     if (!membersList.includes(event.target.value)) {
-//       setMembers(event.target.value);
-//     }
-//   };
 
   useEffect(() => {
     setMembersList((prevList) => [...prevList, members]);
@@ -88,10 +78,6 @@ export function NewStory({ display, discussions, addDiscussion }) {
   // Inputs values changing
   const handleNameChange = (e) => {
     setNameOfTheCrew(e.target.value);
-  }
-
-  const handleDescriptionChange = (e) => {
-    setDescriptionOfTheCrew(e.target.value);
   }
 
   // Annulation du formulaire
@@ -112,6 +98,13 @@ export function NewStory({ display, discussions, addDiscussion }) {
       setDisplayStoryTypeForm(true);
     }
   }
+
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+    // Faire quelque chose avec le fichier sélectionné, par exemple le télécharger
+    console.log('Fichier sélectionné :', selectedFile);
+  };
 
 
   if (displayStoryTypeForm) {
@@ -163,10 +156,9 @@ export function NewStory({ display, discussions, addDiscussion }) {
     );
   }
   else {
-    if (storyType === "Text") {
-
-        return (
-          <ThemeProvider theme={defaultTheme}>
+    if (storyType === "text") {
+      return (
+        <ThemeProvider theme={defaultTheme}>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
@@ -185,89 +177,229 @@ export function NewStory({ display, discussions, addDiscussion }) {
                 Story informations
               </Typography>
 
-
-
-
+              {/* Box of the content of the story */}
               <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={10} sm={12}>
-          <TextField
-            inputRef={ crewName }
-            autoComplete="given-name"
-            name="storyText"
-            required
-            fullWidth
-            id="storyText"
-            label="Contenu de la story"
-            autoFocus
-            value={ nameOfTheCrew }
-            onChange={ handleNameChange }
-          />
-        </Grid>
-        <Grid item xs={10} sm={12}>
-          <TextField
-          inputRef={ CrewDescription }
-            fullWidth
-            id="CrewDescription"
-            label="Commentaires (optionnel)"
-            name="CrewDescription"
-            autoComplete="Crew Description"
-            value = { descriptionOfTheCrew }
-            onChange={ handleDescriptionChange }
-          />
-        </Grid>
+                <Grid container spacing={2}>
+                  <Grid item xs={10} sm={12}>
+                    <TextField
+                      inputRef={ crewName }
+                      autoComplete="given-name"
+                      name="storyText"
+                      required
+                      fullWidth
+                      id="storyText"
+                      label="Contenu de la story"
+                      autoFocus
+                      value={ nameOfTheCrew }
+                      onChange={ handleNameChange }
+                    />
+                  </Grid>
 
-        {/* <div style={{ marginLeft: "10px" }}>
-          <FormControl variant="filled" sx={{ m: 1, minWidth: 400 }}>
-            <InputLabel id="demo-simple-select-filled-label">Add members +</InputLabel>
-            <Select
-              labelId="demo-simple-select-filled-label"
-              id="demo-simple-select-filled"
-              value={members}
-              onChange={handleChange}
-            >
-              { discussions.filter(membre => membre.crew === false).map((membre, index) => (
-                <MenuItem key={ index } value={ membre.discussionName }>{ membre.discussionName }</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div> */}
-
-
-        <Grid item xs={1} sm={1}></Grid>
-
-        <Grid item xs={6} sm={10}>
-          <p style={{ color: 'red', textAlign: 'center' }}>{ error }</p>
-        </Grid>
+                  <Grid item xs={6} sm={10}>
+                    <p style={{ color: 'red', textAlign: 'center' }}>{ error }</p>
+                  </Grid>
         
-      </Grid>
-      <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        sx={{ mt: 3, mb: 2 }}
-      >
-        Publier la story
-      </Button>
+                </Grid>
 
-      <Button
-        fullWidth
-        variant="contained"
-        sx={{ backgroundColor: red[700],
-          '&:hover': {
-            backgroundColor: red[900]
-          }, }}
-        onClick={ handleForget }
-      >
-        Annuler
-      </Button>
-    </Box>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Publier la story
+                </Button>
 
-    </Box>
-        </Container>
-      </ThemeProvider>
-        )
+                <Button
+                  fullWidth
+                  variant="contained"
+                  sx={{ backgroundColor: red[700],
+                    '&:hover': {
+                      backgroundColor: red[900]
+                    }, }}
+                  onClick={ handleForget }
+                >
+                  Annuler
+                </Button>
+              </Box>
 
+            </Box>
+          </Container>
+        </ThemeProvider>
+      )
+    }
+    else if (storyType === "image") {  // If the use want to add image
+       return (
+        <ThemeProvider theme={defaultTheme}>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Box
+              sx={{
+                marginTop: 15,
+                marginBottom: 100,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
+              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <GroupIcon></GroupIcon>
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                Story informations
+              </Typography>
+
+              {/* Box of the content of the story */}
+              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                <Grid container spacing={2}>
+                  <Grid item xs={10} sm={12}>
+                   <Input
+                      accept="image/*"
+                      type="file"
+                      onChange={ handleFileChange }
+                      style={{ display: 'none' }}
+                      id="fileInput"
+                    />
+                    <label htmlFor="fileInput" style={{ margin: '25%' }}>
+                      <Button variant="contained" component="span">
+                        Choisir une image
+                      </Button>
+                    </label>
+
+                    <TextField
+                      inputRef={ crewName }
+                      autoComplete="given-name"
+                      name="storyComments"
+                      fullWidth
+                      id="storyComments"
+                      label="Commentaires (optionnels)"
+                      autoFocus
+                      value={ nameOfTheCrew }
+                      onChange={ handleNameChange }
+                      style={{ marginTop: '20px' }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6} sm={10}>
+                    <p style={{ color: 'red', textAlign: 'center' }}>{ error }</p>
+                  </Grid>
+        
+                </Grid>
+
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Publier la story
+                </Button>
+
+                <Button
+                  fullWidth
+                  variant="contained"
+                  sx={{ backgroundColor: red[700],
+                    '&:hover': {
+                      backgroundColor: red[900]
+                    }, }}
+                  onClick={ handleForget }
+                >
+                  Annuler
+                </Button>
+              </Box>
+
+            </Box>
+          </Container>
+        </ThemeProvider>
+      )
+    }
+    else if (storyType === "video") { // If the user want to add video
+       return (
+        <ThemeProvider theme={defaultTheme}>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Box
+              sx={{
+                marginTop: 15,
+                marginBottom: 100,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
+              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <GroupIcon></GroupIcon>
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                Story informations
+              </Typography>
+
+              {/* Box of the content of the story */}
+              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                <Grid container spacing={2}>
+
+                  <Grid item xs={10} sm={12}>
+
+                    <Input
+                      type="file"
+                      accept="video/*"
+                      onChange={ handleFileChange }
+                      style={{ display: 'none' }}
+                      id="fileInput"
+                    />
+                    <label htmlFor="fileInput" style={{ margin: '25%' }}>
+                      <Button variant="contained" component="span">
+                        Choisir une video
+                      </Button>
+                    </label>
+
+                    <TextField
+                      inputRef={ crewName }
+                      autoComplete="given-name"
+                      name="storyComments"
+                      required
+                      fullWidth
+                      id="storyComments"
+                      label="Commentaires (optionnels)"
+                      autoFocus
+                      value={ nameOfTheCrew }
+                      onChange={ handleNameChange }
+                      style={{ marginTop: '20px' }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6} sm={10}>
+                    <p style={{ color: 'red', textAlign: 'center' }}>{ error }</p>
+                  </Grid>
+        
+                </Grid>
+
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Publier la story
+                </Button>
+
+                <Button
+                  fullWidth
+                  variant="contained"
+                  sx={{ backgroundColor: red[700],
+                    '&:hover': {
+                      backgroundColor: red[900]
+                    }, }}
+                  onClick={ handleForget }
+                >
+                  Annuler
+                </Button>
+              </Box>
+
+            </Box>
+          </Container>
+        </ThemeProvider>
+      )
     }
   }
 }
