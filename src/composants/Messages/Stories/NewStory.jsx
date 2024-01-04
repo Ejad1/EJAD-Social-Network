@@ -1,5 +1,5 @@
 import { PropTypes } from "prop-types";
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import GroupIcon from '@mui/icons-material/Group';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -25,15 +25,19 @@ export function NewStory({ display, storiesArray }) {
   // Variable of the file selected
   const [selectedFile, setSelectedFile] = useState(null);
 
+  // Name of the file selected
+  const [fileName, setFileName] = useState(null);
+
+  // Boolean for the vefication of the selection of the file
+  const [fileSelected, setFileSelected] = useState(false);
+
   // Error message
   const [error, setError] = useState("");
 
-  // Inputs ref
-  const crewName = useRef(null);
-
   // Inputs values
-  const [storyContent, setNameOfTheCrew] = useState("");
+  const [storyContent, setStoryContent] = useState("");
 
+  // On submission of text story
   const handleSubmitTextStory = (event) => {
     event.preventDefault();
 
@@ -59,10 +63,69 @@ export function NewStory({ display, storiesArray }) {
     }
   };
 
+  // On submission of the image story
+  const handleSubmitImageStory = (event) => {
+    event.preventDefault();
 
-  // Inputs values changing
+    if (storyContent === "") {
+      setError("Please enter a text for the story");
+    }
+    else {
+      const newStory = {
+        id: 230,
+        nom: "EJAD",
+        statuts: [
+          {
+            file:  URL.createObjectURL(selectedFile),
+            type: "Image",
+            commentaires: storyContent === null ? "" : storyContent,
+            displayCommentaires: true
+          }
+        ],
+      };
+
+      storiesArray((stories) => [...stories, newStory]);
+
+      display(false);
+    }
+  };
+
+  // On submission of the video story
+  const handleSubmitVideoStory = (event) => {
+    event.preventDefault();
+
+    if (storyContent === "") {
+      setError("Please enter a text for the story");
+    }
+    else {
+      const newStory = {
+        id: 229,
+        nom: "Le grand",
+        statuts: [
+          {
+            file:  URL.createObjectURL(selectedFile),
+            type: "Video",
+            commentaires: storyContent === null ? "" : storyContent,
+            displayCommentaires: true
+          }
+        ],
+      };
+
+      storiesArray((stories) => [...stories, newStory]);
+
+      display(false);
+    }
+  };
+
+  // Function for the story comment to a video or an image
+  const handleStoryComment = (e) => {
+    setStoryContent(e.target.value);
+  }
+
+
+  // Input values changing
   const handleStoryContentChange = (e) => {
-    setNameOfTheCrew(e.target.value);
+    setStoryContent(e.target.value);
   }
 
   // Annulation du formulaire
@@ -84,12 +147,13 @@ export function NewStory({ display, storiesArray }) {
     }
   }
 
-
+  // Getting the file info
   const handleFileChange = (event) => {
+    console.log(event.target.files[0]);
     setSelectedFile(event.target.files[0]);
-    // Faire quelque chose avec le fichier sélectionné, par exemple le télécharger
-    console.log('Fichier sélectionné :', selectedFile);
-  };
+    setFileName(event.target.files[0].name);
+    setFileSelected(true);
+  }
 
 
   if (displayStoryTypeForm) {
@@ -234,7 +298,7 @@ export function NewStory({ display, storiesArray }) {
               </Typography>
 
               {/* Box of the content of the story */}
-              <Box component="form" noValidate onSubmit={handleSubmitTextStory} sx={{ mt: 3 }}>
+              <Box component="form" noValidate onSubmit={ handleSubmitImageStory } sx={{ mt: 3 }}>
                 <Grid container spacing={2}>
                   <Grid item xs={10} sm={12}>
                    <Input
@@ -251,7 +315,6 @@ export function NewStory({ display, storiesArray }) {
                     </label>
 
                     <TextField
-                      inputRef={ crewName }
                       autoComplete="given-name"
                       name="storyComments"
                       fullWidth
@@ -259,13 +322,21 @@ export function NewStory({ display, storiesArray }) {
                       label="Commentaires (optionnels)"
                       autoFocus
                       value={ storyContent }
-                      onChange={ handleStoryContentChange }
+                      onChange={ handleStoryComment }
                       style={{ marginTop: '20px' }}
                     />
                   </Grid>
 
                   <Grid item xs={6} sm={10}>
                     <p style={{ color: 'red', textAlign: 'center' }}>{ error }</p>
+                  </Grid>
+
+                  <Grid item xs={6} sm={10}>
+                    <p className = { `${fileSelected ? 'fileSelected' : ''}` }
+                       style={{ textAlign: 'center' }}
+                    > 
+                      { fileName }
+                    </p>
                   </Grid>
         
                 </Grid>
@@ -319,7 +390,7 @@ export function NewStory({ display, storiesArray }) {
               </Typography>
 
               {/* Box of the content of the story */}
-              <Box component="form" noValidate onSubmit={handleSubmitTextStory} sx={{ mt: 3 }}>
+              <Box component="form" noValidate onSubmit={ handleSubmitVideoStory } sx={{ mt: 3 }}>
                 <Grid container spacing={2}>
 
                   <Grid item xs={10} sm={12}>
@@ -338,22 +409,28 @@ export function NewStory({ display, storiesArray }) {
                     </label>
 
                     <TextField
-                      inputRef={ crewName }
                       autoComplete="given-name"
                       name="storyComments"
-                      required
                       fullWidth
                       id="storyComments"
                       label="Commentaires (optionnels)"
                       autoFocus
                       value={ storyContent }
-                      onChange={ handleStoryContentChange }
+                      onChange={ handleStoryComment }
                       style={{ marginTop: '20px' }}
                     />
                   </Grid>
 
                   <Grid item xs={6} sm={10}>
                     <p style={{ color: 'red', textAlign: 'center' }}>{ error }</p>
+                  </Grid>
+
+                  <Grid item xs={6} sm={10}>
+                    <p className = { `${fileSelected ? 'fileSelected' : ''}` }
+                       style={{ textAlign: 'center' }}
+                    > 
+                      { fileName }
+                    </p>
                   </Grid>
         
                 </Grid>
