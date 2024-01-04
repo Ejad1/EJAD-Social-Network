@@ -7,7 +7,7 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import SvgIcon from '@mui/material/SvgIcon';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import DonutLargeIcon from '@mui/icons-material/DonutLarge';
+import EmailIcon from '@mui/icons-material/Email';
 import { useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { NewStory } from "./NewStory";
@@ -118,7 +118,7 @@ export default function StoriesHead({ discussionsList, setDiscussions,  userInfo
                         New story
                     </Typography>
 
-                    <DonutLargeIcon sx={{ marginRight: '10px'}}></DonutLargeIcon>
+                    <EmailIcon sx={{ marginRight: '10px'}} onClick={ handleMessageClick }></EmailIcon>
                     <Typography
                         variant="h6"
                         noWrap

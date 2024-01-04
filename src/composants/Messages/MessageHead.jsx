@@ -132,16 +132,6 @@ export function MessageHead({ discussionsList, setDiscussions, addDiscussion,  u
                     Stories
                 </Typography>
     
-                <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="menu"
-                    sx={{ mr: 10 }}
-                >
-                    <MenuIcon />
-                </IconButton>
-    
                 <Search>
                     <SearchIconWrapper>
                         <SearchIcon />
@@ -154,6 +144,17 @@ export function MessageHead({ discussionsList, setDiscussions, addDiscussion,  u
                         onChange={ handleSearchChange }
                     />
                 </Search>
+
+                <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ ml: 10 }}
+                >
+                    <MenuIcon />
+                </IconButton>
+
             </Toolbar>
             </AppBar>
 

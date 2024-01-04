@@ -1,58 +1,3 @@
-// export function Navbar({ handleAddNotifications, handleDisplayNotification, state, addPub, longueur, userName }) {
-//     const navigate = useNavigate();
-//     const [clickPub, setClickPub] = useState(false);
-
-//     const MakeAPublication = (state) => {
-//         setClickPub(state);
-//     }
-
-//     const handleNotificationsClick = () => {
-//         handleDisplayNotification(!state);
-//     }
-
-//     const handleMessageClick = () => {
-//         navigate("/messages", { state: { userInfos: {userName} } })
-//     }
-
-//     return (
-//         <>
-//             <nav>
-//                 <h1 id="initials-mobile">ESN</h1>
-//                 <h1>
-//                     <a href="../../index.html">
-//                         <span id='initials'>{ userName.nom + " " + userName.lastName }</span>
-//                     </a>
-//                 </h1>
-//                 <div className='links'>
-//                     <div className="pub-div" onClick={() => MakeAPublication(true)}>
-//                         <img src={ publication } alt="" />
-//                         <h3 id='make-pub'>Faire une publication</h3>
-//                     </div>
-//                     <div className="messages-div">
-//                         <img src={ messages } alt="Message icon" />
-//                         <h3 onClick={ handleMessageClick }>Messages</h3>
-//                     </div>
-//                     <div className="notifs-div" onClick={ handleNotificationsClick }>
-//                         <img src={ notification } alt=""/> 
-//                         <h3 id='notifs'>Notifications</h3>
-//                     </div>
-//                     <div className='search-div'>
-//                         <input type="search" name="search" id="search" placeholder='@Votre recherche' />
-//                         <img src={ search } alt="" />
-//                     </div>
-//                 </div>
-//                 <div className="lines" onClick={ displayMobileNav }>
-//                     <div id='one'></div>
-//                     <div id='two'></div>
-//                     <div id='three'></div>
-//                 </div>
-//                 { clickPub && <NewPublication afficher = { MakeAPublication } addPub = { addPub } longueur = { longueur }/> }
-//             </nav>
-//         </>
-//     )
-// }
-
-
 import { PropTypes } from "prop-types";
 import { NewPublication } from './Publications/NewPublication'
 import { styled, alpha } from '@mui/material/styles';
@@ -156,7 +101,7 @@ export function Navbar({ handleDisplayNotification, state, addPub, longueur, use
                     { userName.nom + " " + userName.lastName }
                 </Typography>
     
-                <AddCommentIcon sx={{ marginRight: '10px'}}></AddCommentIcon>
+                <AddCommentIcon sx={{ marginRight: '10px'}} onClick={ () => MakeAPublication(true) }></AddCommentIcon>
                 <Typography
                     variant="h6"
                     noWrap
@@ -167,7 +112,7 @@ export function Navbar({ handleDisplayNotification, state, addPub, longueur, use
                     Faire une publication
                 </Typography>
     
-                <EmailIcon sx={{ marginRight: '10px'}}></EmailIcon>
+                <EmailIcon sx={{ marginRight: '10px'}} onClick={ handleMessageClick }></EmailIcon>
                 <Typography
                     variant="h6"
                     noWrap
