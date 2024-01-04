@@ -21,7 +21,7 @@ function HomeIcon(props) {
   );
 }
 
-export default function StoriesHead({ discussionsList, setDiscussions,  userInfos }) {
+export default function StoriesHead({ discussionsList, setDiscussions,  userInfos, storiesArray }) {
     const navigate = useNavigate();
     const searchBarRef = useRef(null);
     const [searchText, setSearchText] = useState('');
@@ -144,7 +144,7 @@ export default function StoriesHead({ discussionsList, setDiscussions,  userInfo
                 </Toolbar>
             </AppBar>
 
-            { displayNewStory && <NewStory display={ handleNewStoryClick }></NewStory> }
+            { displayNewStory && <NewStory display={ handleNewStoryClick } storiesArray = { storiesArray }></NewStory> }
         </>
     )
 }
@@ -152,6 +152,7 @@ export default function StoriesHead({ discussionsList, setDiscussions,  userInfo
 StoriesHead.propTypes = {
     discussionsList: PropTypes.array.isRequired,
     setDiscussions: PropTypes.func.isRequired,
-    userInfos: PropTypes.object.isRequired
+    userInfos: PropTypes.object.isRequired,
+    storiesArray: PropTypes.func.isRequired
 }
 

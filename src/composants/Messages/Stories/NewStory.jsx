@@ -11,13 +11,12 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Radio, RadioGroup, FormControlLabel, FormControl, Input } from '@mui/material';
-import { useEffect } from "react";
 import { red } from "@mui/material/colors";
 
 
 const defaultTheme = createTheme();
 
-export function NewStory({ display, discussions, addDiscussion }) {
+export function NewStory({ display, storiesArray }) {
 
   const [storyType, setstoryType] = useState(null);
   const [selectedValue, setSelectedValue] = useState(null);
@@ -26,9 +25,6 @@ export function NewStory({ display, discussions, addDiscussion }) {
   // Variable of the file selected
   const [selectedFile, setSelectedFile] = useState(null);
 
-  const [members, setMembers] = useState("");
-  const [membersList, setMembersList] = useState([]);
-
   // Error message
   const [error, setError] = useState("");
 
@@ -36,47 +32,36 @@ export function NewStory({ display, discussions, addDiscussion }) {
   const crewName = useRef(null);
 
   // Inputs values
-  const [nameOfTheCrew, setNameOfTheCrew] = useState("");
+  const [storyContent, setNameOfTheCrew] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmitTextStory = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
 
-    // @ --- Empty form area verifications --- @ //
-    data.get('crewName') === ""
-    ? (setError("Please enter the crew name") ) 
-    : (setError(""));
-    // @ --- End of empty form area verifications --- @ /
+    if (storyContent === "") {
+      setError("Please enter a text for the story");
+    }
+    else {
+      const newStory = {
+        id: 228,
+        nom: "EJAD",
+        statuts: [
+          {
+            file: storyContent,
+            type: "Text",
+            displayCommentaires: false
+          }
+        ],
+      };
 
-    if (data.get('crewName') !== "" && membersList.length > 0) {
+      storiesArray((stories) => [...stories, newStory]);
 
-      setMembersList((prevList) => prevList.filter((member) => member !== ""));
-
-      const myDiscussion = {
-        id: discussions.length,
-        discussionName: data.get('crewName'),
-        message: [],
-        description : data.get('description'),
-        crew : true,
-        members : membersList
-      }
-
-      addDiscussion(myDiscussion);
-
-      setMembersList([]);
-      setMembers("");
-      setNameOfTheCrew("");
       display(false);
     }
   };
 
-  useEffect(() => {
-    setMembersList((prevList) => [...prevList, members]);
-    setMembersList((prevList) => prevList.filter((member) => member !== ""));
-  }, [members]);
 
   // Inputs values changing
-  const handleNameChange = (e) => {
+  const handleStoryContentChange = (e) => {
     setNameOfTheCrew(e.target.value);
   }
 
@@ -178,11 +163,10 @@ export function NewStory({ display, discussions, addDiscussion }) {
               </Typography>
 
               {/* Box of the content of the story */}
-              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+              <Box component="form" noValidate onSubmit={ handleSubmitTextStory } sx={{ mt: 3 }}>
                 <Grid container spacing={2}>
                   <Grid item xs={10} sm={12}>
                     <TextField
-                      inputRef={ crewName }
                       autoComplete="given-name"
                       name="storyText"
                       required
@@ -190,8 +174,8 @@ export function NewStory({ display, discussions, addDiscussion }) {
                       id="storyText"
                       label="Contenu de la story"
                       autoFocus
-                      value={ nameOfTheCrew }
-                      onChange={ handleNameChange }
+                      value={ storyContent }
+                      onChange={ handleStoryContentChange }
                     />
                   </Grid>
 
@@ -250,7 +234,7 @@ export function NewStory({ display, discussions, addDiscussion }) {
               </Typography>
 
               {/* Box of the content of the story */}
-              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+              <Box component="form" noValidate onSubmit={handleSubmitTextStory} sx={{ mt: 3 }}>
                 <Grid container spacing={2}>
                   <Grid item xs={10} sm={12}>
                    <Input
@@ -274,8 +258,8 @@ export function NewStory({ display, discussions, addDiscussion }) {
                       id="storyComments"
                       label="Commentaires (optionnels)"
                       autoFocus
-                      value={ nameOfTheCrew }
-                      onChange={ handleNameChange }
+                      value={ storyContent }
+                      onChange={ handleStoryContentChange }
                       style={{ marginTop: '20px' }}
                     />
                   </Grid>
@@ -335,7 +319,7 @@ export function NewStory({ display, discussions, addDiscussion }) {
               </Typography>
 
               {/* Box of the content of the story */}
-              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+              <Box component="form" noValidate onSubmit={handleSubmitTextStory} sx={{ mt: 3 }}>
                 <Grid container spacing={2}>
 
                   <Grid item xs={10} sm={12}>
@@ -362,8 +346,8 @@ export function NewStory({ display, discussions, addDiscussion }) {
                       id="storyComments"
                       label="Commentaires (optionnels)"
                       autoFocus
-                      value={ nameOfTheCrew }
-                      onChange={ handleNameChange }
+                      value={ storyContent }
+                      onChange={ handleStoryContentChange }
                       style={{ marginTop: '20px' }}
                     />
                   </Grid>
@@ -408,4 +392,5 @@ NewStory.propTypes = {
     display: PropTypes.func.isRequired,
     discussions: PropTypes.array.isRequired,
     addDiscussion: PropTypes.func.isRequired,
+    storiesArray: PropTypes.func.isRequired
 }

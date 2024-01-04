@@ -9,7 +9,7 @@ import { useState } from "react";
 export default function Stories() {
   const [storyCible, setStoryCible] = useState({});
 
-  const storiesArray = [
+  const [storiesArray, setStoriesArray] = useState([
     {
       id: 1,
       nom: "EJAD",
@@ -77,7 +77,7 @@ export default function Stories() {
         }
       ]
     },
-  ];
+  ]);
 
   const handleStorySelect = (storyInfos) => {
     setStoryCible(storyInfos);
@@ -85,7 +85,7 @@ export default function Stories() {
 
   return (
     <>
-      <StoriesHead></StoriesHead>
+      <StoriesHead storiesArray = { setStoriesArray }></StoriesHead>
       <div style={{ display: "flex", marginTop: '1%' }} className="storiesBox">
         <StoriesList
           storiesArray = { storiesArray }
