@@ -95,8 +95,6 @@ function MyApp() {
     }, userPublications]
 
     setPublicationsArrayLength(userPublications.length);
-
-    console.log(userPublications);
   }
 
   const handleAddNotifications = (notification) => {

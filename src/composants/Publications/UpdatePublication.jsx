@@ -8,7 +8,7 @@ export function UpdatePublication({ id, content, image, updateContent, updateIma
     const [publicationImage, setPublicationImage] = useState(image);
     const [imageName, setImageName] = useState("No image has been selected");
 
-    // Image name if he exist
+    // Image name if it exist
     if (image !== null) {
         const parts = image.split('/');
         setImageName(parts[parts.length - 1]);
