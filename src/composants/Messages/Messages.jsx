@@ -119,8 +119,6 @@ export function Messages() {
         setDiscussionsList([discussionAdded, ...discussionsList]);
     }
 
-    console.log(userInfos);
-
 
     return (
         <div className="messages">
@@ -136,4 +134,4 @@ export function Messages() {
             </div>
         </div>
     )
-    }
+}

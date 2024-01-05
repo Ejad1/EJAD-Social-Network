@@ -22,8 +22,6 @@ export function ConversationMain({ answersArray, conversation, messagesReceived 
         scroll();
     }, [userAnswers]);
 
-    console.log("The answers are : " + userAnswers + ". And there length are : " + userAnswers.length);
-
     if (conversation.crew) {
         if (conversation.message.length !== 0) {
             return (
@@ -60,12 +58,6 @@ export function ConversationMain({ answersArray, conversation, messagesReceived 
                             }}
                         >There is no messages for the moment</h2>
                     </div>
-{/*         
-                    {
-                        userAnswers.map((anAnswer, index) => (
-                            <UserAnswer key={ index } answer={ anAnswer.message } answerTime= { anAnswer.answerTime }></UserAnswer>
-                        ))
-                    } */}
                 </div> 
             )
         }
