@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 import { PropTypes } from "prop-types";
 import { Button } from "@mui/material";
 
-export function UpdatePublication({ id, content, image, updateContent, updateImage, afficher, notif, publicationArrayUpdate, handleDisplayNotification }) {
+export function UpdatePublication({ id, content, image, updateContent, updateImage, afficher, notif, publicationArrayUpdate }) {
     const addImage = useRef(null);
     const [publicationText, setPublicationText] = useState(content);
     const [publicationImage, setPublicationImage] = useState(image);
@@ -46,7 +46,6 @@ export function UpdatePublication({ id, content, image, updateContent, updateIma
             updateContent(publicationText);
             updateImage(publicationImage);
             publicationArrayUpdate(id, publicationText, publicationImage);
-            handleDisplayNotification(true);
             afficher(false);
         }
     }
@@ -95,6 +94,5 @@ UpdatePublication.propTypes = {
     notif: PropTypes.func.isRequired,
     updateContent: PropTypes.func.isRequired,
     updateImage: PropTypes.func.isRequired,
-    publicationArrayUpdate: PropTypes.func.isRequired,
-    handleDisplayNotification: PropTypes.func.isRequired
+    publicationArrayUpdate: PropTypes.func.isRequired
 }

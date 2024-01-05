@@ -7,7 +7,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export function Publication({ id, content, imageSource, modifications, deletePub, addNotifs, handleDisplayNotification }) {
+export function Publication({ id, content, imageSource, modifications, deletePub, addNotifs }) {
     const [pubContent, setPubContent] = useState(content);
     const [pubImageSource, setPubImageSource] = useState(imageSource);
     const [like, setLike] = useState(0);
@@ -32,19 +32,16 @@ export function Publication({ id, content, imageSource, modifications, deletePub
     const handleDeletePublication = () => {
         deletePub(id);
         addNotifs(deleteNotification);
-        handleDisplayNotification(true);
     }
 
     const handleLike = () => {
         setLike(like + 1)
         addNotifs(likeNotification);
-        handleDisplayNotification(true);
     }
 
     const handleShare = () => {
         setShare(share + 1);
         addNotifs(shareNotification);
-        handleDisplayNotification(true);
     }
 
     const handleUpdateClick = (display) => {
@@ -104,7 +101,6 @@ export function Publication({ id, content, imageSource, modifications, deletePub
                         afficher = { handleUpdateClick }
                         notif = { addNotifs }
                         publicationArrayUpdate = { modifications }
-                        handleDisplayNotification = { handleDisplayNotification }
                     ></UpdatePublication>
                 }
             </>
@@ -162,7 +158,6 @@ export function Publication({ id, content, imageSource, modifications, deletePub
                         afficher = { handleUpdateClick }
                         notif = { addNotifs }
                         publicationArrayUpdate = { modifications }
-                        handleDisplayNotification = { handleDisplayNotification }
                     ></UpdatePublication>
                 }
             </>
@@ -177,5 +172,4 @@ Publication.propTypes = {
     addNotifs: PropTypes.func.isRequired,
     modifications: PropTypes.func.isRequired,
     deletePub: PropTypes.func.isRequired,
-    handleDisplayNotification: PropTypes.func.isRequired
 }
