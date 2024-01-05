@@ -10,13 +10,6 @@ main {
 }
 
 
-@media screen and (max-width: 555px) {
-    .new-publication {
-        width: 70%;
-        margin-left: 10%;
-    }
-}
-
 /* New publication box style */
 .new-publication {
     position: fixed;
@@ -31,6 +24,14 @@ main {
     z-index: 800;
 }
 
+@media screen and (max-width: 555px) {
+    .new-publication {
+        top: 12%;
+        left: 5%;
+        width: 85%;
+    }
+}
+
 .new-publication #close {
     user-select: none;
     color: red;
@@ -41,6 +42,13 @@ main {
     padding-top: 2px;
     width: 30px;
     height: 25px;
+}
+
+@media screen and (max-width: 800px) {
+    .new-publication #close {
+        margin-left: 88%;
+        padding-left: 3.7%;
+    }
 }
 
 .new-publication #close:hover {
@@ -61,6 +69,12 @@ main {
     color: white;
     padding: 1% 0 2% 0;
     margin: 2% 0 3% 0;
+}
+
+@media screen and (max-width: 800px) {
+    .new-publication #title {
+        font-size: 25px;
+    }
 }
   
 .new-publication #title::before,
@@ -125,6 +139,18 @@ main {
     transition: all .3s;
 }
 
+@media screen and (max-width: 555px) {
+    .new-publication .my_buttons .input-image label {
+        margin: 24%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .new-publication .my_buttons .input-image label {
+        margin: 25%;
+    }
+}
+
 .new-publication .my_buttons .input-image label:hover {
     background-color: white;
     color: #1b6c68;
@@ -140,6 +166,22 @@ main {
     background-color: rgba(5, 83, 146, 0.803);
     user-select: none;
     transition: all .5s;
+}
+
+@media screen and (max-width: 555px) {
+    .new-publication .my_buttons .input-image p {
+        width: 200px;
+        margin-left: 17%;
+        margin-top: 8%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .new-publication .my_buttons .input-image p {
+        width: 200px;
+        margin-left: 20%;
+        margin-top: 8%;
+    }
 }
 
 .new-publication .my_buttons .input-image p.imageSelected {
