@@ -59,62 +59,115 @@ export function Publication({ id, content, imageSource, modifications, deletePub
         setPubImageSource(image);
     }
 
-    return (
-        <>
-            <Card sx={{ border: '2px solid #2196F3', backgroundColor: 'azure', marginTop: '5%', marginBottom: '10%' }}>
-                <CardHeader
-                    avatar={
-                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                            E
-                        </Avatar>
-                    }
-                    action={
-                        <IconButton aria-label="delete"  onClick={ handleDeletePublication }>
-                            <DeleteIcon sx={{ color: 'red' }}></DeleteIcon>
+    if (pubImageSource === null) {
+        return (
+            <>
+                <Card sx={{ border: '2px solid #2196F3', backgroundColor: 'azure', marginTop: '5%', marginBottom: '10%' }}>
+                    <CardHeader
+                        avatar={
+                            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                                E
+                            </Avatar>
+                        }
+                        action={
+                            <IconButton aria-label="delete"  onClick={ handleDeletePublication }>
+                                <DeleteIcon sx={{ color: 'red' }}></DeleteIcon>
+                            </IconButton>
+                        }
+                        title="Shrimp and Chorizo Paella"
+                        subheader="September 14, 2016"
+                    ></CardHeader>
+    
+                    <CardContent sx={{ fontSize: 'large' }}>{ pubContent }</CardContent>
+    
+                    <CardActions disableSpacing>
+                        <IconButton aria-label="add to favorites"  onClick={ handleLike } sx={{ marginRight: '40%' }}>
+                            { like } <FavoriteIcon />
                         </IconButton>
-                    }
-                    title="Shrimp and Chorizo Paella"
-                    subheader="September 14, 2016"
-                ></CardHeader>
+                        
+                        <h2 onClick={ () => handleUpdateClick(!update) } style={{ cursor: "pointer", marginRight: '35%' }}>Modifier</h2>
+    
+                        <IconButton aria-label="share"  onClick={ handleShare }>
+                            { share } <ShareIcon />
+                        </IconButton>
+                    </CardActions>
+                </Card>
+    
+                {   update 
+                        && 
+                    <UpdatePublication
+                        id = { id }
+                        content = { content }
+                        updateContent = { handleUpdatePubContent }
+                        image = { imageSource }
+                        updateImage = { handleUpdatePubImage }
+                        afficher = { handleUpdateClick }
+                        notif = { addNotifs }
+                        publicationArrayUpdate = { modifications }
+                        handleDisplayNotification = { handleDisplayNotification }
+                    ></UpdatePublication>
+                }
+            </>
+        )
+    }
+    else {  
+        return (
+            <>
+                <Card sx={{ border: '2px solid #2196F3', backgroundColor: 'azure', marginTop: '5%', marginBottom: '10%' }}>
+                    <CardHeader
+                        avatar={
+                            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                                E
+                            </Avatar>
+                        }
+                        action={
+                            <IconButton aria-label="delete"  onClick={ handleDeletePublication }>
+                                <DeleteIcon sx={{ color: 'red' }}></DeleteIcon>
+                            </IconButton>
+                        }
+                        title="Shrimp and Chorizo Paella"
+                        subheader="September 14, 2016"
+                    ></CardHeader>
 
-                <CardContent sx={{ fontSize: 'large' }}>{ pubContent }</CardContent>
+                    <CardContent sx={{ fontSize: 'large' }}>{ pubContent }</CardContent>
 
-                <CardMedia
-                    component="img"
-                    height="auto"
-                    image={ pubImageSource }
-                    alt="Publication Image"
-                ></CardMedia>
+                    <CardMedia
+                        component="img"
+                        height="auto"
+                        image={ pubImageSource }
+                        alt="Publication Image"
+                    ></CardMedia>
 
-                <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites"  onClick={ handleLike } sx={{ marginRight: '40%' }}>
-                        { like } <FavoriteIcon />
-                    </IconButton>
-                    
-                    <h2 onClick={ () => handleUpdateClick(!update) } style={{ cursor: "pointer", marginRight: '35%' }}>Modifier</h2>
+                    <CardActions disableSpacing>
+                        <IconButton aria-label="add to favorites"  onClick={ handleLike } sx={{ marginRight: '40%' }}>
+                            { like } <FavoriteIcon />
+                        </IconButton>
+                        
+                        <h2 onClick={ () => handleUpdateClick(!update) } style={{ cursor: "pointer", marginRight: '35%' }}>Modifier</h2>
 
-                    <IconButton aria-label="share"  onClick={ handleShare }>
-                        { share } <ShareIcon />
-                    </IconButton>
-                </CardActions>
-            </Card>
+                        <IconButton aria-label="share"  onClick={ handleShare }>
+                            { share } <ShareIcon />
+                        </IconButton>
+                    </CardActions>
+                </Card>
 
-            {   update 
-                    && 
-                <UpdatePublication
-                    id = { id }
-                    content = { content }
-                    updateContent = { handleUpdatePubContent }
-                    image = { imageSource }
-                    updateImage = { handleUpdatePubImage }
-                    afficher = { handleUpdateClick }
-                    notif = { addNotifs }
-                    publicationArrayUpdate = { modifications }
-                    handleDisplayNotification = { handleDisplayNotification }
-                ></UpdatePublication>
-            }
-        </>
-    )
+                {   update 
+                        && 
+                    <UpdatePublication
+                        id = { id }
+                        content = { content }
+                        updateContent = { handleUpdatePubContent }
+                        image = { imageSource }
+                        updateImage = { handleUpdatePubImage }
+                        afficher = { handleUpdateClick }
+                        notif = { addNotifs }
+                        publicationArrayUpdate = { modifications }
+                        handleDisplayNotification = { handleDisplayNotification }
+                    ></UpdatePublication>
+                }
+            </>
+        )
+    }
 }
 
 Publication.propTypes = {

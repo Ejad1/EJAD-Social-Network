@@ -6,10 +6,13 @@ export function UpdatePublication({ id, content, image, updateContent, updateIma
     const addImage = useRef(null);
     const [publicationText, setPublicationText] = useState(content);
     const [publicationImage, setPublicationImage] = useState(image);
+    const [imageName, setImageName] = useState("No image has been selected");
 
-    // Image name
-    const parts = image.split('/');
-    const [imageName, setImageName] = useState(parts[parts.length - 1]);
+    // Image name if he exist
+    if (image !== null) {
+        const parts = image.split('/');
+        setImageName(parts[parts.length - 1]);
+    }
 
     // Notification text
     const updateNotification = {
@@ -87,7 +90,7 @@ export function UpdatePublication({ id, content, image, updateContent, updateIma
 UpdatePublication.propTypes = {
     id: PropTypes.number.isRequired,
     content: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
     afficher: PropTypes.func.isRequired,
     notif: PropTypes.func.isRequired,
     updateContent: PropTypes.func.isRequired,
