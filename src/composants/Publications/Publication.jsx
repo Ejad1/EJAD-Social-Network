@@ -19,6 +19,11 @@ export function Publication({ id, content, imageSource, modifications, deletePub
         content: "Vous avez liker la publication : " + id
     }
 
+    const dislikeNotification = {
+        title: "Dislike",
+        content: "Vous avez 'déliker' la publication : " + id
+    }
+
     const deleteNotification = {
         title: "Suppression",
         content: "Vous avez supprimer la publication : " + id 
@@ -35,12 +40,12 @@ export function Publication({ id, content, imageSource, modifications, deletePub
     }
 
     const handleLike = () => {
-        setLike(like + 1)
-        addNotifs(likeNotification);
+        like < 1 ? setLike(like + 1) : setLike(like - 1);
+        like === 0 ? addNotifs(likeNotification) : addNotifs(dislikeNotification);
     }
 
     const handleShare = () => {
-        setShare(share + 1);
+        share < 1 ? setShare(share + 1) : setShare(1);
         addNotifs(shareNotification);
     }
 
@@ -134,12 +139,12 @@ export function Publication({ id, content, imageSource, modifications, deletePub
                         alt="Publication Image"
                     ></CardMedia>
 
-                    <CardActions disableSpacing>
-                        <IconButton aria-label="add to favorites"  onClick={ handleLike } sx={{ marginRight: '40%' }}>
+                    <CardActions disableSpacing sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <IconButton aria-label="add to favorites"  onClick={ handleLike }>
                             { like } <FavoriteIcon />
                         </IconButton>
                         
-                        <h2 onClick={ () => handleUpdateClick(!update) } style={{ cursor: "pointer", marginRight: '35%' }}>Modifier</h2>
+                        <h2 onClick={ () => handleUpdateClick(!update) } style={{ cursor: "pointer" }}>Modifier</h2>
 
                         <IconButton aria-label="share"  onClick={ handleShare }>
                             { share } <ShareIcon />
