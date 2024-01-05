@@ -5,7 +5,6 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 import { useRef, useState } from 'react'
 import { Emoticones } from './UserAnswer/Emoticones';
-// import AudioRecorder from "./AudioRecord";
 import { AudioRecorder } from "./UserAnswer/UserAnswer";
 
 export function ConversationFoot({ setAnswers, conversationName }) {
