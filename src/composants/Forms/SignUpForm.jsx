@@ -1,3 +1,6 @@
+// import axios from 'axios';
+
+// Importation of MUI componants
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
