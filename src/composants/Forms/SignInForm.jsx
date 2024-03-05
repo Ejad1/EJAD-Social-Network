@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -26,6 +27,8 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export function SignInForm() {
+  const navigate = useNavigate();
+
   const [errorPresent, setErrorPresent] = useState(false);
   const [emailErrorPresent, setEmailErrorPresent] = useState(false);
   const [passwordErrorPresent, setPasswordErrorPresent] = useState(false);
@@ -66,7 +69,7 @@ export function SignInForm() {
         const response = await axios.post("/signin", userInfos);
 
         if (response.data.success) {
-          Navigate('/esn')
+          navigate('/esn')
         }
         else {
           setError("Identifiants incorrects");
