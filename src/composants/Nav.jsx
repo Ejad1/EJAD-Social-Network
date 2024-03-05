@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 import { PropTypes } from "prop-types";
 import { NewPublication } from './Publications/NewPublication'
 import { styled, alpha } from '@mui/material/styles';
@@ -9,15 +11,34 @@ import SearchIcon from '@mui/icons-material/Search';
 import EmailIcon from '@mui/icons-material/Email';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AddCommentIcon from '@mui/icons-material/AddComment';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-export function Navbar({ handleDisplayNotification, state, addPub, longueur, userName, discussionsList, setDiscussions,  userInfos }) {
+export function Navbar({ handleDisplayNotification, state, addPub, longueur, discussionsList, setDiscussions }) {
     const navigate = useNavigate();
     const searchBarRef = useRef(null);
     const [searchText, setSearchText] = useState('');
-    const discussions = discussionsList;
     const [clickPub, setClickPub] = useState(false);
+    const [userInfos, setUserInfos] = useState('');
+
+    // discussionsList and setDiscussions are used to do research on the platform
+    const discussions = discussionsList;
+
+
+    // Fetch data to take user infos
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('/');
+                setUserInfos(response.data);
+            }
+            catch (error) {
+                console.log("Erreur de la récupération des données : " + error);
+            }
+        }
+
+        fetchData();
+    }, [])
     
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -71,7 +92,7 @@ export function Navbar({ handleDisplayNotification, state, addPub, longueur, use
     }
 
     const handleHomeClick = () => {
-        navigate("/esn", { state: { myUser: {userInfos} } });
+        navigate("/esn");
     }
 
     const MakeAPublication = (state) => {
@@ -79,7 +100,7 @@ export function Navbar({ handleDisplayNotification, state, addPub, longueur, use
     }
 
     const handleMessageClick = () => {
-        navigate("/messages", { state: { userInfos: {userInfos} } })
+        navigate("/messages")
     }
 
     const handleNotificationsClick = () => {
@@ -98,7 +119,7 @@ export function Navbar({ handleDisplayNotification, state, addPub, longueur, use
                     sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
                     onClick={ handleHomeClick }
                 >
-                    { userName.nom + " " + userName.lastName }
+                    { userInfos.nom }
                 </Typography>
     
                 <AddCommentIcon sx={{ marginRight: '10px'}} onClick={ () => MakeAPublication(true) }></AddCommentIcon>
@@ -155,7 +176,6 @@ export function Navbar({ handleDisplayNotification, state, addPub, longueur, use
 }
 
 Navbar.propTypes = {
-    // handleAddNotifications: PropTypes.func.isRequired,
     handleDisplayNotification: PropTypes.func.isRequired,
     state: PropTypes.bool.isRequired,
     addPub: PropTypes.func.isRequired,
@@ -163,5 +183,4 @@ Navbar.propTypes = {
     discussionsList: PropTypes.array.isRequired,
     setDiscussions: PropTypes.func.isRequired,
     userInfos: PropTypes.object.isRequired,
-    userName: PropTypes.object
 }

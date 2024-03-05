@@ -6,12 +6,9 @@ import { Notifications } from './Notifications/Notifications'
 import imagePublication from '../assets/cat.jpg'
 import dogImage from '../assets/dog.jpg'
 import socialImage from '../assets/social.jpg'
-import { useLocation } from 'react-router-dom'
 
 function MyApp() {
   // Recuparation of the user infos
-  const location = useLocation();
-  const myUser = location.state.myUser;
 
   const [notificationsArray, setNotificationsArray] = useState([]);
   const [displayNotifications, setDisplayNotifications] = useState(false);
@@ -114,7 +111,6 @@ function MyApp() {
           state = { displayNotifications }
           addPub = { handleAddNewPublication }
           longueur = { publicationArrayLength }
-          userName = { myUser }
       ></Navbar>
 
       { displayNotifications && <Notifications monTableau = { notificationsArray }></Notifications> }
