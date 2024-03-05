@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 
 // Importation of MUI componants
 import Avatar from '@mui/material/Avatar';
@@ -39,7 +39,7 @@ export function SignUpForm() {
   // Variable for navigation after submitting the sign up form
   const navigate = useNavigate();
 
-  const [errorPresent, setErrorPresent] = useState(true);
+  const [errorPresent, setErrorPresent] = useState(false);
 
   // Errors messages
   const [generalError, setGeneralError] = useState("");
@@ -60,12 +60,17 @@ export function SignUpForm() {
   const password = useRef(null);
   const passwordConf = useRef(null);
 
+  // Submission state
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleGenderChange = (event) => {
     setGender(event.target.value);
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    setIsSubmitting(true);
     
     const data = new FormData(event.currentTarget);
 
@@ -111,11 +116,13 @@ export function SignUpForm() {
             password: data.get('password'),
           }
 
-          console.log(myUser);
-
-          navigate("/esn", { state: {myUser} });
-
-          setGeneralError("");
+          try {
+            await axios.post('/', { myUser });
+            navigate("/esn");
+          } catch (error) {
+              setGeneralError("Une erreur est survenue lors de l'envoi des données : " + error);
+              setIsSubmitting(false);
+          }
         }
         else {
           setGeneralError("Les deux mots de passe que vous avez entrez ne sont pas identiques");
@@ -269,8 +276,9 @@ export function SignUpForm() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
+              disabled={ isSubmitting } // Désactive le bouton pendant la soumission
+              >
+              { isSubmitting ? 'Envoi en cours...' : 'Sign Up' }
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
