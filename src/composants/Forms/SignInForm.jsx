@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { useRef, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -31,13 +33,14 @@ export function SignInForm() {
   // Errors messages
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [error, setError] = useState("");
 
   // Inputs ref
   const email = useRef(null);
   const password = useRef(null);
 
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     email.current.value === "" 
@@ -50,12 +53,30 @@ export function SignInForm() {
 
     (emailErrorPresent || passwordErrorPresent) ? setErrorPresent(true) : setErrorPresent(false);
 
-    if (!errorPresent) {
+    if (!(email.current.value === ""  || password.current.value === "" )) {
       const data = new FormData(event.currentTarget);
-      console.log({
+
+      let userInfos = {
         email: data.get('email'),
         password: data.get('password'),
-      });
+      }
+
+      // Try to connect to the platform
+      try {
+        const response = await axios.post("/signin", userInfos);
+
+        if (response.data.success) {
+          Navigate('/esn')
+        }
+        else {
+          setError("Identifiants incorrects");
+        }
+      }
+      catch (error) {
+        setError("Une erreur s'est produite lors de la connexion");
+        console.log("L'erreur est : " + error);
+      }
+
     }
   };
 
@@ -104,6 +125,7 @@ export function SignInForm() {
                 { passwordErrorPresent && <p style={{ color: 'red' }}>{ passwordError }</p> }
               </Grid>
             </Grid>
+            <p style={{ color: 'red' }}>{ error }</p>
             <Button
               type="submit"
               fullWidth
