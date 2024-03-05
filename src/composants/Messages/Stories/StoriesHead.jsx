@@ -21,7 +21,7 @@ function HomeIcon(props) {
   );
 }
 
-export default function StoriesHead({ discussionsList, setDiscussions,  userInfos, storiesArray }) {
+export default function StoriesHead({ discussionsList, setDiscussions, storiesArray }) {
     const navigate = useNavigate();
     const searchBarRef = useRef(null);
     const [searchText, setSearchText] = useState('');
@@ -80,11 +80,11 @@ export default function StoriesHead({ discussionsList, setDiscussions,  userInfo
     }
 
     const handleHomeClick = () => {
-        navigate("/esn", { state: { myUser: {userInfos} } });
+        navigate("/esn");
     }
 
     const handleMessageClick = () => {
-        navigate("/messages", { state: { userInfos: {userInfos} } })
+        navigate("/messages")
     }
 
     const handleNewStoryClick = (state) => {
@@ -152,7 +152,6 @@ export default function StoriesHead({ discussionsList, setDiscussions,  userInfo
 StoriesHead.propTypes = {
     discussionsList: PropTypes.array.isRequired,
     setDiscussions: PropTypes.func.isRequired,
-    userInfos: PropTypes.object.isRequired,
     storiesArray: PropTypes.func.isRequired
 }
 

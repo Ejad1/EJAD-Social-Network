@@ -24,7 +24,7 @@ function HomeIcon(props) {
   );
 }
 
-export function MessageHead({ discussionsList, setDiscussions, addDiscussion,  userInfos }) {
+export function MessageHead({ discussionsList, setDiscussions, addDiscussion }) {
     const [displayNewCrewForm, setDisplayNewCrewForm] = useState(false);
     const navigate = useNavigate();
     const searchBarRef = useRef(null);
@@ -83,11 +83,11 @@ export function MessageHead({ discussionsList, setDiscussions, addDiscussion,  u
     }
 
     const handleHomeClick = () => {
-        navigate("/esn", { state: { myUser: {userInfos} } });
+        navigate("/esn");
     }
 
     const handleStoryClick = () => {
-        navigate("/stories", { state: { myUser: {userInfos} } });
+        navigate("/stories");
     }
 
     const handleNewCrewClick = (state) => {
@@ -174,5 +174,4 @@ MessageHead.propTypes = {
     discussionsList: PropTypes.array.isRequired,
     setDiscussions: PropTypes.func.isRequired,
     addDiscussion: PropTypes.func.isRequired,
-    userInfos: PropTypes.object.isRequired
 }
