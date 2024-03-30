@@ -66,7 +66,7 @@ export function SignInForm() {
 
       // Try to connect to the platform
       try {
-        const response = await axios.post("/signin", userInfos);
+        const response = await axios.post("/login", { userInfos });
 
         if (response.data.success) {
           navigate('/esn')

@@ -14,7 +14,7 @@ import AddCommentIcon from '@mui/icons-material/AddComment';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-export function Navbar({ handleDisplayNotification, state, addPub, longueur, discussionsList, setDiscussions }) {
+export function Navbar({ handleDisplayNotification, state, addPub, longueur, discussionsList, setDiscussions, userId }) {
     const navigate = useNavigate();
     const searchBarRef = useRef(null);
     const [searchText, setSearchText] = useState('');
@@ -24,21 +24,21 @@ export function Navbar({ handleDisplayNotification, state, addPub, longueur, dis
     // discussionsList and setDiscussions are used to do research on the platform
     const discussions = discussionsList;
 
-
-    // Fetch data to take user infos
+    // Recuperation of the user infos
+    const [userData, setUserData] = useState(null);
+  
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('/');
-                setUserInfos(response.data);
-            }
-            catch (error) {
-                console.log("Erreur de la récupération des données : " + error);
-            }
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(`http://localhost:3000/api/user/${userId}`);
+          setUserData(response.data);
+        } catch (error) {
+          console.error('Erreur lors de la récupération des données utilisateur :', error);
         }
-
-        fetchData();
-    }, [])
+      };
+  
+      fetchData();
+    }, [userId]);
     
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -119,7 +119,7 @@ export function Navbar({ handleDisplayNotification, state, addPub, longueur, dis
                     sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
                     onClick={ handleHomeClick }
                 >
-                    { userInfos.nom }
+                    { userData }
                 </Typography>
     
                 <AddCommentIcon sx={{ marginRight: '10px'}} onClick={ () => MakeAPublication(true) }></AddCommentIcon>
@@ -182,5 +182,4 @@ Navbar.propTypes = {
     longueur: PropTypes.number.isRequired,
     discussionsList: PropTypes.array.isRequired,
     setDiscussions: PropTypes.func.isRequired,
-    userInfos: PropTypes.object.isRequired,
 }

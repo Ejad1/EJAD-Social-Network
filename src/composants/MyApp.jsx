@@ -6,9 +6,27 @@ import { Notifications } from './Notifications/Notifications'
 import imagePublication from '../assets/cat.jpg'
 import dogImage from '../assets/dog.jpg'
 import socialImage from '../assets/social.jpg'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 function MyApp() {
   // Recuparation of the user infos
+  const userId = useParams();
+  console.log("l'id est : ", userId.toString());
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/user/${userId}`);
+        setUserData(response.data);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données utilisateur :', error);
+      }
+    };
+
+    fetchData();
+  }, [userId]);
 
   const [notificationsArray, setNotificationsArray] = useState([]);
   const [displayNotifications, setDisplayNotifications] = useState(false);

@@ -108,16 +108,20 @@ export function SignUpForm() {
           userName = userName.toUpperCase();
 
           const myUser = {
-            nom: userName,
+            firstName: userName,
             lastName: data.get('lastName'),
             number: data.get('number'),
             gender: gender,
             email: data.get('email'),
+            emailConf: data.get('emailConf'),
             password: data.get('password'),
+            passwordConf: data.get('passwordConf')
           }
 
+          console.log(myUser);
+
           try {
-            await axios.post('/', { myUser });
+            await axios.post('http://localhost:3000/api/signUp', { myUser });
             navigate("/esn");
           } catch (error) {
               setGeneralError("Une erreur est survenue lors de l'envoi des données : " + error);
@@ -157,11 +161,11 @@ export function SignUpForm() {
               <Grid item xs={10} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="lastName"
                   required
                   fullWidth
-                  id="firstName"
-                  label="Nom de famille"
+                  id="lastName"
+                  label="Prénom(s)"
                   autoFocus
                 />
                 <p style={{ color: 'red' }}>{ nameError }</p>
@@ -170,10 +174,9 @@ export function SignUpForm() {
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
-                  label="Prénom(s)"
-                  name="lastName"
-                  autoComplete="family-name"
+                  id="firstName"
+                  label="Nom de famille"
+                  name="firstName"
                 />
                 <p style={{ color: 'red' }}>{ lastNameError }</p>
               </Grid>
