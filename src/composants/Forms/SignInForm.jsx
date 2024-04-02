@@ -64,12 +64,17 @@ export function SignInForm() {
         password: data.get('password'),
       }
 
-      // Try to connect to the platform
+      // Trying to connect to the platform
       try {
-        const response = await axios.post("/login", { userInfos });
+        const response = await axios.post("http://localhost:3000/api/login", { userInfos });
 
         if (response.data.success) {
-          navigate('/esn')
+          // Stockage le JWT dans le stockage local
+          localStorage.setItem('token', response.data.token);
+          // En-tête d'autorisation global avec le JWT
+          axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+
+          navigate('/esn');
         }
         else {
           setError("Identifiants incorrects");
@@ -77,7 +82,7 @@ export function SignInForm() {
       }
       catch (error) {
         setError("Une erreur s'est produite lors de la connexion");
-        console.log("L'erreur est : " + error);
+        console.log("L'erreur est : ", error);
       }
 
     }
