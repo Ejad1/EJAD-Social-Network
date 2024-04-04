@@ -6,6 +6,7 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import DeleteIcon from '@mui/icons-material/Delete';
+import axios from "axios";
 
 export function Publication({ id, content, imageSource, modifications, deletePub, addNotifs }) {
     const [pubContent, setPubContent] = useState(content);
@@ -39,14 +40,26 @@ export function Publication({ id, content, imageSource, modifications, deletePub
         addNotifs(deleteNotification);
     }
 
-    const handleLike = () => {
+    const handleLike = async () => {
         like < 1 ? setLike(like + 1) : setLike(like - 1);
         like === 0 ? addNotifs(likeNotification) : addNotifs(dislikeNotification);
+
+        try {
+            await axios.post('http://localhost:3000/api/publications/like/660ef0f9cadd35958bff5ee2', { like });
+        } catch (error) {
+            console.log("Erreur lors de la mise à jour des like : ", error);
+        }
     }
 
-    const handleShare = () => {
+    const handleShare = async () => {
         share < 1 ? setShare(share + 1) : setShare(1);
         addNotifs(shareNotification);
+
+        try {
+            await axios.post('http://localhost:3000/api/publications/share/660ef0f9cadd35958bff5ee2', { share });
+        } catch (error) {
+            console.log("Erreur lors de la mise à jour des share : ", error);
+        }
     }
 
     const handleUpdateClick = (display) => {

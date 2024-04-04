@@ -1,6 +1,7 @@
 import { useRef, useState } from "react"
 import { PropTypes } from "prop-types";
 import { Button } from "@mui/material";
+import axios from "axios";
 
 export function NewPublication({ afficher, addPub, longueur }) {
     const [imageName, setImageName] = useState("No image has been selected");
@@ -30,15 +31,35 @@ export function NewPublication({ afficher, addPub, longueur }) {
         setNewPublicationText(e.target.value);
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (newPublicationText != "") {
 
-            const newPublication = {
+            const newPublication2 = {
                 id: longueur + 1,
                 text: newPublicationText,
                 photo: newPublicationImage
             }
-            addPub(newPublication, longueur);
+
+            const myDate = new Date();
+
+            const newPublication = {
+                profilPhoto: "Nothing",
+                author: "I'll get it",
+                dateMake: myDate,
+                pubText: newPublicationText,
+                pubImage: newPublicationImage,
+                like: 0,
+                share: 0
+            }
+
+            // Adding a new publication to the database
+            try {
+                await axios.post("http://localhost:3000/api/publications/create", { newPublication });
+            } catch (error) {
+                console.log("Erreur lors de la création d'une publication : ", error);
+            }
+
+            addPub(newPublication2, longueur);
 
             setNewPublicationText("");
             setImageName("No image has been selected");

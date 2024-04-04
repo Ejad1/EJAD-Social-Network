@@ -1,6 +1,7 @@
 import { useRef, useState } from "react"
 import { PropTypes } from "prop-types";
 import { Button } from "@mui/material";
+import axios from "axios";
 
 export function UpdatePublication({ id, content, image, updateContent, updateImage, afficher, notif, publicationArrayUpdate }) {
     const addImage = useRef(null);
@@ -43,13 +44,42 @@ export function UpdatePublication({ id, content, image, updateContent, updateIma
         setPublicationText(e.target.value);
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (publicationText != "") {
-            notif(updateNotification);
-            updateContent(publicationText);
-            updateImage(publicationImage);
-            publicationArrayUpdate(id, publicationText, publicationImage);
-            afficher(false);
+
+            const myDate = new Date();
+            const newPub = {
+                _id: "660ef0f9cadd35958bff5ee2",
+                profilPhoto: "Nothing",
+                author: "I'll get it",
+                dateMake: myDate,
+                pubText: publicationText,
+                pubImage: publicationImage,
+                like: 0,
+                share: 0
+            }
+
+            try {
+                notif(updateNotification);
+                updateContent(publicationText);
+                updateImage(publicationImage);
+                publicationArrayUpdate(id, publicationText, publicationImage);
+                afficher(false);
+
+                await axios.post("http://localhost:3000/api/publications/update", { newPub });
+            } catch (error) {
+                // Si une erreur survient lors de la requête POST
+                if (error.response) {
+                    // La requête a été effectuée mais le serveur a répondu avec un code d'erreur
+                    console.error("Erreur de réponse du serveur:", error.response.data);
+                } else if (error.request) {
+                    // La requête a été effectuée mais aucune réponse n'a été reçue
+                    console.error("Pas de réponse du serveur");
+                } else {
+                    // Une erreur s'est produite lors de la configuration de la requête
+                    console.error("Erreur lors de la configuration de la requête:", error.message);
+                }
+            }
         }
     }
 
