@@ -11,22 +11,43 @@ import axios from 'axios'
 
 function MyApp() {
   // Recuparation of the user infos
-  const userId = useParams();
-  console.log("l'id est : ", userId.toString());
+  const infos = useParams();
   const [userData, setUserData] = useState(null);
+  const [publications, setPublications] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
+      // Getting the user informations
       try {
-        const response = await axios.get(`http://localhost:3000/api/user/${userId}`);
-        setUserData(response.data);
+        await axios.get(`http://localhost:3000/api/user/${infos.userId}`)    
+            .then(response => {
+              const data = response.data;
+              setUserData(data);
+            })
+            .catch(error => {
+              console.error('Une erreur s\'est produite:', error);
+            });
       } catch (error) {
         console.error('Erreur lors de la récupération des données utilisateur :', error);
+      }
+
+      // Getting all the publications
+      try {
+        await axios.get("http://localhost:3000/api/publications/get")
+          .then(response => {
+            const pubs = response.data;
+            setPublications(pubs);
+          })
+          .catch(error => console.log("Une erreur s'est produite:", error));
+      } catch (error) {
+        console.log("Erreur lors de la récupération des publications : ", error);
       }
     };
 
     fetchData();
-  }, [userId]);
+  }, [infos]);
+
+
 
   const [notificationsArray, setNotificationsArray] = useState([]);
   const [displayNotifications, setDisplayNotifications] = useState(false);
@@ -129,6 +150,7 @@ function MyApp() {
           state = { displayNotifications }
           addPub = { handleAddNewPublication }
           longueur = { publicationArrayLength }
+          user = { userData }
       ></Navbar>
 
       { displayNotifications && <Notifications monTableau = { notificationsArray }></Notifications> }
