@@ -14,31 +14,14 @@ import AddCommentIcon from '@mui/icons-material/AddComment';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-export function Navbar({ handleDisplayNotification, state, addPub, longueur, discussionsList, setDiscussions, userId }) {
+export function Navbar({ handleDisplayNotification, state, addPub, longueur, discussionsList, setDiscussions, user }) {
     const navigate = useNavigate();
     const searchBarRef = useRef(null);
     const [searchText, setSearchText] = useState('');
     const [clickPub, setClickPub] = useState(false);
-    const [userInfos, setUserInfos] = useState('');
 
     // discussionsList and setDiscussions are used to do research on the platform
     const discussions = discussionsList;
-
-    // Recuperation of the user infos
-    const [userData, setUserData] = useState(null);
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await axios.get(`http://localhost:3000/api/user/${userId}`);
-          setUserData(response.data);
-        } catch (error) {
-          console.error('Erreur lors de la récupération des données utilisateur :', error);
-        }
-      };
-  
-      fetchData();
-    }, [userId]);
     
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -119,7 +102,7 @@ export function Navbar({ handleDisplayNotification, state, addPub, longueur, dis
                     sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
                     onClick={ handleHomeClick }
                 >
-                    { userData }
+                    { user ? user.firstName + " " + user.lastName : "Your name is..." }
                 </Typography>
     
                 <AddCommentIcon sx={{ marginRight: '10px'}} onClick={ () => MakeAPublication(true) }></AddCommentIcon>
@@ -180,6 +163,6 @@ Navbar.propTypes = {
     state: PropTypes.bool.isRequired,
     addPub: PropTypes.func.isRequired,
     longueur: PropTypes.number.isRequired,
-    discussionsList: PropTypes.array.isRequired,
-    setDiscussions: PropTypes.func.isRequired,
+    discussionsList: PropTypes.array,
+    setDiscussions: PropTypes.func,
 }
