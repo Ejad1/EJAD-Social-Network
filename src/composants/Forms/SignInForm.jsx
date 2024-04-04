@@ -74,7 +74,7 @@ export function SignInForm() {
           // En-tête d'autorisation global avec le JWT
           axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
 
-          navigate('/esn');
+          navigate( `/esn/${response.data.userId}`);
         }
         else {
           setError("Identifiants incorrects");

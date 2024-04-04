@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { auth, provider } from "../GoogleAuthFirebase"
+import { signInWithPopup } from "firebase/auth"
 
 // Importation of MUI componants
 import Avatar from '@mui/material/Avatar';
@@ -18,7 +20,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 
@@ -65,6 +67,23 @@ export function SignUpForm() {
 
   const handleGenderChange = (event) => {
     setGender(event.target.value);
+  }
+
+  // Google authentification
+  const [value, setValue] = useState('');
+
+  const handleGoogleButtonClick = () => {
+    signInWithPopup(auth, provider)
+        .then(data => {
+          console.log(data);
+          console.log("L'user est : ", data.user);
+            setValue(data.user.email);
+            localStorage.setItem("user", data.user.email);
+        })
+
+    useEffect(() => {
+      setValue(localStorage.getItem('email'));
+    })
   }
 
   const handleSubmit = async (event) => {
@@ -121,8 +140,20 @@ export function SignUpForm() {
           console.log(myUser);
 
           try {
-            await axios.post('http://localhost:3000/api/signUp', { myUser });
-            navigate("/esn");
+            const response = await axios.post('http://localhost:3000/api/signUp', { myUser });
+
+            if (response.data.success) {
+              // Stockage le JWT dans le stockage local
+              localStorage.setItem('token', response.data.token);
+              // En-tête d'autorisation global avec le JWT
+              axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+    
+              navigate( `/esn/${response.data.userId}`);
+            }
+            else {
+              setGeneralError("Inscription échouée");
+            }
+
           } catch (error) {
               setGeneralError("Une erreur est survenue lors de l'envoi des données : " + error);
               setIsSubmitting(false);
@@ -283,6 +314,19 @@ export function SignUpForm() {
               >
               { isSubmitting ? 'Envoi en cours...' : 'Sign Up' }
             </Button>
+
+            {/* Google authentification button */}
+            The value is { value ? value : 'Nothing' }
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={ handleGoogleButtonClick }
+              >
+              Sign up with Google
+            </Button>
+
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/signin" variant="body2">
