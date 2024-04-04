@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     element: <App></App>
   },
   {
-    path:'/esn',
+    path:'/esn/:userId',
     element: <MyApp></MyApp>
   },
   {
