@@ -18,6 +18,7 @@
     "@mui/icons-material": "^5.14.13",
     "@mui/material": "^5.14.17",
     "axios": "^1.6.4",
+    "firebase": "^10.10.0",
     "gsap": "^3.12.2",
     "lamejs": "^1.2.1",
     "mic-recorder-to-mp3": "^2.2.2",
