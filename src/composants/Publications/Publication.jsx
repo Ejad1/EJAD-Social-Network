@@ -35,28 +35,40 @@ export function Publication({ id, content, imageSource, modifications, deletePub
         content: "Vous avez partager une publication"
     }
 
-    const handleDeletePublication = () => {
+    const handleDeletePublication = async () => {
         deletePub(id);
         addNotifs(deleteNotification);
+
+        try {
+            await axios.delete("http://localhost:3000/api/publications/delete/660ef0f9cadd35958bff5ee2");
+        } catch (error) {
+            console.log("Erreur lors de la suppression de la publication : ", error);
+        }
     }
 
     const handleLike = async () => {
         like < 1 ? setLike(like + 1) : setLike(like - 1);
         like === 0 ? addNotifs(likeNotification) : addNotifs(dislikeNotification);
 
+        let addLike = 0;
+        like == 0 ? addLike = 1 : addLike = -1
+
         try {
-            await axios.post('http://localhost:3000/api/publications/like/660ef0f9cadd35958bff5ee2', { like });
+            await axios.put('http://localhost:3000/api/publications/like/660eec33f9ce7333d510af09', { addLike })
         } catch (error) {
             console.log("Erreur lors de la mise à jour des like : ", error);
         }
     }
 
     const handleShare = async () => {
-        share < 1 ? setShare(share + 1) : setShare(1);
+        share < 1 ? setShare(share + 1) : setShare(share - 1);
         addNotifs(shareNotification);
 
+        let addShare = 0;
+        share == 0 ? addShare = 1 : addShare = -1
+
         try {
-            await axios.post('http://localhost:3000/api/publications/share/660ef0f9cadd35958bff5ee2', { share });
+            await axios.put('http://localhost:3000/api/publications/share/660eec33f9ce7333d510af09', { addShare });
         } catch (error) {
             console.log("Erreur lors de la mise à jour des share : ", error);
         }

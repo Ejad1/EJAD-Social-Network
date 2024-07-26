@@ -15,7 +15,7 @@ export function DiscussionsList({ discussionsList, callback }) {
     else {
         return (
            <section className="discussions-list">
-                <List sx={{ width: '100%', maxWidth: 760, bgcolor: 'background.paper' }}>
+                <List sx={{ width: '100%', maxWidth: 760, minHeight: 500, bgcolor: 'background.paper' }}>
                     {
                         discussions.map((element, index) => (
                             <ADiscussion 

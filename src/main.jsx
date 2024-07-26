@@ -14,6 +14,9 @@ import { SignInForm } from './composants/Forms/SignInForm.jsx'
 import MyApp from './composants/MyApp.jsx'
 import { Messages } from './composants/Messages/Messages.jsx'
 import Stories from './composants/Messages/Stories/Stories.jsx'
+import { PasswordForgot } from './composants/Forms/PasswordForgot/PasswordForgot.jsx'
+import { PasswordReset } from './composants/Forms/PasswordForgot/ResetPassword.jsx'
+import { CodeVerification } from './composants/Forms/PasswordForgot/CodeVerification.jsx'
 
 const router = createBrowserRouter([
   {
@@ -39,6 +42,18 @@ const router = createBrowserRouter([
   {
     path:'/signin',
     element: <SignInForm></SignInForm>
+  },
+  {
+    path: '/passwordforgot',
+    element: <PasswordForgot></PasswordForgot>
+  },
+  {
+    path: '/resetpassword',
+    element: <PasswordReset></PasswordReset>
+  },
+  {
+    path: '/codeverification',
+    element: <CodeVerification></CodeVerification>
   },
   {
     path:'/stories',

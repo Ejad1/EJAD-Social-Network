@@ -7,7 +7,7 @@
 }
 
 .messages .messages-received p {
-    width: 150px;
+    width: 15%;
     margin: 1% 0 2% 2%;
 }
 
@@ -44,12 +44,12 @@
 /* Discussions list and conversations box styles */
 .discussions-conversations {
     display: flex;
+    max-height: 50em;
     overflow-y: auto;
-    height: 680px;
 }
 
 .discussions-conversations .discussions-list {
-    max-width: 500px;
+    max-width: 34%;
     user-select: none;
     padding: 10px;
 }
@@ -89,6 +89,10 @@
 }
 
 .conversationMain {
-    height: 510px;
+    
+    position: fixed;
+    width: '100%';
+
+    height: 310px;
     overflow-y: auto;
 }

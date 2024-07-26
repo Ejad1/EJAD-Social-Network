@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { Navbar } from './Nav'
 import { Main } from './Main'
 // import { Advertising } from './composants/Advertising'
@@ -8,6 +8,7 @@ import dogImage from '../assets/dog.jpg'
 import socialImage from '../assets/social.jpg'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+
 
 function MyApp() {
   // Recuparation of the user infos
@@ -22,6 +23,8 @@ function MyApp() {
         await axios.get(`http://localhost:3000/api/user/${infos.userId}`)    
             .then(response => {
               const data = response.data;
+              let UserInformations = createContext(data);
+              console.log("Mon contexte est : ", UserInformations);
               setUserData(data);
             })
             .catch(error => {
@@ -30,6 +33,8 @@ function MyApp() {
       } catch (error) {
         console.error('Erreur lors de la récupération des données utilisateur :', error);
       }
+
+      console.log("Mes informations du contexte sont : ", userData);
 
       // Getting all the publications
       try {
@@ -45,7 +50,7 @@ function MyApp() {
     };
 
     fetchData();
-  }, [infos]);
+  }, [infos, userData]);
 
 
 

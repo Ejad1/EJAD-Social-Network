@@ -66,7 +66,7 @@ export function UpdatePublication({ id, content, image, updateContent, updateIma
                 publicationArrayUpdate(id, publicationText, publicationImage);
                 afficher(false);
 
-                await axios.post("http://localhost:3000/api/publications/update", { newPub });
+                await axios.put("http://localhost:3000/api/publications/update", { newPub });
             } catch (error) {
                 // Si une erreur survient lors de la requête POST
                 if (error.response) {

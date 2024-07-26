@@ -1,6 +1,7 @@
 import axios from 'axios';
-
-import { useRef, useState } from 'react';
+import { auth, provider } from "../GoogleAuthFirebase";
+import { signInWithPopup } from "firebase/auth";
+import { useRef, useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -28,63 +29,70 @@ const defaultTheme = createTheme();
 
 export function SignInForm() {
   const navigate = useNavigate();
+  const [error, setError] = useState({ email: '', password: '', general: '' });
+  const [user, setUser] = useState({ email: '', name: '' });
 
-  const [errorPresent, setErrorPresent] = useState(false);
-  const [emailErrorPresent, setEmailErrorPresent] = useState(false);
-  const [passwordErrorPresent, setPasswordErrorPresent] = useState(false);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
 
-  // Errors messages
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [error, setError] = useState("");
+  const handleGoogleButtonClick = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      setUser({ email: user.email, name: user.displayName });
+      localStorage.setItem('userEmail', user.email);
+      localStorage.setItem('userName', user.displayName);
+    } catch (error) {
+      console.log('Google Sign-In Error:', error);
+      setError({ ...error, general: 'Google Sign-In failed. Please try again.' });
+    }
+  };
 
-  // Inputs ref
-  const email = useRef(null);
-  const password = useRef(null);
-
+  useEffect(() => {
+    const storedEmail = localStorage.getItem('userEmail');
+    const storedName = localStorage.getItem('userName');
+    if (storedEmail) setUser({ email: storedEmail, name: storedName });
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    email.current.value === "" 
-    ? (setEmailErrorPresent(true), setEmailError("Please enter your email"))
-    : (setEmailErrorPresent(false), setEmailError(""));
+    const emailValue = emailRef.current.value;
+    const passwordValue = passwordRef.current.value;
 
-    password.current.value === "" 
-    ? (setPasswordErrorPresent(true), setPasswordError("Please enter your password"))
-    : (setPasswordErrorPresent(false), setPasswordError(""));
+    let isValid = true;
 
-    (emailErrorPresent || passwordErrorPresent) ? setErrorPresent(true) : setErrorPresent(false);
+    if (emailValue === '') {
+      setError((prev) => ({ ...prev, email: 'Please enter your email' }));
+      isValid = false;
+    } else {
+      setError((prev) => ({ ...prev, email: '' }));
+    }
 
-    if (!(email.current.value === ""  || password.current.value === "" )) {
-      const data = new FormData(event.currentTarget);
+    if (passwordValue === '') {
+      setError((prev) => ({ ...prev, password: 'Please enter your password' }));
+      isValid = false;
+    } else {
+      setError((prev) => ({ ...prev, password: '' }));
+    }
 
-      let userInfos = {
-        email: data.get('email'),
-        password: data.get('password'),
+    if (!isValid) return;
+
+    const userInfos = { email: emailValue, password: passwordValue };
+
+    try {
+      const response = await axios.post("http://localhost:3000/api/login", { userInfos });
+
+      if (response.data.success) {
+        localStorage.setItem('token', response.data.token);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+        navigate(`/esn/${response.data.userId}`);
+      } else {
+        setError((prev) => ({ ...prev, general: 'Identifiants incorrects' }));
       }
-
-      // Trying to connect to the platform
-      try {
-        const response = await axios.post("http://localhost:3000/api/login", { userInfos });
-
-        if (response.data.success) {
-          // Stockage le JWT dans le stockage local
-          localStorage.setItem('token', response.data.token);
-          // En-tête d'autorisation global avec le JWT
-          axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-
-          navigate( `/esn/${response.data.userId}`);
-        }
-        else {
-          setError("Identifiants incorrects");
-        }
-      }
-      catch (error) {
-        setError("Une erreur s'est produite lors de la connexion");
-        console.log("L'erreur est : ", error);
-      }
-
+    } catch (error) {
+      setError((prev) => ({ ...prev, general: "Une erreur s'est produite lors de la connexion" }));
+      console.log("L'erreur est :", error);
     }
   };
 
@@ -110,30 +118,32 @@ export function SignInForm() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                inputRef={ email }
+                  inputRef={emailRef}
                   required
                   fullWidth
                   id="email"
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  error={!!error.email}
+                  helperText={error.email}
                 />
-                { emailErrorPresent && <p style={{ color: 'red' }}>{ emailError }</p> }
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                inputRef={ password }
+                  inputRef={passwordRef}
                   required
                   fullWidth
                   name="password"
                   label="Password"
                   type="password"
                   id="password"
+                  error={!!error.password}
+                  helperText={error.password}
                 />
-                { passwordErrorPresent && <p style={{ color: 'red' }}>{ passwordError }</p> }
               </Grid>
             </Grid>
-            <p style={{ color: 'red' }}>{ error }</p>
+            {error.general && <Typography color="error">{error.general}</Typography>}
             <Button
               type="submit"
               fullWidth
@@ -142,10 +152,27 @@ export function SignInForm() {
             >
               Sign In
             </Button>
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={handleGoogleButtonClick}
+            >
+              Sign in with Google
+            </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <Link href="/signup" variant="body1">
                   Nouveau sur la plateforme ? Inscrivez-vous
+                </Link>
+              </Grid>
+            </Grid>
+
+            {/* Section for forgetting password */}
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="/passwordforgot" variant="body1">
+                  Mot de passe oubliez ?
                 </Link>
               </Grid>
             </Grid>

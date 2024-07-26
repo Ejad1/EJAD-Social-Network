@@ -50,14 +50,7 @@ export function NewPublication({ afficher, addPub, longueur }) {
                 pubImage: newPublicationImage,
                 like: 0,
                 share: 0
-            }
-
-            // Adding a new publication to the database
-            try {
-                await axios.post("http://localhost:3000/api/publications/create", { newPublication });
-            } catch (error) {
-                console.log("Erreur lors de la création d'une publication : ", error);
-            }
+            }            
 
             addPub(newPublication2, longueur);
 
@@ -66,6 +59,13 @@ export function NewPublication({ afficher, addPub, longueur }) {
             setImageSelected(false);
             setNewPublicationImage(null);
             afficher(false);
+
+            // Adding a new publication to the database
+            try {
+                await axios.post("http://localhost:3000/api/publications/create", { newPublication });
+            } catch (error) {
+                console.log("Erreur lors de la création d'une publication : ", error);
+            }
         }
     }
 

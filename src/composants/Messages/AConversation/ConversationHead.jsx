@@ -10,7 +10,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 export default function ConversationHead({ conversation }) {
 
   return (
-    <Box sx={{ width: '900px', marginBottom: '10px' }}>
+    <Box sx={{ position: 'static', width: '900px', marginBottom: '10px' }}>
       <AppBar position="static">
         <Toolbar>
             <div>
@@ -21,7 +21,7 @@ export default function ConversationHead({ conversation }) {
                 aria-haspopup="true"
                 color="inherit"
               >
-                <AccountCircle sx={{ width: '40px', height: '40px'}}/>
+                <AccountCircle sx={{ width: '100%', height: '40px'}}/>
               </IconButton>
             </div>
          

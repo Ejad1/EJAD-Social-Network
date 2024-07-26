@@ -52,7 +52,7 @@ export function ConversationFoot({ setAnswers, conversationName }) {
     }
 
     return (
-        <Box sx={{ 
+        <Box sx={{
             position: 'fixed',
             bottom: '5px',
             border: '2px solid #2196F3',
@@ -87,7 +87,6 @@ export function ConversationFoot({ setAnswers, conversationName }) {
                 placeholder="Your message"
                 value= { message }
                 onChange={ (e) => handleAnswerChange(e.target.value) }
-                // sx={{ width: '678px' }}
                 sx={{ width: '75%' }}
             ></TextField>
 

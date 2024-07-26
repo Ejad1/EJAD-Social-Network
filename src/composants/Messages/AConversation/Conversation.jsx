@@ -17,8 +17,10 @@ export function Conversation({ conversationCible }) {
 
         return (
             <div className="conversation">
-                <ConversationHead conversationName = { conversationCible.discussionName }
-                conversation = { conversationCible }></ConversationHead>        
+                <ConversationHead 
+                    conversationName = { conversationCible.discussionName }
+                    conversation = { conversationCible }
+                ></ConversationHead>        
         
                 <ConversationMain
                     answersArray = { answers }
