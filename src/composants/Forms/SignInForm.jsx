@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { auth, provider } from "../GoogleAuthFirebase";
 import { signInWithPopup } from "firebase/auth";
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import GoogleIcon from '@mui/icons-material/Google';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 
@@ -30,7 +31,6 @@ const defaultTheme = createTheme();
 export function SignInForm() {
   const navigate = useNavigate();
   const [error, setError] = useState({ email: '', password: '', general: '' });
-  const [user, setUser] = useState({ email: '', name: '' });
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -39,20 +39,24 @@ export function SignInForm() {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      setUser({ email: user.email, name: user.displayName });
       localStorage.setItem('userEmail', user.email);
       localStorage.setItem('userName', user.displayName);
+
+      // Sending the user infos to the data base
+        const response = await axios.post("http://localhost:3000/api/googleauth", { user });
+  
+        if (response.data.success) {
+          localStorage.setItem('token', response.data.token);
+          axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+          navigate(`/esn/${response.data.userId}`);
+        } else {
+          setError(response.data.message);
+        }
     } catch (error) {
       console.log('Google Sign-In Error:', error);
       setError({ ...error, general: 'Google Sign-In failed. Please try again.' });
     }
   };
-
-  useEffect(() => {
-    const storedEmail = localStorage.getItem('userEmail');
-    const storedName = localStorage.getItem('userName');
-    if (storedEmail) setUser({ email: storedEmail, name: storedName });
-  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -148,17 +152,18 @@ export function SignInForm() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 1 }}
             >
               Sign In
             </Button>
             <Button
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 1, mb: 2 }}
               onClick={handleGoogleButtonClick}
+              startIcon={ <GoogleIcon/> }
             >
-              Sign in with Google
+              Google
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>

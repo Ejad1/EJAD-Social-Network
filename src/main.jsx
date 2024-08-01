@@ -17,6 +17,11 @@ import Stories from './composants/Messages/Stories/Stories.jsx'
 import { PasswordForgot } from './composants/Forms/PasswordForgot/PasswordForgot.jsx'
 import { PasswordReset } from './composants/Forms/PasswordForgot/ResetPassword.jsx'
 import { CodeVerification } from './composants/Forms/PasswordForgot/CodeVerification.jsx'
+import { UserInformations } from './composants/User/Informations.jsx'
+import { UserProvider } from './composants/Contexts/UserDataContext.jsx'
+import { PublicationProvider } from './composants/Contexts/PublicationsContext.jsx'
+import { Authentification } from './composants/User/Authentification.jsx'
+import { Modification } from './composants/User/Modifications.jsx'
 
 const router = createBrowserRouter([
   {
@@ -56,13 +61,29 @@ const router = createBrowserRouter([
     element: <CodeVerification></CodeVerification>
   },
   {
+    path: '/esn/profil/:userId',
+    element: <UserInformations></UserInformations>
+  },
+  {
+    path: '/esn/authentification/:userId',
+    element: <Authentification></Authentification>
+  },
+  {
+    path: '/esn/user/modification/:userId',
+    element: <Modification></Modification>
+  },
+  {
     path:'/stories',
     element: <Stories></Stories>
-  }
+  },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={ router }></RouterProvider>
+    <UserProvider>
+      <PublicationProvider>
+        <RouterProvider router={ router }></RouterProvider>
+      </PublicationProvider>
+    </UserProvider>
   </React.StrictMode>,
 )

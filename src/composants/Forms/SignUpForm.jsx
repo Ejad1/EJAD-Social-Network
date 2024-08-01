@@ -104,12 +104,12 @@ export function SignUpForm() {
       if (email.current.value === emailConf.current.value) {
         if (password.current.value === passwordConf.current.value) {
 
-          let userName = data.get('firstName');
+          let userName = data.get('lastName');
           userName = userName.toUpperCase();
 
           const myUser = {
-            firstName: userName,
-            lastName: data.get('lastName'),
+            firstName: data.get('firstName'),
+            lastName: userName,
             number: data.get('number'),
             gender: gender,
             email: data.get('email'),
@@ -117,8 +117,6 @@ export function SignUpForm() {
             password: data.get('password'),
             passwordConf: data.get('passwordConf')
           }
-
-          console.log(myUser);
 
           try {
             const response = await axios.post('http://localhost:3000/api/signUp', { myUser });
@@ -177,7 +175,7 @@ export function SignUpForm() {
                   required
                   fullWidth
                   id="lastName"
-                  label="Prénom(s)"
+                  label="Nom de famille"
                   autoFocus
                 />
                 <p style={{ color: 'red' }}>{ nameError }</p>
@@ -187,7 +185,7 @@ export function SignUpForm() {
                   required
                   fullWidth
                   id="firstName"
-                  label="Nom de famille"
+                  label="Prénom(s)"
                   name="firstName"
                 />
                 <p style={{ color: 'red' }}>{ lastNameError }</p>

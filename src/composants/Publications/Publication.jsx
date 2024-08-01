@@ -7,8 +7,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "axios";
+import { AllPublications } from "./AllPublications";
 
-export function Publication({ id, content, imageSource, modifications, deletePub, addNotifs }) {
+export function Publication({ id, content, imageSource, modifications, addNotifs }) {
     const [pubContent, setPubContent] = useState(content);
     const [pubImageSource, setPubImageSource] = useState(imageSource);
     const [like, setLike] = useState(0);
@@ -17,17 +18,17 @@ export function Publication({ id, content, imageSource, modifications, deletePub
 
     const likeNotification = {
         title: "Like",
-        content: "Vous avez liker la publication : " + id
+        content: "Vous avez liker une publication"
     }
 
     const dislikeNotification = {
         title: "Dislike",
-        content: "Vous avez 'déliker' la publication : " + id
+        content: "Vous avez 'déliker' une publication"
     }
 
     const deleteNotification = {
         title: "Suppression",
-        content: "Vous avez supprimer la publication : " + id 
+        content: "Vous avez supprimer une publication"
     }
 
     const shareNotification = {
@@ -36,11 +37,11 @@ export function Publication({ id, content, imageSource, modifications, deletePub
     }
 
     const handleDeletePublication = async () => {
-        deletePub(id);
         addNotifs(deleteNotification);
 
         try {
-            await axios.delete("http://localhost:3000/api/publications/delete/660ef0f9cadd35958bff5ee2");
+            await axios.delete(`http://localhost:3000/api/publications/delete/${id}`);
+            AllPublications();
         } catch (error) {
             console.log("Erreur lors de la suppression de la publication : ", error);
         }
@@ -54,7 +55,8 @@ export function Publication({ id, content, imageSource, modifications, deletePub
         like == 0 ? addLike = 1 : addLike = -1
 
         try {
-            await axios.put('http://localhost:3000/api/publications/like/660eec33f9ce7333d510af09', { addLike })
+            await axios.put(`http://localhost:3000/api/publications/like/${id}`, { addLike });
+            AllPublications();
         } catch (error) {
             console.log("Erreur lors de la mise à jour des like : ", error);
         }
@@ -68,7 +70,8 @@ export function Publication({ id, content, imageSource, modifications, deletePub
         share == 0 ? addShare = 1 : addShare = -1
 
         try {
-            await axios.put('http://localhost:3000/api/publications/share/660eec33f9ce7333d510af09', { addShare });
+            await axios.put(`http://localhost:3000/api/publications/share/${id}`, { addShare });
+            AllPublications();
         } catch (error) {
             console.log("Erreur lors de la mise à jour des share : ", error);
         }
@@ -151,7 +154,7 @@ export function Publication({ id, content, imageSource, modifications, deletePub
                                 <DeleteIcon sx={{ color: 'red' }}></DeleteIcon>
                             </IconButton>
                         }
-                        title="Shrimp and Chorizo Paella"
+                        title="The author of the publication"
                         subheader="September 14, 2016"
                     ></CardHeader>
 
@@ -163,6 +166,7 @@ export function Publication({ id, content, imageSource, modifications, deletePub
                         image={ pubImageSource }
                         alt="Publication Image"
                     ></CardMedia>
+
 
                     <CardActions disableSpacing sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <IconButton aria-label="add to favorites"  onClick={ handleLike }>
@@ -201,5 +205,4 @@ Publication.propTypes = {
     imageSource: PropTypes.string.isRequired,
     addNotifs: PropTypes.func.isRequired,
     modifications: PropTypes.func.isRequired,
-    deletePub: PropTypes.func.isRequired,
 }

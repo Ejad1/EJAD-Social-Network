@@ -1,6 +1,7 @@
-import { createContext, useEffect, useState } from 'react'
-import { Navbar } from './Nav'
+import { useContext, useEffect, useState } from 'react'
+import { Navbar } from './Navbar/Nav'
 import { Main } from './Main'
+import { UserContext } from './Contexts/UserDataContext'
 // import { Advertising } from './composants/Advertising'
 import { Notifications } from './Notifications/Notifications'
 import imagePublication from '../assets/cat.jpg'
@@ -8,23 +9,33 @@ import dogImage from '../assets/dog.jpg'
 import socialImage from '../assets/social.jpg'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { PublicationsContext } from './Contexts/PublicationsContext'
 
 
 function MyApp() {
   // Recuparation of the user infos
   const infos = useParams();
-  const [userData, setUserData] = useState(null);
-  const [publications, setPublications] = useState(null);
+  const { userData, setUserData } = useContext(UserContext);
+  const { setPublications } = useContext(PublicationsContext);
 
   useEffect(() => {
     const fetchData = async () => {
+      // Getting all the publications
+      try {
+        await axios.get("http://localhost:3000/api/publications/get")
+          .then(response => {
+            setPublications(response.data);
+          })
+          .catch(error => console.log("Une erreur s'est produite:", error));
+      } catch (error) {
+        console.log("Erreur lors de la récupération des publications : ", error);
+      }
+
       // Getting the user informations
       try {
         await axios.get(`http://localhost:3000/api/user/${infos.userId}`)    
             .then(response => {
               const data = response.data;
-              let UserInformations = createContext(data);
-              console.log("Mon contexte est : ", UserInformations);
               setUserData(data);
             })
             .catch(error => {
@@ -33,25 +44,10 @@ function MyApp() {
       } catch (error) {
         console.error('Erreur lors de la récupération des données utilisateur :', error);
       }
-
-      console.log("Mes informations du contexte sont : ", userData);
-
-      // Getting all the publications
-      try {
-        await axios.get("http://localhost:3000/api/publications/get")
-          .then(response => {
-            const pubs = response.data;
-            setPublications(pubs);
-          })
-          .catch(error => console.log("Une erreur s'est produite:", error));
-      } catch (error) {
-        console.log("Erreur lors de la récupération des publications : ", error);
-      }
     };
 
     fetchData();
-  }, [infos, userData]);
-
+  }, [infos, userData, setUserData, setPublications]);
 
 
   const [notificationsArray, setNotificationsArray] = useState([]);
@@ -102,39 +98,15 @@ function MyApp() {
 
   // Add new publication
   const handleAddNewPublication = (newPub, len) => {
-    setUserPublications((prevPubs) => [newPub ,...prevPubs]);
-
     setPublicationsArrayLength(len + 1);
   }
 
   // Publication text and/or image modification function
-  const handleSetPublication = (id, newText, newImage) => {
-    setUserPublications((prevPublications) =>
-        prevPublications.map((publication) => {
-            if (publication.id === id) {
-                return {
-                    ...publication,
-                    text: newText,
-                    photo: newImage
-                }
-            }
-            return publication;
-        })
-    )
+  const handleSetPublication = () => {
     handleDisplayNotification(!displayNotifications);
   }
 
-  const handleDeletePublication = (id) => {
-    setUserPublications((prevPublications) => prevPublications.filter((pub) => pub.id !== id));
-
-    useEffect[() => {
-      const copy = [...userPublications];
-      for (let i = 0; i < userPublications.length; i++) {
-        copy[i].id = i + 1;
-      }
-      setUserPublications(copy);
-    }, userPublications]
-
+  const handleDeletePublication = () => {
     setPublicationsArrayLength(userPublications.length);
   }
 
@@ -164,7 +136,6 @@ function MyApp() {
           notifsArray={ handleAddNotifications } 
           handleDisplayNotification = { handleDisplayNotification } 
           state = { displayNotifications }
-          pubsArray = { userPublications }
           pubModification = { handleSetPublication }
           pubDelete = { handleDeletePublication }
       ></Main>

@@ -24,7 +24,7 @@ export function NewPublication({ afficher, addPub, longueur }) {
         setImageName(e.target.files[0].name)
         setImageSelected(true);
         const imageSource = e.target.files[0];
-        setNewPublicationImage(URL.createObjectURL(imageSource));
+        setNewPublicationImage(imageSource);
     }
 
     const handleNewPublicationTextChanging = (e) => {
@@ -32,40 +32,48 @@ export function NewPublication({ afficher, addPub, longueur }) {
     }
 
     const handleSubmit = async () => {
-        if (newPublicationText != "") {
-
-            const newPublication2 = {
-                id: longueur + 1,
-                text: newPublicationText,
-                photo: newPublicationImage
-            }
-
+        if (newPublicationText !== "") {
             const myDate = new Date();
-
-            const newPublication = {
-                profilPhoto: "Nothing",
-                author: "I'll get it",
-                dateMake: myDate,
-                pubText: newPublicationText,
-                pubImage: newPublicationImage,
-                like: 0,
-                share: 0
-            }            
-
-            addPub(newPublication2, longueur);
-
+    
+            // Créez une instance de FormData
+            const formData = new FormData();
+            formData.append('profilPhoto', "Nothing");
+            formData.append('author', "I'll get it");
+            formData.append('dateMake', myDate);
+            formData.append('pubText', newPublicationText);
+            formData.append('like', 0);
+            formData.append('share', 0);
+    
+            // Ajoutez l'image si elle existe
+            if (newPublicationImage) {
+                formData.append('image', newPublicationImage);
+            }
+    
+            // Envoi de la publication avec axios
+            try {
+                await axios.post("http://localhost:3000/api/publications/create", formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+            } catch (error) {
+                console.log("Erreur lors de la création d'une publication : ", error);
+            }
+    
+            // Réinitialiser les états du formulaire
             setNewPublicationText("");
             setImageName("No image has been selected");
             setImageSelected(false);
             setNewPublicationImage(null);
             afficher(false);
-
-            // Adding a new publication to the database
-            try {
-                await axios.post("http://localhost:3000/api/publications/create", { newPublication });
-            } catch (error) {
-                console.log("Erreur lors de la création d'une publication : ", error);
-            }
+    
+            // Optionnel: ajouter la publication localement
+            const newPublication2 = {
+                id: longueur + 1,
+                text: newPublicationText,
+                photo: newPublicationImage
+            };
+            addPub(newPublication2, longueur);
         }
     }
 

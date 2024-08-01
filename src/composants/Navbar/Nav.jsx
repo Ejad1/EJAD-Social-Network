@@ -1,7 +1,6 @@
-import axios from 'axios'
-
+import axios from "axios";
 import { PropTypes } from "prop-types";
-import { NewPublication } from './Publications/NewPublication'
+import { NewPublication } from '../Publications/NewPublication'
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,8 +9,9 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import EmailIcon from '@mui/icons-material/Email';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import HomeIcon from '@mui/icons-material/Home';
 import AddCommentIcon from '@mui/icons-material/AddComment';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 export function Navbar({ handleDisplayNotification, state, addPub, longueur, discussionsList, setDiscussions, user }) {
@@ -74,8 +74,12 @@ export function Navbar({ handleDisplayNotification, state, addPub, longueur, dis
         searchBarRef.current.focus();
     }
 
+    const handleProfilClick = () => {
+        navigate(`/esn/profil/${user._id}`);
+    }
+
     const handleHomeClick = () => {
-        navigate("/esn");
+        navigate(`/esn/${user._id}`);
     }
 
     const MakeAPublication = (state) => {
@@ -100,9 +104,21 @@ export function Navbar({ handleDisplayNotification, state, addPub, longueur, dis
                     noWrap
                     component="div"
                     sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
+                    onClick={ handleProfilClick }
+                >
+                    { /* eslint-disable-next-line react/prop-types */ }
+                    { user ? user.firstName + " " + user.lastName : "Your name is..." }
+                </Typography>
+
+                <HomeIcon sx={{ marginRight: ".5%", marginTop: "-.4%"}} onClick={ handleHomeClick }></HomeIcon>
+                <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
                     onClick={ handleHomeClick }
                 >
-                    { user ? user.firstName + " " + user.lastName : "Your name is..." }
+                    Home
                 </Typography>
     
                 <AddCommentIcon sx={{ marginRight: '10px'}} onClick={ () => MakeAPublication(true) }></AddCommentIcon>
@@ -165,4 +181,5 @@ Navbar.propTypes = {
     longueur: PropTypes.number.isRequired,
     discussionsList: PropTypes.array,
     setDiscussions: PropTypes.func,
+    user: PropTypes.array.isRequired,
 }
