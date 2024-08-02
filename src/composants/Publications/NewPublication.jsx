@@ -3,7 +3,7 @@ import { PropTypes } from "prop-types";
 import { Button } from "@mui/material";
 import axios from "axios";
 
-export function NewPublication({ afficher, addPub, longueur }) {
+export function NewPublication({ afficher, author, authorMail }) {
     const [imageName, setImageName] = useState("No image has been selected");
     const [imageSelected, setImageSelected] = useState(false);
     const addImage = useRef(null);
@@ -28,6 +28,8 @@ export function NewPublication({ afficher, addPub, longueur }) {
     }
 
     const handleNewPublicationTextChanging = (e) => {
+        e.target.value.split('\n').join(<br></br>);
+
         setNewPublicationText(e.target.value);
     }
 
@@ -38,7 +40,8 @@ export function NewPublication({ afficher, addPub, longueur }) {
             // Créez une instance de FormData
             const formData = new FormData();
             formData.append('profilPhoto', "Nothing");
-            formData.append('author', "I'll get it");
+            formData.append('author', author);
+            formData.append('authorMail', authorMail);
             formData.append('dateMake', myDate);
             formData.append('pubText', newPublicationText);
             formData.append('like', 0);
@@ -66,14 +69,6 @@ export function NewPublication({ afficher, addPub, longueur }) {
             setImageSelected(false);
             setNewPublicationImage(null);
             afficher(false);
-    
-            // Optionnel: ajouter la publication localement
-            const newPublication2 = {
-                id: longueur + 1,
-                text: newPublicationText,
-                photo: newPublicationImage
-            };
-            addPub(newPublication2, longueur);
         }
     }
 
@@ -115,6 +110,6 @@ export function NewPublication({ afficher, addPub, longueur }) {
 
 NewPublication.propTypes = {
     afficher: PropTypes.func.isRequired,
-    addPub: PropTypes.func,
-    longueur: PropTypes.number
+    author: PropTypes.string.isRequired,
+    authorMail: PropTypes.string.isRequired,
 }
