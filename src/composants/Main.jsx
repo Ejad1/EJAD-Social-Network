@@ -1,11 +1,10 @@
 import axios from "axios";
 import { useContext, useEffect } from "react";
-import { PropTypes } from "prop-types";
 import { Publication } from './Publications/Publication'
 import '../css/Main.css'
 import { PublicationsContext } from "./Contexts/PublicationsContext";
 
-export function Main({ notifsArray, state, pubModification, pubDelete }) {
+export function Main() {
     // Récupération du context des publications
     const { publications, setPublications } = useContext(PublicationsContext);
 
@@ -36,12 +35,10 @@ export function Main({ notifsArray, state, pubModification, pubDelete }) {
                             <Publication
                                 key = { aPublication._id }
                                 id = { aPublication._id }
+                                author = { aPublication.author }
+                                authorMail = { aPublication.authorMail }
                                 content = { aPublication.pubText }
                                 imageSource = { aPublication.pubImage }
-                                modifications = { pubModification }
-                                deletePub = { pubDelete }
-                                addNotifs = { notifsArray }
-                                state = { state }
                             />
                         )
                         : <p>No publications available</p>
@@ -52,9 +49,4 @@ export function Main({ notifsArray, state, pubModification, pubDelete }) {
     )
 }
 
-Main.propTypes = {
-    notifsArray: PropTypes.func.isRequired,
-    state: PropTypes.bool.isRequired,
-    pubModification: PropTypes.func.isRequired,
-    pubDelete: PropTypes.func.isRequired
-}
+
