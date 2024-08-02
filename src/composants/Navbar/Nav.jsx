@@ -1,4 +1,3 @@
-import axios from "axios";
 import { PropTypes } from "prop-types";
 import { NewPublication } from '../Publications/NewPublication'
 import { styled, alpha } from '@mui/material/styles';
@@ -8,20 +7,17 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import EmailIcon from '@mui/icons-material/Email';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import HomeIcon from '@mui/icons-material/Home';
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import { useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-export function Navbar({ handleDisplayNotification, state, addPub, longueur, discussionsList, setDiscussions, user }) {
+export function Navbar({ user }) {
     const navigate = useNavigate();
     const searchBarRef = useRef(null);
     const [searchText, setSearchText] = useState('');
     const [clickPub, setClickPub] = useState(false);
 
-    // discussionsList and setDiscussions are used to do research on the platform
-    const discussions = discussionsList;
     
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -66,11 +62,7 @@ export function Navbar({ handleDisplayNotification, state, addPub, longueur, dis
     }));
 
     const handleSearchChange = (e) => {
-        const searchValue = e.target.value;
         setSearchText(e.target.value);
-        const results = discussions.filter(item => item.discussionName.toLowerCase().includes(searchValue.toLowerCase()));
-        
-        searchValue === '' ? setDiscussions(discussions) : setDiscussions(results);
         searchBarRef.current.focus();
     }
 
@@ -87,11 +79,7 @@ export function Navbar({ handleDisplayNotification, state, addPub, longueur, dis
     }
 
     const handleMessageClick = () => {
-        navigate("/messages")
-    }
-
-    const handleNotificationsClick = () => {
-        handleDisplayNotification(!state);
+        navigate("/esn/messages")
     }
 
     return (
@@ -143,17 +131,6 @@ export function Navbar({ handleDisplayNotification, state, addPub, longueur, dis
                     Messages
                 </Typography>
     
-                <NotificationsIcon sx={{ marginRight: '10px'}}  onClick={ handleNotificationsClick }></NotificationsIcon>
-                <Typography
-                    variant="h6"
-                    noWrap
-                    component="div"
-                    sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block', cursor: "pointer" } }}
-                    onClick={ handleNotificationsClick }
-                >
-                    Notifications
-                </Typography>
-    
                 <Search>
                     <SearchIconWrapper>
                         <SearchIcon />
@@ -169,7 +146,14 @@ export function Navbar({ handleDisplayNotification, state, addPub, longueur, dis
             </Toolbar>
             </AppBar>
 
-            { clickPub && <NewPublication afficher = { MakeAPublication } addPub = { addPub } longueur = { longueur }/> }
+            { clickPub 
+                && 
+              <NewPublication 
+                afficher = { MakeAPublication }
+                author = { user.lastName + " " + user.firstName }
+                authorMail = { user.email }
+              />
+            }
         </>
     )
 }
@@ -177,9 +161,7 @@ export function Navbar({ handleDisplayNotification, state, addPub, longueur, dis
 Navbar.propTypes = {
     handleDisplayNotification: PropTypes.func.isRequired,
     state: PropTypes.bool.isRequired,
-    addPub: PropTypes.func.isRequired,
-    longueur: PropTypes.number.isRequired,
     discussionsList: PropTypes.array,
     setDiscussions: PropTypes.func,
-    user: PropTypes.array.isRequired,
+    user: PropTypes.object.isRequired,
 }
