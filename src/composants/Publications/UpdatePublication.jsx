@@ -3,7 +3,7 @@ import { PropTypes } from "prop-types";
 import { Button } from "@mui/material";
 import axios from "axios";
 
-export function UpdatePublication({ id, content, image, updateContent, updateImage, afficher, notif, publicationArrayUpdate }) {
+export function UpdatePublication({ id, content, image, updateContent, updateImage, afficher }) {
     const addImage = useRef(null);
     const [publicationText, setPublicationText] = useState(content);
     const [publicationImage, setPublicationImage] = useState(image);
@@ -16,12 +16,6 @@ export function UpdatePublication({ id, content, image, updateContent, updateIma
         setImageNull(false);
         const parts = image.split('/');
         setImageName(parts[parts.length - 1]);
-    }
-
-    // Notification text
-    const updateNotification = {
-        title: "Modification",
-        content: "Vous avez modifier la publication : " + id
     }
 
     const handleClose = () => {
@@ -49,7 +43,7 @@ export function UpdatePublication({ id, content, image, updateContent, updateIma
 
             const myDate = new Date();
             const newPub = {
-                _id: "660ef0f9cadd35958bff5ee2",
+                _id: id,
                 profilPhoto: "Nothing",
                 author: "I'll get it",
                 dateMake: myDate,
@@ -60,11 +54,8 @@ export function UpdatePublication({ id, content, image, updateContent, updateIma
             }
 
             try {
-                notif(updateNotification);
                 updateContent(publicationText);
                 updateImage(publicationImage);
-                publicationArrayUpdate(id, publicationText, publicationImage);
-                afficher(false);
 
                 await axios.put("http://localhost:3000/api/publications/update", { newPub });
             } catch (error) {
@@ -120,12 +111,10 @@ export function UpdatePublication({ id, content, image, updateContent, updateIma
 }
 
 UpdatePublication.propTypes = {
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     image: PropTypes.string,
     afficher: PropTypes.func.isRequired,
-    notif: PropTypes.func.isRequired,
     updateContent: PropTypes.func.isRequired,
     updateImage: PropTypes.func.isRequired,
-    publicationArrayUpdate: PropTypes.func.isRequired
 }
