@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { PropTypes } from "prop-types";
 import { UpdatePublication } from "./UpdatePublication";
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton } from "@mui/material";
@@ -7,49 +7,34 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "axios";
+import { marked } from "marked";
 import { AllPublications } from "./AllPublications";
+import { UserContext } from "../Contexts/UserDataContext";
 
-export function Publication({ id, content, imageSource, modifications, addNotifs }) {
+export function Publication({ id, author, authorMail, content, imageSource }) {
     const [pubContent, setPubContent] = useState(content);
     const [pubImageSource, setPubImageSource] = useState(imageSource);
     const [like, setLike] = useState(0);
     const [share, setShare] = useState(0);
     const [update, setUpdate] = useState(false);
 
-    const likeNotification = {
-        title: "Like",
-        content: "Vous avez liker une publication"
-    }
+    // User informations
+    const { userData } = useContext(UserContext);
 
-    const dislikeNotification = {
-        title: "Dislike",
-        content: "Vous avez 'déliker' une publication"
-    }
-
-    const deleteNotification = {
-        title: "Suppression",
-        content: "Vous avez supprimer une publication"
-    }
-
-    const shareNotification = {
-        title: "Partage",
-        content: "Vous avez partager une publication"
-    }
 
     const handleDeletePublication = async () => {
-        addNotifs(deleteNotification);
-
-        try {
-            await axios.delete(`http://localhost:3000/api/publications/delete/${id}`);
-            AllPublications();
-        } catch (error) {
-            console.log("Erreur lors de la suppression de la publication : ", error);
+        if (userData.email === authorMail) {
+            try {
+                await axios.delete(`http://localhost:3000/api/publications/delete/${id}`);
+                AllPublications();
+            } catch (error) {
+                console.log("Erreur lors de la suppression de la publication : ", error);
+            }
         }
     }
 
     const handleLike = async () => {
         like < 1 ? setLike(like + 1) : setLike(like - 1);
-        like === 0 ? addNotifs(likeNotification) : addNotifs(dislikeNotification);
 
         let addLike = 0;
         like == 0 ? addLike = 1 : addLike = -1
@@ -64,7 +49,6 @@ export function Publication({ id, content, imageSource, modifications, addNotifs
 
     const handleShare = async () => {
         share < 1 ? setShare(share + 1) : setShare(share - 1);
-        addNotifs(shareNotification);
 
         let addShare = 0;
         share == 0 ? addShare = 1 : addShare = -1
@@ -78,7 +62,9 @@ export function Publication({ id, content, imageSource, modifications, addNotifs
     }
 
     const handleUpdateClick = (display) => {
-        setUpdate(display);
+        if (userData.email === authorMail) {
+            setUpdate(display);
+        }
     }
 
     const handleUpdatePubContent = (text) => {
@@ -88,6 +74,11 @@ export function Publication({ id, content, imageSource, modifications, addNotifs
     const handleUpdatePubImage = (image) => {
         setPubImageSource(image);
     }
+
+    const getFormattedText = (text) => {
+        const rawMarkup = marked(text);
+        return { __html: rawMarkup };
+    };
 
     if (pubImageSource === null) {
         return (
@@ -132,8 +123,6 @@ export function Publication({ id, content, imageSource, modifications, addNotifs
                         image = { imageSource }
                         updateImage = { handleUpdatePubImage }
                         afficher = { handleUpdateClick }
-                        notif = { addNotifs }
-                        publicationArrayUpdate = { modifications }
                     ></UpdatePublication>
                 }
             </>
@@ -154,11 +143,12 @@ export function Publication({ id, content, imageSource, modifications, addNotifs
                                 <DeleteIcon sx={{ color: 'red' }}></DeleteIcon>
                             </IconButton>
                         }
-                        title="The author of the publication"
+                        title= { author }
                         subheader="September 14, 2016"
                     ></CardHeader>
 
-                    <CardContent sx={{ fontSize: 'large' }}>{ pubContent }</CardContent>
+                    <CardContent sx={{ fontSize: 'large' }} dangerouslySetInnerHTML={ getFormattedText(pubContent) } >
+                    </CardContent>
 
                     <CardMedia
                         component="img"
@@ -190,8 +180,6 @@ export function Publication({ id, content, imageSource, modifications, addNotifs
                         image = { imageSource }
                         updateImage = { handleUpdatePubImage }
                         afficher = { handleUpdateClick }
-                        notif = { addNotifs }
-                        publicationArrayUpdate = { modifications }
                     ></UpdatePublication>
                 }
             </>
@@ -201,8 +189,8 @@ export function Publication({ id, content, imageSource, modifications, addNotifs
 
 Publication.propTypes = {
     id: PropTypes.number.isRequired,
+    author: PropTypes.string.isRequired,
+    authorMail: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     imageSource: PropTypes.string.isRequired,
-    addNotifs: PropTypes.func.isRequired,
-    modifications: PropTypes.func.isRequired,
 }
