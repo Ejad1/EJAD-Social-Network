@@ -11,4 +11,3 @@
 * <input type="checkbox"> Possibilité d'épingler un message dans un groupe, une discussion ou une publication
 * <input type="checkbox"> Pouvoir faire une recherche triée en fonction de la date
 
-
