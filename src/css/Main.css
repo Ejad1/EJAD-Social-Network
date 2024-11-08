@@ -1,0 +1,193 @@
+main {
+    width: 60%;
+    margin: auto;
+}
+
+@media screen and (max-width: 555px) {
+    main {
+        width: 80%;
+    }
+}
+
+
+/* New publication box style */
+.new-publication {
+    position: fixed;
+    top: 10%;
+    left: 25%;
+    width: 50%;
+    height: 450px;
+    margin-top: 5%;
+    border: 1px solid #1b6c68;
+    background: fixed #2196F3;
+    padding: 10px;
+    z-index: 800;
+}
+
+@media screen and (max-width: 555px) {
+    .new-publication {
+        top: 12%;
+        left: 5%;
+        width: 85%;
+    }
+}
+
+.new-publication #close {
+    user-select: none;
+    color: red;
+    margin-left: 93%;
+    margin-top: -1%;
+    border: 1px solid red;
+    padding-left: 2.7%;
+    padding-top: 2px;
+    width: 30px;
+    height: 25px;
+}
+
+@media screen and (max-width: 800px) {
+    .new-publication #close {
+        margin-left: 88%;
+        padding-left: 3.7%;
+    }
+}
+
+.new-publication #close:hover {
+    background-color: red;
+    color: white;
+    box-shadow: 2px 2px 2px black;
+    transition: all .3s;
+}
+
+
+/* New publication title style */
+.new-publication #title {
+    position: relative;
+    user-select: none;
+    font-size: 30px;
+    text-shadow: 2px 2px 1px black;
+    text-align: center;
+    color: white;
+    padding: 1% 0 2% 0;
+    margin: 2% 0 3% 0;
+}
+
+@media screen and (max-width: 800px) {
+    .new-publication #title {
+        font-size: 25px;
+    }
+}
+  
+.new-publication #title::before,
+.new-publication #title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s ease-in-out;
+}
+
+.new-publication #title::before {
+    transform-origin: left;
+}
+
+.new-publication #title::after {
+    transform-origin: right;
+}
+
+.new-publication #title:hover::before,
+.new-publication #title:hover::after {
+    width: 50%;
+}
+/* End of the style of the title */
+
+.new-publication textarea {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.new-publication #my_buttons {
+    display: flex;
+}
+
+.new-publication textarea {
+    border: 2px solid blue;
+    border-radius: 10px;
+    padding: 1%;
+    height: 135px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: large;
+}
+
+.new-publication .my_buttons .input-image {
+    margin-top: 3%;
+}
+
+.new-publication .my_buttons .input-image input[type="file"] {
+    display: none;
+}
+
+.new-publication .my_buttons .input-image label {
+    font-size: larger;
+    width: 300px;
+    margin: 35%;
+    padding: 10px;
+    border: 1px solid white;
+    transition: all .3s;
+}
+
+@media screen and (max-width: 555px) {
+    .new-publication .my_buttons .input-image label {
+        margin: 24%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .new-publication .my_buttons .input-image label {
+        margin: 25%;
+    }
+}
+
+.new-publication .my_buttons .input-image label:hover {
+    background-color: white;
+    color: #1b6c68;
+    box-shadow: 2px 2px 2px black;
+}
+
+.new-publication .my_buttons .input-image p {
+    border: 1px solid black;
+    width: 300px;
+    padding: 10px;
+    margin-top: 3%;
+    margin-left: 22%;
+    background-color: rgba(5, 83, 146, 0.803);
+    user-select: none;
+    transition: all .5s;
+}
+
+@media screen and (max-width: 555px) {
+    .new-publication .my_buttons .input-image p {
+        width: 200px;
+        margin-left: 17%;
+        margin-top: 8%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .new-publication .my_buttons .input-image p {
+        width: 200px;
+        margin-left: 20%;
+        margin-top: 8%;
+    }
+}
+
+.new-publication .my_buttons .input-image p.imageSelected {
+    text-align: center;
+    background-color: #2196F3;
+    box-shadow: 2px 2px 2px black;
+}
+
+/* End of the style of the new publication box */

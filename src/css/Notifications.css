@@ -1,0 +1,97 @@
+aside {
+    position: fixed;
+    width: 18.2%;
+    height: 90%;
+    overflow-y: auto;
+    font-family: 'Times New Roman', Times, serif;
+    box-shadow: 2px 2px 2px black;
+    background-color: #1490f6cb;
+    padding: 10px;
+    user-select: none;
+    z-index: 2;
+}
+
+/* Style for mobile */
+@media screen and (max-width: 555px) {
+    aside {
+        width: 100%;
+    }
+}
+/* End of the style for the mobile */
+
+aside div {
+    margin-bottom: 10px;
+    padding: auto;
+}
+
+aside h2 {
+    position: relative;
+    user-select: none;
+    text-align: center;
+    margin: 5% 0;
+    padding-bottom: 2%;
+    color: rgba(255, 255, 255, 0.91);
+    font-size: 30px;
+}
+
+aside h2::before,
+aside h2::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    transform: translateX(-50%);
+    background-color: white;
+    transition: all .3s ease-in-out;
+}
+
+aside h2:hover::before,
+aside h2:hover::after {
+    width: 58%;
+}
+
+aside div .notif-title {
+    display: flex;
+}
+
+aside div .notif-title h3 {
+    font-size: large;
+    margin-left: 2%;
+    color: aqua;
+    transition: all .5s;
+}
+
+aside div .notif-title img {
+    transition: all .5s;
+}
+
+aside div p {
+    margin-left: 15%;
+    margin-right: 4%;
+    margin-bottom: 10%;
+    color: white;
+    transition: all .5s;
+}
+
+@media screen and (max-width: 555px) {
+    aside div p {
+        margin-left: 12%;
+
+    }
+}
+
+aside div:hover p {
+    padding: 2%;
+    box-shadow: 2px 2px 2px black;
+    background-color: #17615d;
+}
+
+aside div:hover .notif-title img {
+    transform: rotate(90deg);
+}
+
+aside div:hover .notif-title h3 {
+    text-decoration: underline;
+}

@@ -1,0 +1,193 @@
+.advertising {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 2px 2px 2px black;
+    height: 85%;
+    width: 70%;
+    padding: 1%;
+    text-align: center;
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(5px); /* Pour la compatibilité avec Safari */         
+}
+
+@media screen and (max-width: 555px) {
+    .advertising {
+        width: 96%;
+        padding: 2%;
+        top: 50%;
+        left: 0;
+        transform: translateY(-49%);
+    }
+}
+
+.advertising .head {
+    display: flex;
+    justify-content: space-between;
+}
+
+.advertising .head img {
+    width: 30px;
+    height: 30px;
+}
+
+.advertising .head h1 {
+    user-select: none;
+    border: 2px solid black;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.advertising .head h2 {
+    border: 1px solid rgb(234, 2, 2);
+    color: red;
+    padding: 3px 20px;
+    user-select: none;
+    transition: all .3s;
+}
+
+.advertising .head h2:hover {
+    background-color: rgb(234, 2, 2);
+    color: white;
+    box-shadow: 2px 2px 2px black;
+}
+
+.advertising .main #title {
+    position: relative;
+    color: white;
+    margin-top: 3%;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 40px;
+    user-select: none;
+}
+
+.advertising .main #title::before,
+.advertising .main #title:after {
+    position: absolute;
+    content: "";
+    left: 50%;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background-color: white;
+    transform: translateX(-50%);
+    transition: all .3s ease-in-out;
+}
+
+.advertising .main #title:hover::before,
+.advertising .main #title:hover::after {
+    width: 31%;
+}
+
+.advertising .main .adver-body .product {
+    display: flex;
+    margin-top: 4%;
+    height: 200px;
+}
+
+.advertising .main .adver-body .product h2 {
+    text-align: center;
+    position: relative;
+    top: 80%;
+    margin-left: 4%;
+    transform: translateY(-50%);
+}
+
+.advertising .main .adver-body .product .demarcation-line {
+    width: 2px;
+    height: 150px;
+    background: linear-gradient(#A8FE39, #EDFF08);
+    margin-left: 3%;
+}
+
+.advertising .main .adver-body .product .product-description h3 {
+    margin: 10px 22px 35px 22px;
+    text-align: left;
+    transition: all .2s;
+}
+
+.advertising .main .adver-body .product .product-description h3:hover {
+    color: blue;
+}
+
+@media screen and (max-width: 555px) {
+    .advertising .main .adver-body .product {
+        flex-wrap: wrap;
+    }
+
+    .advertising .main .adver-body .product h2 {
+        top: 4%;
+        width: fit-content;
+        margin: auto;
+    }
+
+    .advertising .main .adver-body .product .demarcation-line {
+        width: 80%;
+        height: 2px;
+    }
+
+    .advertising .main .adver-body .product .product-description h3 {
+        margin: 10px;
+    }
+}
+
+.advertising .main .adver-body #super-advertise {
+    text-align: center;
+    padding: 10px;
+    margin-left: 50%;
+    margin-top: -2%;
+    border: 1px solid white;
+    border-radius: 8px;
+    width: fit-content;
+    transform: translateX(-50%);
+    transition: all .5s;
+}
+
+.advertising .main .adver-body #super-advertise:hover {
+    background-color: white;
+    box-shadow: 2px 2px 2px black;
+}
+
+@media screen and (max-width: 555px) {
+    .advertising .main .adver-body #super-advertise {
+        padding: 5px;
+        margin-top: 5%;
+    }
+}
+
+.advertising .main .adver-body #testimonials-title {
+    margin-top: 2%;
+    padding-bottom: 8px;
+    width: 100%;
+    color: white;
+    border-bottom: 2px solid white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 25px;
+}
+
+.advertising .main .adver-body .testimonials {
+    display: flex;
+    justify-content: space-around;
+}
+
+.advertising .main .adver-body .testimonials .testimony {
+    margin-top: 2%;
+    padding: 8px;
+    background-color: white;
+    border: 2px solid white;
+    border-radius: 8px;
+    max-width: 200px;
+    transition: all .5s;
+}
+
+.advertising .main .adver-body .testimonials .testimony:hover {
+    border-color: #A8FE39;
+    background-color: #A8FE39;
+    box-shadow: 2px 2px 2px black;
+}
+
+.advertising .main .adver-body .testimonials .testimony h2 {
+    margin-bottom: 2%;
+}

@@ -1,0 +1,31 @@
+.emoticones {
+    position: absolute;
+    bottom: 130%;
+    right: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px black;
+    width: 290px;
+    z-index: 900;
+    background-color: azure;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.emoticones span {
+    user-select: none;
+    width: 25px;
+    height: 25px;
+    margin: 10px;
+    font-size: 20px;
+    transition: all .3s;
+}
+
+.emoticones span:hover {
+    background-color: #2196F3;
+    width: 27px;
+    height: 27px;
+    padding: 3px;
+    margin: 6px;
+}

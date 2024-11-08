@@ -1,0 +1,38 @@
+.user-answer {
+    position: relative;
+    bottom: 0;
+    right: 1%;
+    margin-bottom: 10px;
+    text-align: bottom;
+}
+
+.user-answer p {
+    position: inherit;
+    left: 100%;
+    transform: translateX(-100%);
+    background-color: #2196F3;
+    color: white;
+    text-align: start;
+    width: fit-content;
+}
+
+.user-answer #answer-date {
+    position: absolute;
+    left: 95%;
+    color: white;
+    border: none;
+    margin-top: -2%;
+}
+
+.user-answer .audio-part audio {
+    margin-left: 100%;
+    /* transform: translateX(-100%); */
+}
+
+/* Mobile user answer box style */
+/* @media screen and (max-width: 555px) {
+    .user-answer {
+        margin-top: 20%;
+        margin-left: 30%;
+    }
+} */
